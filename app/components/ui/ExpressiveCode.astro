@@ -1,6 +1,8 @@
 ---
 interface CodeLine {
   html: string;
+  /** Optional `--ecIndent` measure for the line (the original's inline style). */
+  indent?: string | null;
 }
 
 interface Props {
@@ -8,6 +10,10 @@ interface Props {
   language?: string;
   code: string;
   lines?: CodeLine[];
+  /** Line-number gutter. Lab docs show it; the writing post does not. */
+  gutter?: boolean;
+  /** `--ecMaxLine` measure for the <pre> (the original expressive-code setting). */
+  maxLine?: string;
   class?: string;
 }
 
@@ -16,20 +22,36 @@ const {
   language = 'ts',
   code,
   lines,
+  gutter = true,
+  maxLine,
   class: className = '',
 } = Astro.props;
 
-const rawLines = lines
-  ? lines.map((l) => l.html)
-  : code.split('\n').map((line) =>
-      line
+const rawLines: CodeLine[] = lines
+  ? lines
+  : code.split('\n').map((line) => ({
+      html: line
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-    );
+        .replace(/>/g, '&gt;'),
+      indent: null,
+    }));
+
+// Built as a string so <pre> keeps the original's byte-exact line markup: no template
+// whitespace leaks into the block, and the gutter can be dropped for the writing post.
+const linesHtml = rawLines
+  .map((line, idx) => {
+    const indentStyle = line.indent ? ` style="--ecIndent:${line.indent}"` : '';
+    const gutterHtml = gutter
+      ? `<div class="gutter"><div class="ln">${idx + 1}</div></div>`
+      : '';
+    return `<div class="ec-line"${indentStyle}>${gutterHtml}<div class="code">${line.html || '&nbsp;'}</div></div>`;
+  })
+  .join('');
 
 const copyData = code.replace(/\n/g, '\u007f');
 const hasTitle = Boolean(title);
+const preStyle = maxLine ? `--ecMaxLine:${maxLine}` : undefined;
 ---
 
 <div class:list={['expressive-code', className]}>
@@ -37,7 +59,7 @@ const hasTitle = Boolean(title);
     <figcaption class="header">
       {hasTitle && <span class="title">{title}</span>}
     </figcaption>
-    <pre data-language={language} class="wrap"><code>{rawLines.map((lineHtml, idx) => (<div class="ec-line"><div class="gutter"><div class="ln">{idx + 1}</div></div><div class="code" set:html={lineHtml || '&nbsp;'} /></div>))}</code></pre>
+    <pre data-language={language} class="wrap" style={preStyle}><code set:html={linesHtml}></code></pre>
     <div class="copy">
       <div aria-live="polite"></div>
       <button

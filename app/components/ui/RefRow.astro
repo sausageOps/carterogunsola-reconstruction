@@ -5,6 +5,10 @@ interface Props {
   href?: string;
   badge?: string;
   label: string;
+  /** Optional sprite icon rendered in the badge instead of the mono wordmark. */
+  icon?: string;
+  /** Text utility for the label chip. `text-caption` (default) on lab docs, `text-tag` on the post. */
+  labelClass?: string;
   stretch?: boolean;
   external?: boolean;
   class?: string;
@@ -14,6 +18,8 @@ const {
   href,
   badge = 'REF',
   label,
+  icon,
+  labelClass = 'text-caption',
   stretch = false,
   external = true,
   class: className = '',
@@ -30,9 +36,15 @@ const Tag = href ? 'a' : 'span';
   class:list={['refrow', href && 'refrow--link', stretch && 'refrow--stretch', className]}
 >
   <span class="refrow__badge">
-    <span class="refrow__wordmark text-mono-sm">{badge}</span>
+    {icon ? (
+      <svg width="1em" height="1em" viewBox="0 0 24 24" class="refrow__icon" aria-hidden="true" data-icon={icon}>
+        <use href={`#ai:local:${icon}`} />
+      </svg>
+    ) : (
+      <span class="refrow__wordmark text-mono-sm">{badge}</span>
+    )}
   </span>
-  <span class="refrow__label text-caption">{label}</span>
+  <span class:list={['refrow__label', labelClass]}>{label}</span>
   {href && (
     <span class="refrow__ext" aria-hidden="true">
       <ArrowRoll diagonal={external} />

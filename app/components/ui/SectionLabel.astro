@@ -1,13 +1,20 @@
 ---
 interface Props {
   size?: 'lg' | 'sm';
-  as?: 'h2' | 'h3' | 'span' | 'p';
+  as?: 'h1' | 'h2' | 'h3' | 'span' | 'p';
+  /** Original trailing mark: `<span class="section-label__mark"> ::</span>`. */
+  mark?: boolean;
+  markText?: string;
   class?: string;
 }
 
-const { size = 'lg', as: Tag = 'h2', class: className = '' } = Astro.props;
+const {
+  size = 'lg',
+  as: Tag = 'h2',
+  mark = false,
+  markText = ' ::',
+  class: className = '',
+} = Astro.props;
 ---
 
-<Tag class:list={['section-label', `section-label--${size}`, className]}>
-  <slot />
-</Tag>
+<Tag class:list={['section-label', `section-label--${size}`, className]}><slot />{mark && <span class="section-label__mark" aria-hidden="true">{markText}</span>}</Tag>

@@ -1,14 +1,103 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import FoundationShell from '../../components/FoundationShell.astro';
+import LinkCircle from '../../components/ui/LinkCircle.astro';
+import SectionLabel from '../../components/ui/SectionLabel.astro';
+import { FOLDERS, ROW_TAGS, WRITING_INDEX } from '../../data/writing';
+import '../../styles/writing.css';
+
+// Original /writing: `section.wstage` (JS-driven folder shelf, hidden until the engine
+// mounts) + `div.writing__classic` (intro, 2026 archive, six filter tabs, rows, empty
+// state). Both blocks and their data are reproduced from pages/writing.html.
+const foldersJson = JSON.stringify(FOLDERS).replace(/</g, '\\u003c');
+const POST_SLUG = FOLDERS[0].href.replace('/writing/', '');
 ---
 
-<BaseLayout title="Writing" ogImage="/og/section/writing.jpg">
-  <FoundationShell
-    heading="Writing — Index Shell"
-    eyebrow="Phase 1 :: Verification Route"
-    lead="Verifies ClientRouter navigation, Veil transition, and LogoNav capsule odometer rolling to 'Writing'."
-    routePath="/writing"
-    showAtoms={false}
-  />
+<BaseLayout
+  title={WRITING_INDEX.title}
+  description={WRITING_INDEX.description}
+  ogImage={WRITING_INDEX.ogImage}
+  showFooter={false}
+  mainClass="writing"
+>
+  <section
+    class="wstage"
+    data-folders
+    data-lenis-prevent
+    hidden
+    tabindex="0"
+    role="group"
+    aria-roledescription="carousel"
+    aria-label="Writing — a shelf of post folders. Arrow keys browse, Enter opens."
+  >
+    <div class="wstage__ui container">
+      <div class="wstage__info">
+        <a
+          class="wstage__info-btn"
+          data-folders-title
+          href="/writing"
+          aria-describedby="wstage-tip wstage-excerpt"
+        >
+          <svg width="1em" height="1em" aria-hidden="true" data-icon="circle-info"
+            ><use href="#ai:local:circle-info"></use
+          ></svg>
+        </a>
+        <div class="wstage__tip" id="wstage-tip" role="tooltip" aria-live="polite">
+          <p class="wstage__tip-title" data-folders-tip-title></p>
+          <div class="wstage__tip-tags">
+            <span class="chip text-meta" data-folders-chip-date="true"></span>
+            <span class="chip text-meta chip--pill" data-folders-chip-year="true"></span>
+            <span class="chip text-meta" data-folders-chip-cat="true"></span>
+          </div>
+        </div>
+        <p class="u-sr-only" id="wstage-excerpt" data-folders-excerpt></p>
+      </div>
+    </div>
+    <script type="application/json" data-folders-data set:html={foldersJson} />
+  </section>
+
+  <div class="writing__classic container" data-folders-classic>
+    <div class="writing__col">
+      <header class="writing__intro">
+        <SectionLabel as="h1" mark>Writing</SectionLabel>
+        <div class="writing__prose">
+          {WRITING_INDEX.intro.map((paragraph) => <p class="text-lead">{paragraph}</p>)}
+        </div>
+      </header>
+
+      <section class="writing__archive" data-index-reco aria-label="2026 articles">
+        <SectionLabel mark>{WRITING_INDEX.archiveLabel}</SectionLabel>
+        <div class="writing__filters" role="tablist" aria-label="Filter articles by category">
+          {WRITING_INDEX.filters.map((cat, i) => (
+            <button
+              class="writing__filter text-label"
+              type="button"
+              role="tab"
+              data-index-tab
+              data-cat={cat}
+              aria-selected={i === 0 ? 'true' : 'false'}
+            >
+              {cat === 'all' ? 'All' : cat}
+            </button>
+          ))}
+        </div>
+        <div class="writing__card" data-index-rows data-row-list>
+          {FOLDERS.map((folder) => (
+            <a href={folder.href} data-hover data-cat={folder.cat} class="row row--link">
+              <span class="row__label text-tag">{folder.title}</span>
+              <span class="row__line" aria-hidden="true" />
+              <span class="row__tags">
+                <span class="chip text-meta row__tag">{ROW_TAGS[POST_SLUG]?.date}</span>
+                <span class="chip text-meta chip--pill row__tag">{ROW_TAGS[POST_SLUG]?.year}</span>
+                <span class="chip text-meta row__tag">{folder.cat}</span>
+                <LinkCircle diagonal diagonalRoll={false} class="row__link" />
+              </span>
+            </a>
+          ))}
+          <p class="writing__empty text-meta" data-index-empty style="display: none" aria-live="polite">
+            {WRITING_INDEX.empty}
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
 </BaseLayout>
