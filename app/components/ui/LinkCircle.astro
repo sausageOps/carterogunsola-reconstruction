@@ -3,12 +3,14 @@ import ArrowRoll from './ArrowRoll.astro';
 
 interface Props {
   diagonal?: boolean;
+  /** Pass-through to ArrowRoll: the roll direction, independent of the glyph. */
+  diagonalRoll?: boolean;
   class?: string;
 }
 
-const { diagonal = false, class: className = '' } = Astro.props;
+const { diagonal = false, diagonalRoll, class: className = '' } = Astro.props;
 ---
 
 <span class:list={['linkcircle', className]} aria-hidden="true">
-  <ArrowRoll diagonal={diagonal} />
+  <ArrowRoll diagonal={diagonal} diagonalRoll={diagonalRoll} />
 </span>

@@ -1,14 +1,120 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import FoundationShell from '../components/FoundationShell.astro';
+import InfoTip from '../components/ui/InfoTip.astro';
+import LinkCircle from '../components/ui/LinkCircle.astro';
+import '../styles/studio.css';
+
+// Phase 4 — /studio, rebuilt from the recovered document (pages/studio.html) and the
+// recovered Lanyard engine (src/lanyard.GSKzBzbt.js). Nothing here is invented: the
+// stage, its data-lanyard-* copy, the visit infotip and the classic fallback tile are
+// the original markup. The engine reads the badge copy off data-lanyard-*, hides the
+// classic tile once WebGL is up, and leaves it in place for no-JS / reduced motion.
+const badge = {
+  name: 'Carter Ogunsola',
+  role: 'Founder & Creative Developer',
+  studio: 'Balky Studio',
+  line: 'We make the web fun again',
+  addr: 'BALKY.STUDIO',
+  place: 'Utah, USA',
+  year: '2026',
+};
+
+const studioUrl = 'https://www.balky.studio/';
 ---
 
-<BaseLayout title="Studio" ogImage="/og/section/studio.jpg">
-  <FoundationShell
-    heading="Studio — Route Shell"
-    eyebrow="Phase 1 :: Verification Route"
-    lead="Verifies ClientRouter navigation, Veil transition, and LogoNav capsule odometer rolling to 'Studio'."
-    routePath="/studio"
-    showAtoms={false}
-  />
+<BaseLayout
+  title="Studio"
+  description="Balky Studio :: the studio side of Carter Ogunsola. We make the web fun again."
+  ogImage="/og/section/studio.jpg"
+  mainClass="studio"
+  showFooter={false}
+>
+  <h1 class="u-sr-only">Studio</h1>
+
+  <section
+    class="lstage"
+    data-lanyard
+    data-lanyard-name={badge.name}
+    data-lanyard-role={badge.role}
+    data-lanyard-studio={badge.studio}
+    data-lanyard-line={badge.line}
+    data-lanyard-addr={badge.addr}
+    data-lanyard-place={badge.place}
+    data-lanyard-year={badge.year}
+    hidden
+    tabindex="0"
+    role="group"
+    aria-label="Balky Studio's badge. Drag to swing it."
+  >
+    <canvas class="lstage__canvas" data-lanyard-canvas></canvas>
+    <div class="lstage__info">
+      <InfoTip
+        title="balky.studio"
+        place="top"
+        label="Visit Balky Studio"
+        href={studioUrl}
+        tipId="studio-tip"
+        titleTag="p"
+        titleClass="text-label"
+        externalIcon
+      />
+    </div>
+  </section>
+
+  <div class="studio__classic container" data-lanyard-classic>
+    <div class="studio__unit">
+      <a class="studio__link" href={studioUrl} target="_blank" rel="noopener noreferrer" data-hover>
+        <span class="studio__tile">
+          <span class="studio__flag">
+            <svg
+              style="display:block;width:100%;height:auto"
+              viewBox="0 -5 43 47"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <mask
+                id="balky-flag-mask-studio"
+                style="mask-type:alpha"
+                maskUnits="userSpaceOnUse"
+                x="0"
+                y="2"
+                width="38"
+                height="22"
+              >
+                <path
+                  d="M5.27133 4.91922C5.27133 4.91922 14.075 7.09747 19.391 3.34013C24.707 -0.417198 37.4864 4.91922 37.4864 4.91922L33.5106 21.9247C33.5106 21.9247 23.003 15.2021 16.7553 20.2242C10.5076 25.2462 0 21.9247 0 21.9247L5.27133 4.91922Z"
+                  fill="#D9D9D9"
+                ></path>
+              </mask>
+              <g mask="url(#balky-flag-mask-studio)">
+                <path
+                  d="M6.04547 -2.10032C6.61636 -3.89376 8.53303 -4.88483 10.3265 -4.31393L19.3022 -1.45676L10.3435 26.6866L1.36781 23.8294C-0.425629 23.2585 -1.4167 21.3418 -0.845808 19.5484L6.04547 -2.10032Z"
+                  fill="#F25116"
+                ></path>
+                <path
+                  d="M19.3022 -1.45676L29.488 1.78563L20.5293 29.929L10.3435 26.6866L19.3022 -1.45676Z"
+                  fill="#545251"
+                ></path>
+                <path
+                  d="M29.488 1.78563L37.6367 4.37954L28.678 32.5229L20.5293 29.929L29.488 1.78563Z"
+                  fill="#A6A5A4"
+                ></path>
+                <path
+                  d="M37.6367 4.37954L40.0934 5.16159C41.8869 5.73248 42.8779 7.64915 42.307 9.44259L35.4158 31.0913C34.8449 32.8848 32.9282 33.8758 31.1348 33.3049L28.678 32.5229L37.6367 4.37954Z"
+                  fill="#DFDBD8"
+                ></path>
+              </g>
+              <path
+                d="M36.5126 4.66331L38.1617 5.09201L28.7544 41.561L26.9218 41.5533L36.5126 4.66331Z"
+                fill="#DFDBD8"
+              ></path>
+            </svg>
+          </span>
+        </span>
+        <span class="studio__name text-h6">Balky Studio<LinkCircle diagonal diagonalRoll={false} /></span>
+      </a>
+      <p class="studio__meta text-meta">We make the web fun again</p>
+    </div>
+  </div>
 </BaseLayout>
