@@ -1,0 +1,20 @@
+---
+interface Props {
+  top?: boolean;
+  fixed?: boolean;
+  class?: string;
+}
+
+const { top = false, fixed = false, class: className = '' } = Astro.props;
+---
+
+<div
+  class:list={['pblur', top && 'pblur--top', fixed && 'pblur--fixed', className]}
+  aria-hidden="true"
+>
+  <div class="pblur__layer is--1"></div>
+  <div class="pblur__layer is--2"></div>
+  <div class="pblur__layer is--3"></div>
+  <div class="pblur__layer is--4"></div>
+  <div class="pblur__layer is--5"></div>
+</div>

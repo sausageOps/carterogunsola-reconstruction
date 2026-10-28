@@ -1,0 +1,18 @@
+---
+import Logo from './Logo.astro';
+---
+
+<div
+  class="veil"
+  data-veil-panel
+  data-astro-transition-persist="veil"
+  aria-hidden="true"
+>
+  <canvas class="veil__paper" data-veil-paper></canvas>
+  <div class="veil__boot" data-veil-boot>
+    <Logo isVeilWord word="O" class="veil__word" />
+    <div class="veil__travel" data-veil-travel>
+      <span class="veil__count" data-veil-count>0</span>
+    </div>
+  </div>
+</div>

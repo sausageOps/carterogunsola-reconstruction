@@ -1,0 +1,72 @@
+---
+import ArrowRoll from './ui/ArrowRoll.astro';
+import { CHANGELOG_ITEMS } from '../data/site';
+---
+
+<div
+  class="notif"
+  id="notif"
+  data-notif
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Notifications"
+  data-astro-transition-persist="astro-gyrtbwwo-8"
+>
+  <div class="notif__panel">
+    <div class="notif__head">
+      <span class="notif__title text-mono-sm">Notifications</span>
+      <span class="notif__count text-hud" data-notif-count hidden>0</span>
+      <button type="button" class="notif__clear text-mono-sm" data-notif-clear hidden>
+        Mark all read
+      </button>
+    </div>
+    <div class="notif__body">
+      <div class="notif__fade notif__fade--top" aria-hidden="true"></div>
+      <ul class="notif__list" data-notif-list data-lenis-prevent>
+        {CHANGELOG_ITEMS.map((item) => (
+          <li>
+            {item.href ? (
+              <a
+                href={item.href}
+                class="notif__item notif__item--link"
+                data-date={item.date}
+                data-hover
+              >
+                <span class="notif__dot" aria-hidden="true"></span>
+                <span class="notif__main">
+                  <span class="notif__label text-body-sm">{item.title}</span>
+                  <span class="notif__summary text-caption">{item.summary}</span>
+                </span>
+                <span class="notif__meta">
+                  <span class="notif__time text-mono-sm" data-time={item.date}></span>
+                  <span class="chip text-mono-tag notif__tag">{item.tag}</span>
+                </span>
+                <ArrowRoll diagonal />
+              </a>
+            ) : (
+              <div class="notif__item" data-date={item.date}>
+                <span class="notif__dot" aria-hidden="true"></span>
+                <span class="notif__main">
+                  <span class="notif__label text-body-sm">{item.title}</span>
+                  <span class="notif__summary text-caption">{item.summary}</span>
+                </span>
+                <span class="notif__meta">
+                  <span class="notif__time text-mono-sm" data-time={item.date}></span>
+                  <span class="chip text-mono-tag notif__tag">{item.tag}</span>
+                </span>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+      <div class="notif__fade notif__fade--bottom" aria-hidden="true"></div>
+    </div>
+    <div class="notif__footer">
+      <a href="/changelog" class="notif__all text-mono-sm" data-hover>
+        <span>View all</span>
+        <ArrowRoll />
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+---
+interface Props {
+  pill?: boolean;
+  class?: string;
+}
+
+const { pill = false, class: className = '' } = Astro.props;
+---
+
+<span class:list={['chip', pill && 'chip--pill', 'text-mono-tag', className]}>
+  <slot />
+</span>

@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionLabel from '../components/ui/SectionLabel.astro';
+import Row from '../components/ui/Row.astro';
+import { CHANGELOG_ITEMS } from '../data/site';
+---
+
+<BaseLayout title="Changelog" ogImage="/og/section/changelog.jpg">
+  <section class="u-container" style="padding-block: clamp(9rem, 16svh, 12rem) var(--s-96);">
+    <div style="width: min(100%, var(--measure)); margin-inline: auto;">
+      <div style="display: flex; flex-direction: column; gap: var(--s-24); color: var(--ink);" data-reveal>
+        <SectionLabel size="lg" class="z-y">Changelog</SectionLabel>
+        <p class="text-h4 z-s">
+          A running log of features, interactive experiments, and writing shipped to this site.
+        </p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: var(--s-14); margin-block-start: var(--s-64);" data-reveal>
+        <SectionLabel size="sm" class="z-y">2026</SectionLabel>
+        <div
+          data-row-list
+          style="display: flex; flex-direction: column; gap: var(--s-4); padding: var(--s-24) var(--s-12); border-radius: var(--r-lg); background-color: var(--card); background-image: var(--sheet-tex); overflow: hidden;"
+        >
+          {CHANGELOG_ITEMS.map((item) => (
+            <Row
+              label={item.title}
+              note={item.summary}
+              tags={[item.tag, item.date.slice(5)]}
+              href={item.href}
+              pillTags={false}
+              data-log-row=""
+              data-date={item.date}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,46 @@
+---
+import LinkCircle from './ui/LinkCircle.astro';
+import Socials from './ui/Socials.astro';
+import { NAV_ITEMS, SITE } from '../data/site';
+---
+
+<div
+  class="drawer"
+  id="drawer"
+  data-drawer
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Site navigation"
+  data-astro-transition-persist="astro-gyrtbwwo-9"
+>
+  <div class="drawer__sheet" data-drawer-sheet>
+    <div class="drawer__handle" aria-hidden="true"></div>
+    <nav class="drawer__nav" aria-label="Mobile">
+      <ul>
+        {NAV_ITEMS.map((item) => (
+          <li>
+            <a href={item.href} class="drawer__link text-h2" data-drawer-link data-hover>
+              <span>{item.label}</span>
+              <LinkCircle />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <div class="drawer__meta">
+      <div class="drawer__hud text-mono-meta">
+        <span class="drawer__chip">
+          <span class="drawer__k">UT::</span><span class="drawer__v" data-hud-time>--:--</span>
+        </span>
+        <span class="drawer__chip">
+          <span class="drawer__v" data-hud-online>0</span><span class="drawer__k">ONLINE</span>
+        </span>
+        <span class="drawer__chip">
+          <span class="drawer__k">{SITE.hud.bookingLabel.toUpperCase()}::</span><span class="drawer__v">{SITE.hud.nextOpen}</span>
+        </span>
+      </div>
+      <Socials />
+    </div>
+  </div>
+</div>

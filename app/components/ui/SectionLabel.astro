@@ -1,0 +1,13 @@
+---
+interface Props {
+  size?: 'lg' | 'sm';
+  as?: 'h2' | 'h3' | 'span' | 'p';
+  class?: string;
+}
+
+const { size = 'lg', as: Tag = 'h2', class: className = '' } = Astro.props;
+---
+
+<Tag class:list={['section-label', `section-label--${size}`, className]}>
+  <slot />
+</Tag>

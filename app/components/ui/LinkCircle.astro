@@ -1,0 +1,14 @@
+---
+import ArrowRoll from './ArrowRoll.astro';
+
+interface Props {
+  diagonal?: boolean;
+  class?: string;
+}
+
+const { diagonal = false, class: className = '' } = Astro.props;
+---
+
+<span class:list={['linkcircle', className]} aria-hidden="true">
+  <ArrowRoll diagonal={diagonal} />
+</span>
