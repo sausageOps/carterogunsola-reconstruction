@@ -14,6 +14,8 @@ interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
+  /** `og:type` — `website` everywhere, `article` on writing posts (original head). */
+  ogType?: string;
   crumbName?: string;
   showFooter?: boolean;
   noindex?: boolean;
@@ -25,6 +27,7 @@ const {
   title,
   description = SITE.description,
   ogImage = SITE.ogImage,
+  ogType = 'website',
   crumbName,
   showFooter = true,
   noindex = false,
@@ -129,7 +132,7 @@ const jsonLd = {
       href="/feed.json"
     />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:locale" content={SITE.ogLocale} />
     <meta property="og:title" content={fullTitle} />

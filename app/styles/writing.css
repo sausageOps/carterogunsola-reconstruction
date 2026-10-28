@@ -1,0 +1,38 @@
+/* Phase 5 — Writing index page styles.
+   Recovered from the original /writing stylesheet (src/writing.C1dRexZC.css, served as
+   /_astro/writing.C1dRexZC.css). Every declaration and conditional context is verbatim;
+   only the generated Astro scope attributes ([data-astro-cid-…]) are removed and each
+   selector is prefixed with the route root (`.writing`) so the recovered cascade stays
+   scoped to this page, as it was on the original. */
+
+.writing .wstage[hidden],.writing .writing__classic[hidden]{display:none}
+.writing .wstage{touch-action:pinch-zoom;overscroll-behavior:none;outline:none;height:100svh;position:relative}
+.writing .wstage:focus-visible{outline:2px solid var(--ink);outline-offset:-6px}
+.writing .wstage__ui{z-index:2;pointer-events:none;padding-block:clamp(6.5rem, 12svh, 9rem) var(--s-32);flex-direction:column;justify-content:space-between;display:flex;position:absolute;inset:0}
+.writing .wstage__info{position:absolute;inset-block-start:calc(50% + var(--wfill,.58) * 1.15 * 50svh + .7rem);inset-inline-start:50%;translate:-50%}
+.writing .wstage__info-btn{pointer-events:auto;block-size:2.5rem;inline-size:2.5rem;color:var(--ink-muted);transition:color .25s var(--ease-out-quad), transform .16s var(--ease-out-quad);place-items:center;display:grid}
+.writing .wstage__info-btn svg{block-size:1rem;inline-size:1rem}
+.writing .wstage__info-btn:active{transform:scale(.96)}
+@media (hover:hover) and (pointer:fine){.writing .wstage__info-btn:hover{color:var(--ink)}}
+.writing .wstage__info-btn:focus-visible{outline:2px solid var(--ink);outline-offset:-4px;border-radius:var(--r-sm);color:var(--ink)}
+.writing .wstage__tip{transform-origin:top;align-items:center;gap:var(--s-8);width:max-content;padding:var(--s-10) var(--s-12);border-radius:var(--r-md);background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow-card);text-align:center;opacity:0;pointer-events:none;transition:opacity .15s var(--ease-out-expo), translate .15s var(--ease-out-expo), scale .15s var(--ease-out-expo);flex-direction:column;display:flex;position:absolute;inset-block-start:calc(100% - .4rem);inset-inline-start:50%;translate:-50% -3px;scale:.97}
+@media (hover:hover) and (pointer:fine){.writing .wstage__info-btn:hover+.wstage__tip{opacity:1;transition-delay:.12s;translate:-50%;scale:1}}
+.writing .wstage__info-btn:focus-visible+.wstage__tip{opacity:1;transition-delay:0s;translate:-50%;scale:1}
+@media (prefers-reduced-motion:reduce){.writing .wstage__tip{transition:opacity .15s var(--ease-out-expo);translate:-50%;scale:1}}
+.writing .wstage__tip-title{font-family:var(--font-sans);font-size:var(--fs-meta);font-weight:var(--fw-regular);line-height:var(--lh-tight);letter-spacing:var(--track);font-variant-numeric:tabular-nums;text-transform:uppercase;color:var(--ink);white-space:nowrap;text-overflow:ellipsis;max-width:min(48ch,86vw);overflow:hidden}
+.writing .wstage__tip-tags{justify-content:center;align-items:center;display:flex}
+.writing .writing__classic{padding-block:clamp(9rem, 16svh, 12rem) var(--s-96)}
+.writing .writing__col{width:min(100%, var(--measure));justify-self:center}
+.writing .writing__intro{gap:var(--s-24);flex-direction:column;display:flex}
+.writing .writing__prose{gap:var(--s-24);color:var(--ink);flex-direction:column;display:flex}
+.writing .writing__prose p{text-wrap:pretty}
+.writing .writing__archive{gap:var(--s-14);flex-direction:column;margin-block-start:var(--s-96);display:flex}
+.writing .writing__empty{padding:var(--s-24) 0;text-align:center;color:var(--ink-muted);text-transform:uppercase}
+.writing .writing__filters{flex-wrap:wrap;align-items:center;display:flex}
+.writing .writing__filter{padding:var(--s-4) var(--s-8);background:var(--fill);color:color-mix(in srgb, var(--ink) 60%, transparent);cursor:pointer;text-transform:uppercase;transition:background-color .25s var(--ease-out-quad), color .25s var(--ease-out-quad), border-radius .3s var(--ease-out-expo);border:0;border-radius:.66rem}
+@media (hover:hover) and (pointer:fine){.writing .writing__filter:hover{color:var(--ink)}}
+.writing .writing__filter:active{background:var(--fill-strong)}
+.writing .writing__filter:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.writing .writing__filter[aria-selected=true]{background:var(--fill-strong);border-radius:var(--r-xs);color:var(--ink)}
+.writing .writing__card{gap:var(--s-4);padding:var(--s-24) var(--s-12);border-radius:var(--r-lg);background:var(--paper);flex-direction:column;display:flex;overflow:hidden}
+@media (width<=33.99rem){.writing .writing__card .row__tags>:nth-child(-n+2){display:none}.writing .writing__archive{margin-block-start:var(--s-64)}}
