@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LabDocument from '../../components/LabDocument.astro';
+import { LAB_ITEMS, labHref, type LabItem } from '../../data/lab';
+import { LAB_INDEX_JSON_LD, labDocumentEvidence } from '../../data/lab-evidence';
+import '../../styles/lab-detail.css';
+
+export function getStaticPaths() {
+  return LAB_ITEMS.map((item, index) => ({
+    params: { slug: item.slug },
+    props: { item, index },
+  }));
+}
+
+interface Props {
+  item: LabItem;
+  index: number;
+}
+const { item, index } = Astro.props;
+const previous = LAB_ITEMS[(index + LAB_ITEMS.length - 1) % LAB_ITEMS.length];
+const next = LAB_ITEMS[(index + 1) % LAB_ITEMS.length];
+const evidence = labDocumentEvidence(item.slug);
+---
+
+<BaseLayout
+  title={`${item.name} :: Lab`}
+  description={item.description}
+  canonical={`https://carterogunsola.com${labHref(item)}`}
+  jsonLd={evidence?.jsonLd ?? LAB_INDEX_JSON_LD}
+  ogImage={item.slug === 'dial' ? '/og/lab/dial.jpg' : '/og/section/lab.jpg'}
+  crumbName={item.name}
+  showFooter={false}
+>
+  <LabDocument
+    item={item}
+    previous={previous}
+    next={next}
+    position={index + 1}
+    total={LAB_ITEMS.length}
+    notes={evidence?.notes}
+    code={evidence?.code}
+  />
+</BaseLayout>

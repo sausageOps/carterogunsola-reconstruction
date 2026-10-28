@@ -1,14 +1,49 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import FoundationShell from '../../components/FoundationShell.astro';
+import LabItem from '../../components/LabItem.astro';
+import { LAB_ITEMS } from '../../data/lab';
+import { LAB_INDEX_JSON_LD } from '../../data/lab-evidence';
+import { img } from '../../lib/assets';
+import '../../styles/lab-index.css';
 ---
 
-<BaseLayout title="Lab" ogImage="/og/section/lab.jpg">
-  <FoundationShell
-    heading="Lab — Motion Archive Shell"
-    eyebrow="Phase 1 :: Verification Route"
-    lead="Verifies LogoNav capsule odometer rolling to 'Motion' (/lab maps to 'Motion') and active navpill state."
-    routePath="/lab"
-    showAtoms={false}
-  />
+<BaseLayout
+  title="Lab"
+  canonical="https://carterogunsola.com/lab"
+  jsonLd={LAB_INDEX_JSON_LD}
+  ogImage="/og/section/lab.jpg"
+  showFooter={false}
+  mainClass="container"
+>
+  <h1 class="u-sr-only">Lab — motion experiments</h1>
+  <section class="lab bleed-full" data-lab data-lab-cols="6" data-lab-start="8" aria-label="Lab experiments" data-astro-cid-jcwly6sb>
+    <div class="lab__viewport" data-lab-viewport data-astro-cid-jcwly6sb>
+      <div class="lab__list" data-lab-list data-astro-cid-jcwly6sb>
+        {Array.from({ length: 4 }, (_, copy) =>
+          LAB_ITEMS.map((item) => <LabItem item={item} duplicate={copy > 0} />),
+        )}
+      </div>
+      <div class="pblur pblur--top" style="--pblur-h:9em" aria-hidden="true" data-astro-cid-jcwly6sb data-astro-cid-c2u6o4li>
+        <div class="pblur__layer is--1" data-astro-cid-c2u6o4li></div>
+        <div class="pblur__layer is--2" data-astro-cid-c2u6o4li></div>
+        <div class="pblur__layer is--3" data-astro-cid-c2u6o4li></div>
+      </div>
+      <div class="pblur pblur--bottom" style="--pblur-h:6em" aria-hidden="true" data-astro-cid-jcwly6sb data-astro-cid-c2u6o4li>
+        <div class="pblur__layer is--1" data-astro-cid-c2u6o4li></div>
+        <div class="pblur__layer is--2" data-astro-cid-c2u6o4li></div>
+        <div class="pblur__layer is--3" data-astro-cid-c2u6o4li></div>
+      </div>
+      <div class="lab__mode" role="group" aria-label="View mode" data-lab-mode-toggle data-astro-cid-jcwly6sb>
+        <button class="lab__mode-seg text-meta" type="button" data-lab-mode-set="flat" aria-pressed="true" data-astro-cid-jcwly6sb>
+          <span class="lab__mode-bg" data-lab-mode-bg aria-hidden="true" data-astro-cid-jcwly6sb></span>List
+        </button>
+        <button class="lab__mode-seg text-meta" type="button" data-lab-mode-set="wheel" aria-pressed="false" data-astro-cid-jcwly6sb>Wheel</button>
+        <button class="lab__mode-seg text-meta" type="button" data-lab-mode-set="grid" aria-pressed="false" data-astro-cid-jcwly6sb>Grid</button>
+      </div>
+      <div class="lab__preview u-media" data-lab-preview aria-hidden="true" data-astro-cid-jcwly6sb>
+        <img class="lab__preview-img u-cover" data-lab-preview-img src={img(LAB_ITEMS[0].poster, 960)} alt="" decoding="async" data-astro-cid-jcwly6sb />
+        <video class="lab__preview-reel u-cover" data-lab-preview-reel muted loop playsinline preload="none" hidden data-astro-cid-jcwly6sb></video>
+      </div>
+    </div>
+  </section>
 </BaseLayout>

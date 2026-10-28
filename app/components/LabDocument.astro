@@ -1,0 +1,134 @@
+---
+import ArrowRoll from './ui/ArrowRoll.astro';
+import { img } from '../lib/assets';
+import { labHref, type LabItem } from '../data/lab';
+
+interface Props {
+  item: LabItem;
+  previous: LabItem;
+  next: LabItem;
+  position: number;
+  total: number;
+  notes?: string;
+  code?: string;
+}
+const { item, previous, next, position, total, notes = '', code = '' } = Astro.props;
+const number = String(position).padStart(2, '0');
+const count = String(total).padStart(2, '0');
+const digits = Array.from({ length: 10 }, (_, digit) => digit);
+---
+
+<h1 class="u-sr-only">{item.name} — Lab experiment</h1>
+<div
+  class="labd"
+  data-no-pulse
+  data-lab-detail
+  data-experiment={item.slug}
+  data-name={item.name}
+  data-prev-href={labHref(previous)}
+  data-next-href={labHref(next)}
+  data-prev-name={previous.name}
+  data-next-name={next.name}
+  data-position={number}
+  data-total={count}
+  data-astro-cid-f3pbbn5j
+>
+  <button class="labd__toggle" type="button" data-docs-toggle aria-expanded="false" aria-controls="lab-docs" aria-label="Toggle docs" data-astro-cid-f3pbbn5j>
+    <svg class="labd__toggle-icon labd__toggle-icon--book" width="1em" height="1em" aria-hidden="true" data-icon="book-open" data-astro-cid-f3pbbn5j>
+      <symbol id="ai:local:book-open" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 7v14m-9-3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></symbol>
+      <use href="#ai:local:book-open"></use>
+    </svg>
+    <svg class="labd__toggle-icon labd__toggle-icon--x" width="1em" height="1em" aria-hidden="true" data-icon="close" data-astro-cid-f3pbbn5j>
+      <symbol id="ai:local:close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="m6.25 6.25 11.5 11.5m0-11.5-11.5 11.5"/></symbol>
+      <use href="#ai:local:close"></use>
+    </svg>
+  </button>
+
+  <aside class="labd__docs" id="lab-docs" data-docs aria-label={`${item.name} — docs`} data-astro-cid-f3pbbn5j>
+    <div class="labd__docs-head" data-astro-cid-f3pbbn5j>
+      <div class="labd__tabs" role="group" aria-label="Docs view" data-docs-tabs data-astro-cid-f3pbbn5j>
+        <button class="labd__tab text-meta" type="button" data-docs-tab="notes" aria-pressed="true" aria-controls="lab-docs-notes" data-astro-cid-f3pbbn5j>
+          <span class="labd__tab-bg" data-docs-tab-bg aria-hidden="true" data-astro-cid-f3pbbn5j></span>Notes
+        </button>
+        <button class="labd__tab text-meta" type="button" data-docs-tab="code" aria-pressed="false" aria-controls="lab-docs-code" data-astro-cid-f3pbbn5j>Code</button>
+      </div>
+      <span class="labd__docs-tags" aria-hidden="true" data-astro-cid-f3pbbn5j>
+        <span class="chip text-meta">{item.category}</span>
+        {item.isNew && <span class="chip text-meta chip--pill">New</span>}
+      </span>
+    </div>
+    <div class="labd__docs-clip" data-astro-cid-f3pbbn5j>
+      <div class="labd__docs-body" data-docs-scroll data-lenis-prevent data-astro-cid-f3pbbn5j>
+        <div class="labd__pane" id="lab-docs-notes" data-docs-pane="notes" data-astro-cid-f3pbbn5j set:html={notes}></div>
+        <div class="labd__pane" id="lab-docs-code" data-docs-pane="code" hidden data-astro-cid-f3pbbn5j set:html={code}></div>
+      </div>
+    </div>
+    <div class="labd__bar" data-docs-scrollbar aria-hidden="true" data-astro-cid-f3pbbn5j>
+      <div class="labd__bar-thumb" data-docs-thumb data-astro-cid-f3pbbn5j></div>
+    </div>
+  </aside>
+
+  <section class="labd__stage" data-stage data-no-wake data-astro-cid-f3pbbn5j>
+    <div class="labd__viewport" data-experiment-viewport data-astro-cid-f3pbbn5j>
+      <div class="labd__empty" data-stage-empty data-astro-cid-f3pbbn5j>
+        <img class="labd__empty-bg u-cover" data-halftone src={img(item.poster, 720)} alt="" decoding="async" draggable="false" data-astro-cid-f3pbbn5j />
+        <div class="labd__empty-content" data-astro-cid-f3pbbn5j>
+          <p class="labd__empty-name" data-astro-cid-f3pbbn5j>{item.name}</p>
+          <span class="labd__empty-tags" data-astro-cid-f3pbbn5j>
+            <span class="chip text-meta">{item.category}</span>
+            {item.isNew && <span class="chip text-meta chip--pill">New</span>}
+          </span>
+          <p class="labd__empty-note text-meta" data-astro-cid-f3pbbn5j>
+            <span class="labd__empty-note-soon" data-astro-cid-f3pbbn5j>Experiment coming soon</span>
+            <span class="labd__empty-note-loading" data-astro-cid-f3pbbn5j>Loading experiment</span>
+          </p>
+          <div class="labd__empty-loader" aria-hidden="true" data-astro-cid-f3pbbn5j>
+            <span class="labd__empty-loader-bar" data-astro-cid-f3pbbn5j></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="labd__nav" aria-label="Experiments" data-lab-nav data-astro-transition-persist="labd-nav" data-astro-cid-f3pbbn5j>
+    <a class="labd__nav-seg labd__nav-arrow" href={labHref(previous)} data-lab-prev data-hover data-astro-cid-f3pbbn5j>
+      <ArrowRoll />
+      <span class="u-sr-only" data-lab-prev-label data-astro-cid-f3pbbn5j>Previous experiment: {previous.name}</span>
+    </a>
+    <a class="labd__nav-seg labd__nav-count text-meta" href="/lab" title="Back to Lab" aria-label={`${number} of ${count}, back to Lab`} data-astro-cid-f3pbbn5j>
+      <span class="labd__odo" data-lab-odo aria-hidden="true" data-astro-cid-f3pbbn5j>
+        {number.split('').map((digit) => (
+          <span class="labd__odo-col" data-astro-cid-f3pbbn5j>
+            <span class="labd__odo-strip" data-odo-strip style={`translate: 0 -${Number(digit)}em`} data-astro-cid-f3pbbn5j>
+              {digits.map((n) => <span class="labd__odo-num" data-astro-cid-f3pbbn5j>{n}</span>)}
+            </span>
+          </span>
+        ))}
+      </span>
+      <span class="labd__odo-rest" aria-hidden="true" data-astro-cid-f3pbbn5j>{'\u2009/\u2009'}{count}</span>
+    </a>
+    <a class="labd__nav-seg labd__nav-arrow" href={labHref(next)} data-lab-next data-hover data-astro-cid-f3pbbn5j>
+      <ArrowRoll />
+      <span class="u-sr-only" data-lab-next-label data-astro-cid-f3pbbn5j>Next experiment: {next.name}</span>
+    </a>
+  </nav>
+
+  <button class="labd__tune" type="button" data-config-toggle aria-expanded="false" aria-controls="lab-config" aria-label="Tune" hidden data-astro-cid-f3pbbn5j>
+    <svg class="labd__tune-icon" width="1em" height="1em" aria-hidden="true" data-icon="sliders" data-astro-cid-f3pbbn5j>
+      <symbol id="ai:local:sliders" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="square" stroke-width="1.5"><path clip-rule="evenodd" d="M9 20a3.25 3.25 0 1 0 0-6.5A3.25 3.25 0 1 0 9 20Zm6-9.5A3.25 3.25 0 1 0 15 4a3.25 3.25 0 1 0 0 6.5Z"/><path d="M11.5 7.25H3.75m1.75 9.5H3.75m16.5-9.5H18.5m1.75 9.5H12.5"/></g></symbol>
+      <use href="#ai:local:sliders"></use>
+    </svg>
+  </button>
+  <aside class="labcfg" id="lab-config" data-config-panel hidden aria-label="Tune experiment" data-astro-cid-f3pbbn5j>
+    <div class="labcfg__head" data-astro-cid-f3pbbn5j>
+      <span class="labcfg__title text-label" data-astro-cid-f3pbbn5j>Tune</span>
+      <button class="labcfg__reset text-meta" type="button" data-config-reset data-astro-cid-f3pbbn5j>Reset</button>
+    </div>
+    <div class="labcfg__tools" data-config-tools hidden data-astro-cid-f3pbbn5j>
+      <select class="labcfg__ver text-meta" data-config-versions aria-label="Version" data-astro-cid-f3pbbn5j></select>
+      <button class="labcfg__tool" type="button" data-config-save aria-label="Save version" data-astro-cid-f3pbbn5j>+</button>
+      <button class="labcfg__tool" type="button" data-config-copy aria-label="Copy values as JSON" data-astro-cid-f3pbbn5j>Copy</button>
+    </div>
+    <div class="labcfg__body" data-config-body data-astro-cid-f3pbbn5j></div>
+  </aside>
+</div>
