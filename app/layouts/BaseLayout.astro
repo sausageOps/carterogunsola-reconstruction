@@ -16,6 +16,9 @@ interface Props {
   ogImage?: string;
   /** `og:type` — `website` everywhere, `article` on writing posts (original head). */
   ogType?: string;
+  /** Optional route-specific head overrides; defaults retain the shared foundation. */
+  canonical?: string;
+  jsonLd?: Record<string, any>;
   crumbName?: string;
   showFooter?: boolean;
   noindex?: boolean;
@@ -28,6 +31,8 @@ const {
   description = SITE.description,
   ogImage = SITE.ogImage,
   ogType = 'website',
+  canonical,
+  jsonLd: jsonLdOverride,
   crumbName,
   showFooter = true,
   noindex = false,
@@ -40,12 +45,12 @@ const fullTitle = title
   : `${SITE.name}${SITE.titleSeparator}${SITE.role}`;
 
 const pathname = Astro.url.pathname;
-const canonicalUrl = new URL(pathname, SITE.url).toString();
+const canonicalUrl = canonical ?? new URL(pathname, SITE.url).toString();
 const ogImageUrl = ogImage.startsWith('http')
   ? ogImage
   : `${SITE.ogOrigin}${ogImage}`;
 
-const jsonLd = {
+const jsonLd = jsonLdOverride ?? {
   '@context': 'https://schema.org',
   '@graph': [
     {
@@ -256,6 +261,7 @@ const jsonLd = {
     <main id="main" class={mainClass} {...mainAttrs}>
       <slot />
     </main>
+    <slot name="afterMain" />
     {showFooter && <Footer />}
     <div
       class="overlay"

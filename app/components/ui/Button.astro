@@ -8,6 +8,8 @@ interface Props {
   type?: 'button' | 'submit' | 'reset';
   class?: string;
   label?: string;
+  /** Typography utility on the control; defaults to the original shared style. */
+  textClass?: string;
   [key: string]: any;
 }
 
@@ -20,6 +22,7 @@ const {
   type = 'button',
   class: className = '',
   label,
+  textClass = 'text-caption',
   ...rest
 } = Astro.props;
 
@@ -32,7 +35,7 @@ const Tag = href ? 'a' : 'button';
   target={target}
   rel={rel}
   data-magnetic={magnetic !== undefined ? String(magnetic) : undefined}
-  class:list={['btn', solid && 'btn--solid', 'text-caption', className]}
+  class:list={['btn', solid && 'btn--solid', textClass, className]}
   {...rest}
 >
   {label ? (

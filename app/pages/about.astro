@@ -1,14 +1,1319 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import FoundationShell from '../components/FoundationShell.astro';
+import Socials from '../components/ui/Socials.astro';
+import Button from '../components/ui/Button.astro';
+import CloseBox from '../components/ui/CloseBox.astro';
+import Signature from '../components/ui/Signature.astro';
+import '../styles/about.css';
+
+// Recovered from pages/about.html. Original page-scope attributes used by the
+// recovered styles are retained: app/styles/about.css uses those selectors verbatim.
+const description = "Carter Ogunsola is a creative developer and brand engineer. Lead web dev at Strive, founder of Balky Studio. Lagos-born, Utah-based, making the web fun again.";
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://carterogunsola.com/#person",
+      "name": "Carter Ogunsola",
+      "url": "https://carterogunsola.com",
+      "image": "https://carterogunsola.com/og/section/home.jpg",
+      "jobTitle": "Creative Developer & Brand Engineer",
+      "description": "Creative developer, director and entrepreneur. Lead web developer and brand engineer at Strive, founder of Balky Studio. Born in Lagos, based in Utah.",
+      "birthPlace": {
+        "@type": "Place",
+        "name": "Lagos, Nigeria"
+      },
+      "homeLocation": {
+        "@type": "Place",
+        "name": "Utah, United States"
+      },
+      "worksFor": [
+        {
+          "@type": "Organization",
+          "name": "Strive",
+          "url": "https://strivepharmacy.com"
+        },
+        {
+          "@type": "Organization",
+          "name": "Balky Studio",
+          "url": "https://www.balky.studio/"
+        }
+      ],
+      "sameAs": [
+        "https://www.instagram.com/carterogunsola.dev/",
+        "https://x.com/CarterOgunsola",
+        "https://www.linkedin.com/in/carterogunsola/",
+        "https://www.awwwards.com/carter-ogunsola/",
+        "https://github.com/CarterOgunsola"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://carterogunsola.com/#website",
+      "url": "https://carterogunsola.com",
+      "name": "Carter Ogunsola",
+      "description": "Creative developer, director, and entrepreneur crafting unique web experiences. A living lab of motion experiments, ideas and writing by Carter Ogunsola.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://carterogunsola.com/#person"
+      }
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://carterogunsola.com/about/#profilepage",
+      "url": "https://carterogunsola.com/about/",
+      "name": "About Carter Ogunsola",
+      "mainEntity": {
+        "@id": "https://carterogunsola.com/#person"
+      },
+      "isPartOf": {
+        "@id": "https://carterogunsola.com/#website"
+      }
+    }
+  ]
+};
 ---
 
-<BaseLayout title="About" ogImage="/og/section/about.jpg">
-  <FoundationShell
-    heading="About — Route Shell"
-    eyebrow="Phase 1 :: Verification Route"
-    lead="Verifies ClientRouter navigation, Veil page transition curtain, navpill active highlight, and LogoNav capsule odometer rolling to 'About'."
-    routePath="/about"
-    showAtoms={false}
-  />
+<BaseLayout
+  title="About"
+  description={description}
+  canonical="https://carterogunsola.com/about"
+  jsonLd={jsonLd}
+  ogImage="/og/section/about.jpg"
+  showFooter={false}
+  mainClass="ov3"
+  mainAttrs={{ 'data-canvas': '', 'data-astro-cid-ta2fbyqs': '' }}
+>
+<h1 class="u-sr-only" data-astro-cid-ta2fbyqs>About Carter Ogunsola, Creative Developer &amp; Brand Engineer</h1>
+<header class="ov3__ticket" hidden data-astro-cid-ta2fbyqs>
+<span class="ov3__ticket-name text-label" data-astro-cid-ta2fbyqs>The Front Office</span>
+<span class="ov3__ticket-kv text-mono-meta" aria-label="File status" data-astro-cid-ta2fbyqs>
+<span data-astro-cid-ta2fbyqs>
+<span class="k" data-astro-cid-ta2fbyqs>JOB::</span>
+<b data-astro-cid-ta2fbyqs>N°00</b>
+</span>
+<span data-astro-cid-ta2fbyqs>
+<span class="k" data-astro-cid-ta2fbyqs>EST::</span>
+<span class="v" data-astro-cid-ta2fbyqs>2000</span>
+</span>
+<span data-astro-cid-ta2fbyqs>
+<span class="k" data-astro-cid-ta2fbyqs>STATUS::</span>
+<b data-astro-cid-ta2fbyqs>OPEN</b>
+</span>
+</span>
+</header>
+<div class="ov3__board" data-astro-cid-ta2fbyqs>
+<section class="ov3__item ov3__hero" data-canvas-item data-rot="0" tabindex="0" style="--fx:0;--fy:-0.03" data-frank-stage aria-label="Carter Ogunsola" data-astro-cid-ta2fbyqs>
+<div class="ov3__hero-gl" data-frank-gl aria-hidden="true" data-astro-cid-ta2fbyqs>
+</div>
+<div class="ov3__hero-layer" data-frank-layer data-astro-cid-ta2fbyqs>
+<article class="ov3__env u-card" data-frank-card data-hit data-marks-surface data-astro-cid-ta2fbyqs>
+<span class="ov3__field" data-marks aria-hidden="true" data-astro-cid-ta2fbyqs>
+</span>
+<span class="ov3__imprints" data-marks-avoid data-astro-cid-ta2fbyqs>
+<button class="ov3__imprint" type="button" data-dialog-open="record" aria-label="The record: where the work has been" aria-haspopup="dialog" aria-expanded="false" data-astro-cid-ta2fbyqs>
+<svg width="1em" height="1em" aria-hidden="true" data-astro-cid-ta2fbyqs="true" data-icon="suitcase-work">
+<symbol id="ai:local:suitcase-work" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5" d="M21.25 18.25v-9.5a2 2 0 0 0-2-2H4.75a2 2 0 0 0-2 2v9.5a2 2 0 0 0 2 2h14.5a2 2 0 0 0 2-2ZM7.75 6.75v-2a2 2 0 0 1 2-2h4.5a2 2 0 0 1 2 2v2"/>
+</symbol>
+<use href="#ai:local:suitcase-work">
+</use>
+</svg>
+</button>
+<button class="ov3__imprint" type="button" data-dialog-open="onfile" aria-label="On file: awards and features" aria-haspopup="dialog" aria-expanded="false" data-astro-cid-ta2fbyqs>
+<svg width="1em" height="1em" aria-hidden="true" data-astro-cid-ta2fbyqs="true" data-icon="trophy">
+<symbol id="ai:local:trophy" viewBox="0 0 24 24">
+<g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5">
+<path d="M12 18v-3m6.25-10.25h1a2 2 0 0 1 2 2v.5a3 3 0 0 1-3 3"/>
+<path d="M5.75 4.75a2 2 0 0 1 2-2h8.5a2 2 0 0 1 2 2v4.5a6 6 0 0 1-6 6h-.5a6 6 0 0 1-6-6zm1 14.5a1.5 1.5 0 0 1 1.5-1.5h7.5a1.5 1.5 0 0 1 1.5 1.5v.5a1.5 1.5 0 0 1-1.5 1.5h-7.5a1.5 1.5 0 0 1-1.5-1.5zm-1-14.5h-1a2 2 0 0 0-2 2v.5a3 3 0 0 0 3 3"/>
+</g>
+</symbol>
+<use href="#ai:local:trophy">
+</use>
+</svg>
+</button>
+</span>
+<div class="frank" style="--sw:208px;--sh:260px;--cut:url(#stamp-cut-dm6sa1)" data-astro-cid-tl32dyly>
+<svg class="frank__defs" aria-hidden="true" focusable="false" data-astro-cid-tl32dyly>
+<defs data-astro-cid-tl32dyly>
+<clipPath id="stamp-cut-dm6sa1" data-astro-cid-tl32dyly>
+<path d="M0 0 L3.84 0 A4.521739130434782 4.521739130434782 0 0 0 12.89 0 L14.47 0 A4.521739130434782 4.521739130434782 0 0 0 23.51 0 L25.10 0 A4.521739130434782 4.521739130434782 0 0 0 34.14 0 L35.72 0 A4.521739130434782 4.521739130434782 0 0 0 44.77 0 L46.35 0 A4.521739130434782 4.521739130434782 0 0 0 55.39 0 L56.97 0 A4.521739130434782 4.521739130434782 0 0 0 66.02 0 L67.60 0 A4.521739130434782 4.521739130434782 0 0 0 76.64 0 L78.23 0 A4.521739130434782 4.521739130434782 0 0 0 87.27 0 L88.85 0 A4.521739130434782 4.521739130434782 0 0 0 97.90 0 L99.48 0 A4.521739130434782 4.521739130434782 0 0 0 108.52 0 L110.10 0 A4.521739130434782 4.521739130434782 0 0 0 119.15 0 L120.73 0 A4.521739130434782 4.521739130434782 0 0 0 129.77 0 L131.36 0 A4.521739130434782 4.521739130434782 0 0 0 140.40 0 L141.98 0 A4.521739130434782 4.521739130434782 0 0 0 151.03 0 L152.61 0 A4.521739130434782 4.521739130434782 0 0 0 161.65 0 L163.23 0 A4.521739130434782 4.521739130434782 0 0 0 172.28 0 L173.86 0 A4.521739130434782 4.521739130434782 0 0 0 182.90 0 L184.49 0 A4.521739130434782 4.521739130434782 0 0 0 193.53 0 L195.11 0 A4.521739130434782 4.521739130434782 0 0 0 204.16 0 L208 0 L208 3.28 A4.521739130434782 4.521739130434782 0 0 0 208 12.32 L208 13.90 A4.521739130434782 4.521739130434782 0 0 0 208 22.95 L208 24.53 A4.521739130434782 4.521739130434782 0 0 0 208 33.57 L208 35.16 A4.521739130434782 4.521739130434782 0 0 0 208 44.20 L208 45.78 A4.521739130434782 4.521739130434782 0 0 0 208 54.83 L208 56.41 A4.521739130434782 4.521739130434782 0 0 0 208 65.45 L208 67.03 A4.521739130434782 4.521739130434782 0 0 0 208 76.08 L208 77.66 A4.521739130434782 4.521739130434782 0 0 0 208 86.70 L208 88.29 A4.521739130434782 4.521739130434782 0 0 0 208 97.33 L208 98.91 A4.521739130434782 4.521739130434782 0 0 0 208 107.96 L208 109.54 A4.521739130434782 4.521739130434782 0 0 0 208 118.58 L208 120.17 A4.521739130434782 4.521739130434782 0 0 0 208 129.21 L208 130.79 A4.521739130434782 4.521739130434782 0 0 0 208 139.83 L208 141.42 A4.521739130434782 4.521739130434782 0 0 0 208 150.46 L208 152.04 A4.521739130434782 4.521739130434782 0 0 0 208 161.09 L208 162.67 A4.521739130434782 4.521739130434782 0 0 0 208 171.71 L208 173.30 A4.521739130434782 4.521739130434782 0 0 0 208 182.34 L208 183.92 A4.521739130434782 4.521739130434782 0 0 0 208 192.97 L208 194.55 A4.521739130434782 4.521739130434782 0 0 0 208 203.59 L208 205.17 A4.521739130434782 4.521739130434782 0 0 0 208 214.22 L208 215.80 A4.521739130434782 4.521739130434782 0 0 0 208 224.84 L208 226.43 A4.521739130434782 4.521739130434782 0 0 0 208 235.47 L208 237.05 A4.521739130434782 4.521739130434782 0 0 0 208 246.10 L208 247.68 A4.521739130434782 4.521739130434782 0 0 0 208 256.72 L208 260 L204.16 260 A4.521739130434782 4.521739130434782 0 0 0 195.11 260 L193.53 260 A4.521739130434782 4.521739130434782 0 0 0 184.49 260 L182.90 260 A4.521739130434782 4.521739130434782 0 0 0 173.86 260 L172.28 260 A4.521739130434782 4.521739130434782 0 0 0 163.23 260 L161.65 260 A4.521739130434782 4.521739130434782 0 0 0 152.61 260 L151.03 260 A4.521739130434782 4.521739130434782 0 0 0 141.98 260 L140.40 260 A4.521739130434782 4.521739130434782 0 0 0 131.36 260 L129.77 260 A4.521739130434782 4.521739130434782 0 0 0 120.73 260 L119.15 260 A4.521739130434782 4.521739130434782 0 0 0 110.10 260 L108.52 260 A4.521739130434782 4.521739130434782 0 0 0 99.48 260 L97.90 260 A4.521739130434782 4.521739130434782 0 0 0 88.85 260 L87.27 260 A4.521739130434782 4.521739130434782 0 0 0 78.23 260 L76.64 260 A4.521739130434782 4.521739130434782 0 0 0 67.60 260 L66.02 260 A4.521739130434782 4.521739130434782 0 0 0 56.97 260 L55.39 260 A4.521739130434782 4.521739130434782 0 0 0 46.35 260 L44.77 260 A4.521739130434782 4.521739130434782 0 0 0 35.72 260 L34.14 260 A4.521739130434782 4.521739130434782 0 0 0 25.10 260 L23.51 260 A4.521739130434782 4.521739130434782 0 0 0 14.47 260 L12.89 260 A4.521739130434782 4.521739130434782 0 0 0 3.84 260 L0 260 L0 256.72 A4.521739130434782 4.521739130434782 0 0 0 0 247.68 L0 246.10 A4.521739130434782 4.521739130434782 0 0 0 0 237.05 L0 235.47 A4.521739130434782 4.521739130434782 0 0 0 0 226.43 L0 224.84 A4.521739130434782 4.521739130434782 0 0 0 0 215.80 L0 214.22 A4.521739130434782 4.521739130434782 0 0 0 0 205.17 L0 203.59 A4.521739130434782 4.521739130434782 0 0 0 0 194.55 L0 192.97 A4.521739130434782 4.521739130434782 0 0 0 0 183.92 L0 182.34 A4.521739130434782 4.521739130434782 0 0 0 0 173.30 L0 171.71 A4.521739130434782 4.521739130434782 0 0 0 0 162.67 L0 161.09 A4.521739130434782 4.521739130434782 0 0 0 0 152.04 L0 150.46 A4.521739130434782 4.521739130434782 0 0 0 0 141.42 L0 139.83 A4.521739130434782 4.521739130434782 0 0 0 0 130.79 L0 129.21 A4.521739130434782 4.521739130434782 0 0 0 0 120.17 L0 118.58 A4.521739130434782 4.521739130434782 0 0 0 0 109.54 L0 107.96 A4.521739130434782 4.521739130434782 0 0 0 0 98.91 L0 97.33 A4.521739130434782 4.521739130434782 0 0 0 0 88.29 L0 86.70 A4.521739130434782 4.521739130434782 0 0 0 0 77.66 L0 76.08 A4.521739130434782 4.521739130434782 0 0 0 0 67.03 L0 65.45 A4.521739130434782 4.521739130434782 0 0 0 0 56.41 L0 54.83 A4.521739130434782 4.521739130434782 0 0 0 0 45.78 L0 44.20 A4.521739130434782 4.521739130434782 0 0 0 0 35.16 L0 33.57 A4.521739130434782 4.521739130434782 0 0 0 0 24.53 L0 22.95 A4.521739130434782 4.521739130434782 0 0 0 0 13.90 L0 12.32 A4.521739130434782 4.521739130434782 0 0 0 0 3.28 L0 0 Z" data-astro-cid-tl32dyly>
+</path>
+</clipPath>
+<filter id="stamp-print-dm6sa1" color-interpolation-filters="sRGB" data-astro-cid-tl32dyly>
+<feColorMatrix type="matrix" values="0.299 0.587 0.114 0 0
+                  0.299 0.587 0.114 0 0
+                  0.299 0.587 0.114 0 0
+                  0 0 0 1 0" data-astro-cid-tl32dyly>
+</feColorMatrix>
+<feComponentTransfer data-astro-cid-tl32dyly>
+<feFuncR type="discrete" tableValues=".00 .11 .22 .33 .44 .56 .67 .78 .89 1" data-astro-cid-tl32dyly>
+</feFuncR>
+<feFuncG type="discrete" tableValues=".00 .11 .22 .33 .44 .56 .67 .78 .89 1" data-astro-cid-tl32dyly>
+</feFuncG>
+<feFuncB type="discrete" tableValues=".00 .11 .22 .33 .44 .56 .67 .78 .89 1" data-astro-cid-tl32dyly>
+</feFuncB>
+</feComponentTransfer>
+</filter>
+<filter id="pm-ink-dm6sa1" x="-8%" y="-8%" width="116%" height="116%" data-astro-cid-tl32dyly>
+<feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="41" result="r" data-astro-cid-tl32dyly>
+</feTurbulence>
+<feDisplacementMap in="SourceGraphic" in2="r" scale="1.2" result="d" data-astro-cid-tl32dyly>
+</feDisplacementMap>
+<feTurbulence type="fractalNoise" baseFrequency="0.09" numOctaves="3" seed="48" result="m" data-astro-cid-tl32dyly>
+</feTurbulence>
+<feColorMatrix in="m" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 3 -0.9" result="mm" data-astro-cid-tl32dyly>
+</feColorMatrix>
+<feComposite in="d" in2="mm" operator="in" data-astro-cid-tl32dyly>
+</feComposite>
+</filter>
+</defs>
+</svg>
+<div class="frank__stamp" data-tilt style="--print:url(#stamp-print-dm6sa1)" data-astro-cid-tl32dyly>
+<img src="https://carterogunsola.com/_astro/carter-stamp.BRpWjIXQ_4vkhB.webp" srcset="https://carterogunsola.com/_astro/carter-stamp.BRpWjIXQ_ZH60A1.webp 560w, https://carterogunsola.com/_astro/carter-stamp.BRpWjIXQ_4vkhB.webp 1000w" alt="Carter Ogunsola" sizes="(max-width: 63.99rem) 184px, 560px" draggable="false" data-astro-cid-tl32dyly="true" loading="eager" decoding="sync" fetchpriority="high" width="1000" height="1250" class="frank__photo u-cover u-no-drag">
+<span class="frank__cap" data-astro-cid-tl32dyly>Carter Ogunsola<svg class="frank__waves" viewBox="0 0 26 10" fill="none" aria-hidden="true" focusable="false" data-astro-cid-tl32dyly>
+<path d="M1 2c3-1.6 5-1.6 8 0s5 1.6 8 0 5-1.6 8 0" data-astro-cid-tl32dyly>
+</path>
+<path d="M1 5c3-1.6 5-1.6 8 0s5 1.6 8 0 5-1.6 8 0" data-astro-cid-tl32dyly>
+</path>
+<path d="M1 8c3-1.6 5-1.6 8 0s5 1.6 8 0 5-1.6 8 0" data-astro-cid-tl32dyly>
+</path>
+</svg>
+</span>
+</div>
+<span class="frank__shine" data-tilt-shine aria-hidden="true" data-astro-cid-tl32dyly>
+</span>
+<svg class="frank__postmark" data-marks-avoid viewBox="0 0 190 96" fill="none" aria-hidden="true" focusable="false" data-astro-cid-tl32dyly>
+<defs data-astro-cid-tl32dyly>
+<path id="pm-arc-top-dm6sa1" d="M11 48a37 37 0 0 1 74 0" data-astro-cid-tl32dyly>
+</path>
+<path id="pm-arc-bot-dm6sa1" d="M15 48a33 33 0 0 0 66 0" data-astro-cid-tl32dyly>
+</path>
+</defs>
+<g filter="url(#pm-ink-dm6sa1)" data-astro-cid-tl32dyly>
+<circle cx="48" cy="48" r="42" stroke="currentColor" stroke-width="1.6" data-astro-cid-tl32dyly>
+</circle>
+<circle cx="48" cy="48" r="33" stroke="currentColor" stroke-width="1" data-astro-cid-tl32dyly>
+</circle>
+<text class="frank__postmark-type" fill="currentColor" data-astro-cid-tl32dyly>
+<textPath href="#pm-arc-top-dm6sa1" startOffset="50%" text-anchor="middle" data-astro-cid-tl32dyly>LAGOS · NG</textPath>
+</text>
+<text class="frank__postmark-type" fill="currentColor" data-astro-cid-tl32dyly>
+<textPath href="#pm-arc-bot-dm6sa1" startOffset="50%" text-anchor="middle" data-astro-cid-tl32dyly>UTAH · US</textPath>
+</text>
+<path d="M31 44h34M31 52h34" stroke="currentColor" stroke-width="1.6" stroke-linecap="butt" data-astro-cid-tl32dyly>
+</path>
+<path d="M94 30q11-5 22 0t22 0 22 0 22 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" data-astro-cid-tl32dyly>
+</path>
+<path d="M94 42q11-5 22 0t22 0 22 0 22 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" data-astro-cid-tl32dyly>
+</path>
+<path d="M94 54q11-5 22 0t22 0 22 0 22 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" data-astro-cid-tl32dyly>
+</path>
+<path d="M94 66q11-5 22 0t22 0 22 0 22 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" data-astro-cid-tl32dyly>
+</path>
+</g>
+</svg>
+</div>
+<div class="ov3__conn" data-astro-cid-ta2fbyqs>
+<div class="ov3__conn-row" data-marks-avoid data-astro-cid-ta2fbyqs>
+<Socials />
+</div>
+<div class="ov3__conn-row" data-marks-avoid data-astro-cid-ta2fbyqs>
+<Button textClass="text-tag" data-dialog-open="letter" aria-haspopup="dialog" aria-expanded="false" data-astro-cid-ta2fbyqs data-astro-cid-j6ocf6pu>
+<span class="btn__label roll" data-roll data-astro-cid-j6ocf6pu>About me</span>
+</Button>
+<span class="ov3__conn-from text-label" data-astro-cid-ta2fbyqs>Lagos → Utah</span>
+</div>
+</div>
+</article>
+</div>
+</section>
+<article class="ov3__item ov3__tele u-card" data-canvas-item data-rot="-1.3" tabindex="0" style="--fx:-0.32;--fy:0.24" data-about data-state="boot" aria-label="Telemetry" data-astro-cid-ta2fbyqs>
+<div class="ov3__tele-head" data-astro-cid-ta2fbyqs>
+<span class="ov3__tele-tag text-mono-tag" data-astro-cid-ta2fbyqs>Telemetry::<span class="ov3__roll" data-about-state data-astro-cid-ta2fbyqs>Sync</span>
+</span>
+<button class="ov3__scope" type="button" data-about-scope aria-pressed="false" aria-label="Turn the tape over" data-astro-cid-ta2fbyqs>
+</button>
+</div>
+<div class="ov3__tele-rows text-mono-meta" data-astro-cid-ta2fbyqs>
+<span data-astro-cid-ta2fbyqs>
+<span class="k" data-astro-cid-ta2fbyqs>LOCAL::</span>
+<span class="v ov3__roll" data-about-time data-astro-cid-ta2fbyqs>--:--</span>
+</span>
+<span data-live data-astro-cid-ta2fbyqs>
+<span class="k" data-astro-cid-ta2fbyqs>POS::</span>
+<span class="v" data-astro-cid-ta2fbyqs>N 37°05′47″ / W 113°34′06″</span>
+</span>
+<span data-online-row data-astro-cid-ta2fbyqs>
+<span class="k" data-astro-cid-ta2fbyqs>ONLINE::</span>
+<span class="v ov3__roll" data-online data-astro-cid-ta2fbyqs>···</span>
+</span>
+<span data-commits-row data-astro-cid-ta2fbyqs>
+<span class="k" data-astro-cid-ta2fbyqs>COMMITS::</span>
+<span class="v ov3__roll" data-commits-total data-astro-cid-ta2fbyqs>···</span>
+</span>
+</div>
+<div class="ov3__commits" data-commits aria-hidden="true" data-astro-cid-ta2fbyqs>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+<span data-astro-cid-ta2fbyqs>
+</span>
+</div>
+</article>
+<article class="ov3__item ov3__radio" data-canvas-item data-rot="0.8" tabindex="0" style="--fx:0.35;--fy:0.17" data-deck-stage aria-label="Radio" data-astro-cid-ta2fbyqs>
+<div class="ov3__deck" data-deck-gl aria-hidden="true" data-astro-cid-ta2fbyqs>
+</div>
+<div class="ov3__deck-layer" data-deck-layer data-astro-cid-ta2fbyqs>
+<div class="ov3__strip" data-deck-panel data-astro-cid-ta2fbyqs>
+<div class="con con--deck" data-console data-on="false" data-state="boot" data-con-plain data-astro-cid-v6dmze42>
+<img alt="" class="con__art-src" data-con-img hidden data-astro-cid-v6dmze42>
+<div class="con__zone" data-astro-cid-v6dmze42>
+<div class="con__head" data-astro-cid-v6dmze42>
+<span class="con__tag text-mono-tag" data-astro-cid-v6dmze42>Radio::<span class="con__roll" data-con-state data-astro-cid-v6dmze42>Tuning</span>
+</span>
+<span class="con__meta text-mono-meta" data-astro-cid-v6dmze42>
+<span class="con__onair" aria-hidden="true" data-astro-cid-v6dmze42>
+</span>
+<span class="con__roll" data-con-status data-astro-cid-v6dmze42>SEARCHING</span>
+</span>
+</div>
+<div class="con__now" data-astro-cid-v6dmze42>
+<span class="con__deck" aria-live="polite" data-astro-cid-v6dmze42>
+<span class="con__track text-h6" data-con-track data-astro-cid-v6dmze42>Tuning in…</span>
+<span class="con__artist text-meta" data-con-artist data-astro-cid-v6dmze42>Stand by</span>
+<span class="con__progress text-mono-sm" aria-hidden="true" data-astro-cid-v6dmze42>
+<span data-con-elapsed data-astro-cid-v6dmze42>0:00</span>
+<span class="con__bar" data-astro-cid-v6dmze42>
+<span data-con-bar data-astro-cid-v6dmze42>
+</span>
+</span>
+<span data-con-remain data-astro-cid-v6dmze42>−0:00</span>
+</span>
+</span>
+<span class="con__eq" aria-hidden="true" data-astro-cid-v6dmze42>
+<i data-astro-cid-v6dmze42>
+</i>
+<i data-astro-cid-v6dmze42>
+</i>
+<i data-astro-cid-v6dmze42>
+</i>
+<i data-astro-cid-v6dmze42>
+</i>
+<i data-astro-cid-v6dmze42>
+</i>
+</span>
+</div>
+</div>
+<div class="con__spec" data-astro-cid-v6dmze42>
+<span class="con__read" hidden data-con-rot-mod data-astro-cid-v6dmze42>
+<span class="con__k text-mono-sm" data-astro-cid-v6dmze42>Rotation::</span>
+<span class="con__v text-mono-sm" data-astro-cid-v6dmze42>
+<span class="con__roll" data-con-rot data-astro-cid-v6dmze42>
+</span>
+</span>
+</span>
+<span class="con__read" hidden data-con-tape-mod data-astro-cid-v6dmze42>
+<span class="con__k text-mono-sm" data-con-tape-k data-astro-cid-v6dmze42>Tape::</span>
+<span class="con__v text-mono-sm" data-astro-cid-v6dmze42>
+<span class="con__roll" data-con-tape data-astro-cid-v6dmze42>
+</span>
+</span>
+</span>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="ov3__tag" hidden data-astro-cid-ta2fbyqs>
+<div class="ov3__tag-card" data-astro-cid-ta2fbyqs>
+<svg class="ov3__tag-eyelet" viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-ta2fbyqs>
+<defs data-astro-cid-ta2fbyqs>
+<linearGradient id="eye-ni" x1="0" y1="0" x2="1" y2="1" data-astro-cid-ta2fbyqs>
+<stop offset="0" stop-color="#e6e7e9" data-astro-cid-ta2fbyqs>
+</stop>
+<stop offset="0.55" stop-color="#8f9196" data-astro-cid-ta2fbyqs>
+</stop>
+<stop offset="1" stop-color="#d3d5d8" data-astro-cid-ta2fbyqs>
+</stop>
+</linearGradient>
+</defs>
+<circle cx="12" cy="12" r="9" fill="url(#eye-ni)" data-astro-cid-ta2fbyqs>
+</circle>
+<circle cx="12" cy="12" r="5" fill="var(--paper)" data-astro-cid-ta2fbyqs>
+</circle>
+<circle cx="12" cy="12" r="5" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="1" data-astro-cid-ta2fbyqs>
+</circle>
+</svg>
+<div class="ov3__tag-route" aria-label="Lagos to St. George" data-astro-cid-ta2fbyqs>
+<span class="ov3__tag-code" data-astro-cid-ta2fbyqs>LOS</span>
+<span class="ov3__tag-arrow" aria-hidden="true" data-astro-cid-ta2fbyqs>
+<i data-astro-cid-ta2fbyqs>
+</i>
+</span>
+<span class="ov3__tag-code" data-astro-cid-ta2fbyqs>SGU</span>
+</div>
+<div class="ov3__tag-cities text-label" aria-hidden="true" data-astro-cid-ta2fbyqs>
+<span data-astro-cid-ta2fbyqs>Lagos, NG</span>
+<span data-astro-cid-ta2fbyqs>St. George, UT</span>
+</div>
+<p class="ov3__tag-print text-mono-sm" data-astro-cid-ta2fbyqs>11,886 km · −7 h · since 2000</p>
+<svg class="ov3__barcode" viewBox="0 0 150 22" preserveAspectRatio="none" aria-hidden="true" data-astro-cid-ta2fbyqs>
+<rect x="0" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="3" y="0" width="3" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="8" y="0" width="3" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="12" y="0" width="2" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="15" y="0" width="2" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="19" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="22" y="0" width="3" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="27" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="29" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="32" y="0" width="3" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="36" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="38" y="0" width="3" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="42" y="0" width="2" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="46" y="0" width="2" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="49" y="0" width="2" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="52" y="0" width="3" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="57" y="0" width="3" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="61" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="64" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="67" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="69" y="0" width="2" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="73" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="76" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="78" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="81" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="83" y="0" width="2" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="86" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="89" y="0" width="2" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="93" y="0" width="2" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="97" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="100" y="0" width="2" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="104" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="107" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="110" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="113" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="116" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="118" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="120" y="0" width="2" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="124" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="126" y="0" width="2" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="130" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="132" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="134" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="137" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="140" y="0" width="2" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="144" y="0" width="1" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+<rect x="146" y="0" width="3" height="22" fill="currentColor" data-astro-cid-ta2fbyqs>
+</rect>
+</svg>
+</div>
+</article>
+</div>
+<div class="ov3__exit" data-canvas-exit hidden data-astro-cid-ta2fbyqs>
+<button type="button" aria-label="Put it back" data-astro-cid-ta2fbyqs="true" data-astro-cid-rqy3m4bm="true" class="closebox closebox--md closebox--surface">
+<svg width="1em" height="1em" aria-hidden="true" data-astro-cid-rqy3m4bm="true" data-icon="close">
+<symbol id="ai:local:close" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="m6.25 6.25 11.5 11.5m0-11.5-11.5 11.5"/>
+</symbol>
+<use href="#ai:local:close">
+</use>
+</svg>
+</button>
+</div>
+<nav class="ov3__drawer" aria-label="Adjacent files" data-astro-cid-ta2fbyqs>
+<a class="ov3__drawer-tab text-label" href="/writing" data-astro-cid-ta2fbyqs>File:: Writing</a>
+<a class="ov3__drawer-tab text-label" href="/lab" data-astro-cid-ta2fbyqs>File:: Lab</a>
+</nav>
+  <Fragment slot="afterMain">
+<dialog class="ov3__dialog ov3__letter" data-dialog="letter" aria-labelledby="letter-title" data-lenis-prevent data-astro-cid-ta2fbyqs>
+<div class="ov3__dialog-scroll" data-lenis-prevent data-astro-cid-ta2fbyqs>
+<div class="ov3__dialog-head" data-astro-cid-ta2fbyqs>
+<span class="text-label ov3__dialog-tag" data-astro-cid-ta2fbyqs>The letter ::</span>
+<CloseBox size="sm" label="Close" class="closebox--fill" data-dialog-close data-astro-cid-ta2fbyqs data-astro-cid-rqy3m4bm>
+<svg width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" data-icon="close" data-astro-cid-rqy3m4bm>
+<use href="#ai:local:close">
+</use>
+</svg>
+</CloseBox>
+</div>
+<p class="ov3__salut" id="letter-title" data-astro-cid-ta2fbyqs>Hey, you pulled my file.</p>
+<div class="ov3__body" data-astro-cid-ta2fbyqs>
+<p data-astro-cid-ta2fbyqs>I’m a creative developer, director and entrepreneur focused on crafting truly unique web experiences. Strong background in design, an unconventional way into every problem, and a taste for pure digital originality.</p>
+<p data-astro-cid-ta2fbyqs>Days I’m the lead web developer and brand engineer at <a href="https://strivepharmacy.com" data-underline-link target="_blank" rel="noopener noreferrer" data-astro-cid-ta2fbyqs>Strive</a>. I founded and run <a href="https://www.balky.studio/" data-underline-link target="_blank" rel="noopener noreferrer" data-astro-cid-ta2fbyqs>Balky Studio</a>, and I’m building <a href="https://www.odyn.dev/" data-underline-link target="_blank" rel="noopener noreferrer" data-astro-cid-ta2fbyqs>Odyn</a>, custom code in production for Webflow. Nights, the lab stays lit.</p>
+<p data-astro-cid-ta2fbyqs>Born in Lagos, Nigeria. Based in Utah. The press out front is what the shop makes. This room is who makes it.</p>
+</div>
+<div class="ov3__sigrow" data-astro-cid-ta2fbyqs>
+<Signature class="ov3__sig" />
+</div>
+</div>
+</dialog>
+<dialog class="ov3__dialog ov3__rec" data-dialog="record" aria-labelledby="record-title" data-lenis-prevent data-astro-cid-ta2fbyqs>
+<div class="ov3__dialog-scroll" data-lenis-prevent data-astro-cid-ta2fbyqs>
+<div class="ov3__dialog-head" data-astro-cid-ta2fbyqs>
+<span class="text-label ov3__dialog-tag" data-astro-cid-ta2fbyqs>The record ::</span>
+<CloseBox size="sm" label="Close" class="closebox--fill" data-dialog-close data-astro-cid-ta2fbyqs data-astro-cid-rqy3m4bm>
+<svg width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" data-icon="close" data-astro-cid-rqy3m4bm>
+<use href="#ai:local:close">
+</use>
+</svg>
+</CloseBox>
+</div>
+<h2 class="ov3__dialog-title text-h2" id="record-title" data-astro-cid-ta2fbyqs>Where I’ve worked.</h2>
+<div class="ov3__dialog-sec" data-astro-cid-ta2fbyqs>
+<section class="rec" aria-label="Experience" data-section="Experience" data-astro-cid-kq42ek7p>
+<div class="rec__sheet u-card" data-record style="--rec-role:138px" data-astro-cid-kq42ek7p>
+<div class="rec__head" aria-hidden="true" data-astro-cid-kq42ek7p>
+<span class="rec__field text-mono-sm" data-astro-cid-kq42ek7p>Company</span>
+<span class="rec__field rec__field--role text-mono-sm" data-astro-cid-kq42ek7p>Role</span>
+<span class="rec__field rec__field--year text-mono-sm" data-astro-cid-kq42ek7p>Year</span>
+</div>
+<div class="rec__body" data-row-list data-record-body data-astro-cid-kq42ek7p>
+<span class="rec__reader" data-record-reader aria-hidden="true" data-astro-cid-kq42ek7p>
+</span>
+<div class="rec__row" data-astro-cid-kq42ek7p>
+<span class="rec__co text-tag" data-astro-cid-kq42ek7p>Odyn</span>
+<span class="rec__role text-mono-meta" data-astro-cid-kq42ek7p>Founder</span>
+<span class="rec__year text-mono-meta" data-astro-cid-kq42ek7p>Present</span>
+</div>
+<div class="rec__row" data-astro-cid-kq42ek7p>
+<span class="rec__co text-tag" data-astro-cid-kq42ek7p>Strive</span>
+<span class="rec__role text-mono-meta" data-astro-cid-kq42ek7p>Creative Developer</span>
+<span class="rec__year text-mono-meta" data-astro-cid-kq42ek7p>Present</span>
+</div>
+<div class="rec__row" data-astro-cid-kq42ek7p>
+<span class="rec__co text-tag" data-astro-cid-kq42ek7p>Balky Studio</span>
+<span class="rec__role text-mono-meta" data-astro-cid-kq42ek7p>Founder</span>
+<span class="rec__year text-mono-meta" data-astro-cid-kq42ek7p>Present</span>
+</div>
+<div class="rec__row" data-astro-cid-kq42ek7p>
+<span class="rec__co text-tag" data-astro-cid-kq42ek7p>Bondir</span>
+<span class="rec__role text-mono-meta" data-astro-cid-kq42ek7p>Web Designer &amp; Dev</span>
+<span class="rec__year text-mono-meta" data-astro-cid-kq42ek7p>2024</span>
+</div>
+<div class="rec__row" data-astro-cid-kq42ek7p>
+<span class="rec__co text-tag" data-astro-cid-kq42ek7p>Auvlie</span>
+<span class="rec__role text-mono-meta" data-astro-cid-kq42ek7p>Co-Founder</span>
+<span class="rec__year text-mono-meta" data-astro-cid-kq42ek7p>2023</span>
+</div>
+<div class="rec__row" data-astro-cid-kq42ek7p>
+<span class="rec__co text-tag" data-astro-cid-kq42ek7p>Utah Tech University</span>
+<span class="rec__role text-mono-meta" data-astro-cid-kq42ek7p>Adjunct Professor</span>
+<span class="rec__year text-mono-meta" data-astro-cid-kq42ek7p>2023</span>
+</div>
+<div class="rec__row" data-astro-cid-kq42ek7p>
+<span class="rec__co text-tag" data-astro-cid-kq42ek7p>Adapte</span>
+<span class="rec__role text-mono-meta" data-astro-cid-kq42ek7p>Creative Director</span>
+<span class="rec__year text-mono-meta" data-astro-cid-kq42ek7p>2022</span>
+</div>
+<div class="rec__row" data-astro-cid-kq42ek7p>
+<span class="rec__co text-tag" data-astro-cid-kq42ek7p>beatBread</span>
+<span class="rec__role text-mono-meta" data-astro-cid-kq42ek7p>Product Designer</span>
+<span class="rec__year text-mono-meta" data-astro-cid-kq42ek7p>2022</span>
+</div>
+</div>
+<div class="rec__foot text-mono-sm" data-astro-cid-kq42ek7p>
+<a class="rec__link" href="https://www.linkedin.com/in/carterogunsola/" target="_blank" rel="noopener noreferrer" data-hover data-astro-cid-kq42ek7p>LinkedIn<span class="arrow-roll" aria-hidden="true" data-astro-cid-klkmuj5r>
+<span class="arrow-roll__icon arrow-roll__current" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M14 5.75L20.25 12L14 18.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M19.5 12H3.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+<span class="arrow-roll__icon arrow-roll__next" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M14 5.75L20.25 12L14 18.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M19.5 12H3.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+</span>
+</a>
+</div>
+</div>
+</section>
+</div>
+</div>
+</dialog>
+<dialog class="ov3__dialog" data-dialog="onfile" aria-labelledby="onfile-title" data-lenis-prevent data-astro-cid-ta2fbyqs>
+<div class="ov3__dialog-scroll" data-lenis-prevent data-astro-cid-ta2fbyqs>
+<div class="ov3__dialog-head" data-astro-cid-ta2fbyqs>
+<span class="text-label ov3__dialog-tag" data-astro-cid-ta2fbyqs>On file ::</span>
+<CloseBox size="sm" label="Close" class="closebox--fill" data-dialog-close data-astro-cid-ta2fbyqs data-astro-cid-rqy3m4bm>
+<svg width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" data-icon="close" data-astro-cid-rqy3m4bm>
+<use href="#ai:local:close">
+</use>
+</svg>
+</CloseBox>
+</div>
+<h2 class="ov3__dialog-title text-h2" id="onfile-title" data-astro-cid-ta2fbyqs>What the work picked up.</h2>
+<section class="ov3__dialog-sec" aria-label="Awards" data-astro-cid-ta2fbyqs>
+<div class="ov3__dialog-sub" data-astro-cid-ta2fbyqs>
+<span class="text-label" data-astro-cid-ta2fbyqs>Awards ::</span>
+<span class="text-meta" data-astro-cid-ta2fbyqs>9</span>
+</div>
+<div class="ov3__dialog-rows" data-row-list data-astro-cid-ta2fbyqs>
+<a href="https://www.awwwards.com/carter-ogunsola/" data-hover="true" target="_blank" rel="noopener noreferrer" data-astro-cid-ta2fbyqs="true" data-astro-cid-karsvxoy="true" class="row row--link">
+<span class="row__label text-tag" data-astro-cid-karsvxoy>Awwwards</span>
+<span class="row__line" aria-hidden="true" data-astro-cid-karsvxoy>
+</span>
+<span class="row__tags" data-astro-cid-karsvxoy>
+<span class="chip text-meta row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Site of the Day</span>
+<span class="chip text-meta chip--pill row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>X2</span>
+<span class="linkcircle row__link" aria-hidden="true" data-astro-cid-karsvxoy="true" data-astro-cid-l5seddro>
+<span class="arrow-roll" aria-hidden="true" data-astro-cid-klkmuj5r>
+<span class="arrow-roll__icon arrow-roll__current" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+<span class="arrow-roll__icon arrow-roll__next" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+</span>
+</span>
+</span>
+</a>
+<a href="https://www.awwwards.com/carter-ogunsola/" data-hover="true" target="_blank" rel="noopener noreferrer" data-astro-cid-ta2fbyqs="true" data-astro-cid-karsvxoy="true" class="row row--link">
+<span class="row__label text-tag" data-astro-cid-karsvxoy>Awwwards</span>
+<span class="row__line" aria-hidden="true" data-astro-cid-karsvxoy>
+</span>
+<span class="row__tags" data-astro-cid-karsvxoy>
+<span class="chip text-meta row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Developer Award</span>
+<span class="chip text-meta chip--pill row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>X2</span>
+<span class="linkcircle row__link" aria-hidden="true" data-astro-cid-karsvxoy="true" data-astro-cid-l5seddro>
+<span class="arrow-roll" aria-hidden="true" data-astro-cid-klkmuj5r>
+<span class="arrow-roll__icon arrow-roll__current" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+<span class="arrow-roll__icon arrow-roll__next" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+</span>
+</span>
+</span>
+</a>
+<a href="https://www.awwwards.com/carter-ogunsola/" data-hover="true" target="_blank" rel="noopener noreferrer" data-astro-cid-ta2fbyqs="true" data-astro-cid-karsvxoy="true" class="row row--link">
+<span class="row__label text-tag" data-astro-cid-karsvxoy>Awwwards</span>
+<span class="row__line" aria-hidden="true" data-astro-cid-karsvxoy>
+</span>
+<span class="row__tags" data-astro-cid-karsvxoy>
+<span class="chip text-meta row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Honorable Mention</span>
+<span class="chip text-meta chip--pill row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>X8</span>
+<span class="linkcircle row__link" aria-hidden="true" data-astro-cid-karsvxoy="true" data-astro-cid-l5seddro>
+<span class="arrow-roll" aria-hidden="true" data-astro-cid-klkmuj5r>
+<span class="arrow-roll__icon arrow-roll__current" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+<span class="arrow-roll__icon arrow-roll__next" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+</span>
+</span>
+</span>
+</a>
+<a href="https://www.awwwards.com/jury-member/carter-ogunsola" data-hover="true" target="_blank" rel="noopener noreferrer" data-astro-cid-ta2fbyqs="true" data-astro-cid-karsvxoy="true" class="row row--link">
+<span class="row__label text-tag" data-astro-cid-karsvxoy>Awwwards</span>
+<span class="row__line" aria-hidden="true" data-astro-cid-karsvxoy>
+</span>
+<span class="row__tags" data-astro-cid-karsvxoy>
+<span class="chip text-meta row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Jury</span>
+<span class="chip text-meta chip--pill row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>2026</span>
+<span class="linkcircle row__link" aria-hidden="true" data-astro-cid-karsvxoy="true" data-astro-cid-l5seddro>
+<span class="arrow-roll" aria-hidden="true" data-astro-cid-klkmuj5r>
+<span class="arrow-roll__icon arrow-roll__current" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+<span class="arrow-roll__icon arrow-roll__next" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+</span>
+</span>
+</span>
+</a>
+<a href="https://www.cssdesignawards.com/sites/heva-health/45818/" data-hover="true" target="_blank" rel="noopener noreferrer" data-astro-cid-ta2fbyqs="true" data-astro-cid-karsvxoy="true" class="row row--link">
+<span class="row__label text-tag" data-astro-cid-karsvxoy>CSS Design Awards</span>
+<span class="row__line" aria-hidden="true" data-astro-cid-karsvxoy>
+</span>
+<span class="row__tags" data-astro-cid-karsvxoy>
+<span class="chip text-meta row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Website of the Day</span>
+<span class="chip text-meta chip--pill row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Heva Health</span>
+<span class="linkcircle row__link" aria-hidden="true" data-astro-cid-karsvxoy="true" data-astro-cid-l5seddro>
+<span class="arrow-roll" aria-hidden="true" data-astro-cid-klkmuj5r>
+<span class="arrow-roll__icon arrow-roll__current" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+<span class="arrow-roll__icon arrow-roll__next" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+</span>
+</span>
+</span>
+</a>
+<a href="https://www.cssdesignawards.com/sites/the-carter-ogunsola-portfolio/43026/" data-hover="true" target="_blank" rel="noopener noreferrer" data-astro-cid-ta2fbyqs="true" data-astro-cid-karsvxoy="true" class="row row--link">
+<span class="row__label text-tag" data-astro-cid-karsvxoy>CSS Design Awards</span>
+<span class="row__line" aria-hidden="true" data-astro-cid-karsvxoy>
+</span>
+<span class="row__tags" data-astro-cid-karsvxoy>
+<span class="chip text-meta row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Special Kudos</span>
+<span class="chip text-meta chip--pill row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Portfolio</span>
+<span class="linkcircle row__link" aria-hidden="true" data-astro-cid-karsvxoy="true" data-astro-cid-l5seddro>
+<span class="arrow-roll" aria-hidden="true" data-astro-cid-klkmuj5r>
+<span class="arrow-roll__icon arrow-roll__current" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+<span class="arrow-roll__icon arrow-roll__next" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+</span>
+</span>
+</span>
+</a>
+<a href="https://www.topcssgallery.com/gallery/1820-productions/" data-hover="true" target="_blank" rel="noopener noreferrer" data-astro-cid-ta2fbyqs="true" data-astro-cid-karsvxoy="true" class="row row--link">
+<span class="row__label text-tag" data-astro-cid-karsvxoy>Top CSS Gallery</span>
+<span class="row__line" aria-hidden="true" data-astro-cid-karsvxoy>
+</span>
+<span class="row__tags" data-astro-cid-karsvxoy>
+<span class="chip text-meta row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Site of the Day</span>
+<span class="chip text-meta chip--pill row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>1820 Prod.</span>
+<span class="linkcircle row__link" aria-hidden="true" data-astro-cid-karsvxoy="true" data-astro-cid-l5seddro>
+<span class="arrow-roll" aria-hidden="true" data-astro-cid-klkmuj5r>
+<span class="arrow-roll__icon arrow-roll__current" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+<span class="arrow-roll__icon arrow-roll__next" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+</span>
+</span>
+</span>
+</a>
+<a href="https://webflow.com/webflowconf/2024/webflow-awards" data-hover="true" target="_blank" rel="noopener noreferrer" data-astro-cid-ta2fbyqs="true" data-astro-cid-karsvxoy="true" class="row row--link">
+<span class="row__label text-tag" data-astro-cid-karsvxoy>Webflow Awards</span>
+<span class="row__line" aria-hidden="true" data-astro-cid-karsvxoy>
+</span>
+<span class="row__tags" data-astro-cid-karsvxoy>
+<span class="chip text-meta row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Finalist</span>
+<span class="chip text-meta chip--pill row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>’24 · Creative Excellence</span>
+<span class="linkcircle row__link" aria-hidden="true" data-astro-cid-karsvxoy="true" data-astro-cid-l5seddro>
+<span class="arrow-roll" aria-hidden="true" data-astro-cid-klkmuj5r>
+<span class="arrow-roll__icon arrow-roll__current" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+<span class="arrow-roll__icon arrow-roll__next" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+</span>
+</span>
+</span>
+</a>
+<div data-astro-cid-ta2fbyqs="true" data-astro-cid-karsvxoy="true" class="row">
+<span class="row__label text-tag" data-astro-cid-karsvxoy>Okay Dev</span>
+<span class="row__line" aria-hidden="true" data-astro-cid-karsvxoy>
+</span>
+<span class="row__tags" data-astro-cid-karsvxoy>
+<span class="chip text-meta row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Member</span>
+<span class="chip text-meta chip--pill row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>2025</span>
+</span>
+</div>
+</div>
+</section>
+<section class="ov3__dialog-sec" aria-label="Featured in" data-astro-cid-ta2fbyqs>
+<div class="ov3__dialog-sub" data-astro-cid-ta2fbyqs>
+<span class="text-label" data-astro-cid-ta2fbyqs>Featured in ::</span>
+<span class="text-meta" data-astro-cid-ta2fbyqs>9</span>
+</div>
+<div class="ov3__dialog-rows" data-row-list data-astro-cid-ta2fbyqs>
+<a href="https://tympanus.net/codrops/2026/02/13/1820-productions-minimal-design-maximal-motion/" data-hover="true" target="_blank" rel="noopener noreferrer" data-astro-cid-ta2fbyqs="true" data-astro-cid-karsvxoy="true" class="row row--link">
+<span class="row__label text-tag" data-astro-cid-karsvxoy>Codrops</span>
+<span class="row__line" aria-hidden="true" data-astro-cid-karsvxoy>
+</span>
+<span class="row__tags" data-astro-cid-karsvxoy>
+<span class="chip text-meta row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Case Study</span>
+<span class="chip text-meta chip--pill row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>1820 Productions</span>
+<span class="linkcircle row__link" aria-hidden="true" data-astro-cid-karsvxoy="true" data-astro-cid-l5seddro>
+<span class="arrow-roll" aria-hidden="true" data-astro-cid-klkmuj5r>
+<span class="arrow-roll__icon arrow-roll__current" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+<span class="arrow-roll__icon arrow-roll__next" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+</span>
+</span>
+</span>
+</a>
+<a href="https://webflow.com/community/livestreams/making-it-pop" data-hover="true" target="_blank" rel="noopener noreferrer" data-astro-cid-ta2fbyqs="true" data-astro-cid-karsvxoy="true" class="row row--link">
+<span class="row__label text-tag" data-astro-cid-karsvxoy>Webflow</span>
+<span class="row__line" aria-hidden="true" data-astro-cid-karsvxoy>
+</span>
+<span class="row__tags" data-astro-cid-karsvxoy>
+<span class="chip text-meta row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Livestream</span>
+<span class="chip text-meta chip--pill row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Interactions + GSAP</span>
+<span class="linkcircle row__link" aria-hidden="true" data-astro-cid-karsvxoy="true" data-astro-cid-l5seddro>
+<span class="arrow-roll" aria-hidden="true" data-astro-cid-klkmuj5r>
+<span class="arrow-roll__icon arrow-roll__current" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+<span class="arrow-roll__icon arrow-roll__next" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+</span>
+</span>
+</span>
+</a>
+<a href="https://open.spotify.com/episode/6tIX8mFTMIGJeko6eRIFcq" data-hover="true" target="_blank" rel="noopener noreferrer" data-astro-cid-ta2fbyqs="true" data-astro-cid-karsvxoy="true" class="row row--link">
+<span class="row__label text-tag" data-astro-cid-karsvxoy>Webflail</span>
+<span class="row__line" aria-hidden="true" data-astro-cid-karsvxoy>
+</span>
+<span class="row__tags" data-astro-cid-karsvxoy>
+<span class="chip text-meta row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Podcast</span>
+<span class="chip text-meta chip--pill row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Ep. 33</span>
+<span class="linkcircle row__link" aria-hidden="true" data-astro-cid-karsvxoy="true" data-astro-cid-l5seddro>
+<span class="arrow-roll" aria-hidden="true" data-astro-cid-klkmuj5r>
+<span class="arrow-roll__icon arrow-roll__current" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+<span class="arrow-roll__icon arrow-roll__next" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+</span>
+</span>
+</span>
+</a>
+<a href="https://www.youtube.com/watch?v=PMdsmpGpRp0" data-hover="true" target="_blank" rel="noopener noreferrer" data-astro-cid-ta2fbyqs="true" data-astro-cid-karsvxoy="true" class="row row--link">
+<span class="row__label text-tag" data-astro-cid-karsvxoy>Flow Party</span>
+<span class="row__line" aria-hidden="true" data-astro-cid-karsvxoy>
+</span>
+<span class="row__tags" data-astro-cid-karsvxoy>
+<span class="chip text-meta row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Livestream</span>
+<span class="chip text-meta chip--pill row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>No. 25</span>
+<span class="linkcircle row__link" aria-hidden="true" data-astro-cid-karsvxoy="true" data-astro-cid-l5seddro>
+<span class="arrow-roll" aria-hidden="true" data-astro-cid-klkmuj5r>
+<span class="arrow-roll__icon arrow-roll__current" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+<span class="arrow-roll__icon arrow-roll__next" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+</span>
+</span>
+</span>
+</a>
+<a href="https://www.footer.design/sites/balky-studio" data-hover="true" target="_blank" rel="noopener noreferrer" data-astro-cid-ta2fbyqs="true" data-astro-cid-karsvxoy="true" class="row row--link">
+<span class="row__label text-tag" data-astro-cid-karsvxoy>Footer.design</span>
+<span class="row__line" aria-hidden="true" data-astro-cid-karsvxoy>
+</span>
+<span class="row__tags" data-astro-cid-karsvxoy>
+<span class="chip text-meta row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Feature</span>
+<span class="chip text-meta chip--pill row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Balky Studio</span>
+<span class="linkcircle row__link" aria-hidden="true" data-astro-cid-karsvxoy="true" data-astro-cid-l5seddro>
+<span class="arrow-roll" aria-hidden="true" data-astro-cid-klkmuj5r>
+<span class="arrow-roll__icon arrow-roll__current" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+<span class="arrow-roll__icon arrow-roll__next" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+</span>
+</span>
+</span>
+</a>
+<a href="https://httpster.net/website/balky/" data-hover="true" target="_blank" rel="noopener noreferrer" data-astro-cid-ta2fbyqs="true" data-astro-cid-karsvxoy="true" class="row row--link">
+<span class="row__label text-tag" data-astro-cid-karsvxoy>httpster</span>
+<span class="row__line" aria-hidden="true" data-astro-cid-karsvxoy>
+</span>
+<span class="row__tags" data-astro-cid-karsvxoy>
+<span class="chip text-meta row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Feature</span>
+<span class="chip text-meta chip--pill row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Balky Studio</span>
+<span class="linkcircle row__link" aria-hidden="true" data-astro-cid-karsvxoy="true" data-astro-cid-l5seddro>
+<span class="arrow-roll" aria-hidden="true" data-astro-cid-klkmuj5r>
+<span class="arrow-roll__icon arrow-roll__current" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+<span class="arrow-roll__icon arrow-roll__next" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+</span>
+</span>
+</span>
+</a>
+<a href="https://www.nocodesupply.co/item/the-carter-ogunsola" data-hover="true" target="_blank" rel="noopener noreferrer" data-astro-cid-ta2fbyqs="true" data-astro-cid-karsvxoy="true" class="row row--link">
+<span class="row__label text-tag" data-astro-cid-karsvxoy>No Code Supply</span>
+<span class="row__line" aria-hidden="true" data-astro-cid-karsvxoy>
+</span>
+<span class="row__tags" data-astro-cid-karsvxoy>
+<span class="chip text-meta row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Feature</span>
+<span class="chip text-meta chip--pill row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Portfolio</span>
+<span class="linkcircle row__link" aria-hidden="true" data-astro-cid-karsvxoy="true" data-astro-cid-l5seddro>
+<span class="arrow-roll" aria-hidden="true" data-astro-cid-klkmuj5r>
+<span class="arrow-roll__icon arrow-roll__current" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+<span class="arrow-roll__icon arrow-roll__next" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+</span>
+</span>
+</span>
+</a>
+<a href="https://www.navbar.gallery/navbar/heva-health" data-hover="true" target="_blank" rel="noopener noreferrer" data-astro-cid-ta2fbyqs="true" data-astro-cid-karsvxoy="true" class="row row--link">
+<span class="row__label text-tag" data-astro-cid-karsvxoy>Navbar Gallery</span>
+<span class="row__line" aria-hidden="true" data-astro-cid-karsvxoy>
+</span>
+<span class="row__tags" data-astro-cid-karsvxoy>
+<span class="chip text-meta row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Feature</span>
+<span class="chip text-meta chip--pill row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Heva Health</span>
+<span class="linkcircle row__link" aria-hidden="true" data-astro-cid-karsvxoy="true" data-astro-cid-l5seddro>
+<span class="arrow-roll" aria-hidden="true" data-astro-cid-klkmuj5r>
+<span class="arrow-roll__icon arrow-roll__current" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+<span class="arrow-roll__icon arrow-roll__next" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+</span>
+</span>
+</span>
+</a>
+<a href="https://www.folioinspo.com/submissions/carter-ogunsola" data-hover="true" target="_blank" rel="noopener noreferrer" data-astro-cid-ta2fbyqs="true" data-astro-cid-karsvxoy="true" class="row row--link">
+<span class="row__label text-tag" data-astro-cid-karsvxoy>FolioInspo</span>
+<span class="row__line" aria-hidden="true" data-astro-cid-karsvxoy>
+</span>
+<span class="row__tags" data-astro-cid-karsvxoy>
+<span class="chip text-meta row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Feature</span>
+<span class="chip text-meta chip--pill row__tag" data-astro-cid-karsvxoy="true" data-astro-cid-ags4ogmk>Portfolio</span>
+<span class="linkcircle row__link" aria-hidden="true" data-astro-cid-karsvxoy="true" data-astro-cid-l5seddro>
+<span class="arrow-roll" aria-hidden="true" data-astro-cid-klkmuj5r>
+<span class="arrow-roll__icon arrow-roll__current" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+<span class="arrow-roll__icon arrow-roll__next" data-astro-cid-klkmuj5r>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+</span>
+</span>
+</span>
+</a>
+</div>
+</section>
+</div>
+</dialog>
+  </Fragment>
 </BaseLayout>
