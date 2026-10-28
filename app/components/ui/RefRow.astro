@@ -1,0 +1,41 @@
+---
+import ArrowRoll from './ArrowRoll.astro';
+
+interface Props {
+  href?: string;
+  badge?: string;
+  label: string;
+  stretch?: boolean;
+  external?: boolean;
+  class?: string;
+}
+
+const {
+  href,
+  badge = 'REF',
+  label,
+  stretch = false,
+  external = true,
+  class: className = '',
+} = Astro.props;
+
+const Tag = href ? 'a' : 'span';
+---
+
+<Tag
+  href={href}
+  target={href && external ? '_blank' : undefined}
+  rel={href && external ? 'noopener noreferrer' : undefined}
+  data-hover={href ? '' : undefined}
+  class:list={['refrow', href && 'refrow--link', stretch && 'refrow--stretch', className]}
+>
+  <span class="refrow__badge">
+    <span class="refrow__wordmark text-mono-sm">{badge}</span>
+  </span>
+  <span class="refrow__label text-caption">{label}</span>
+  {href && (
+    <span class="refrow__ext" aria-hidden="true">
+      <ArrowRoll diagonal={external} />
+    </span>
+  )}
+</Tag>

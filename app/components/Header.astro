@@ -1,0 +1,168 @@
+---
+import Logo from './Logo.astro';
+import { NAV_ITEMS, SITE, getLogoWordForPath } from '../data/site';
+
+interface Props {
+  crumbName?: string;
+}
+
+const { crumbName } = Astro.props;
+const pathname = Astro.url.pathname;
+const logoWord = getLogoWordForPath(pathname);
+---
+
+<header class="header" data-header data-astro-transition-persist="astro-gyrtbwwo-5">
+  <div class="hud text-hud" role="status" aria-label="Site status">
+    <span class="hud__chip">
+      <span class="hud__k">UT::</span><span class="hud__v" data-hud-time>--:--</span>
+    </span>
+    <span class="hud__chip">
+      <span class="hud__v" data-hud-fps>60</span><span class="hud__k">FPS</span>
+    </span>
+    <span class="hud__chip" data-hud-online-chip hidden>
+      <span class="hud__dot" aria-hidden="true"></span>
+      <number-flow class="hud__v" data-hud-online>0</number-flow>
+      <span class="hud__k">ONLINE</span>
+    </span>
+    <span class="hud__chip" data-hud-owner-chip hidden>
+      <span class="hud__dot" aria-hidden="true"></span>
+      <span class="hud__k">CARTER::</span><span class="hud__v">HERE</span>
+    </span>
+    <span class="hud__chip" data-hud-lcp-chip hidden>
+      <span class="hud__k">LCP::</span><span class="hud__v" data-hud-lcp>--</span>
+    </span>
+    <button
+      type="button"
+      class="hud__chip"
+      data-hud-presence
+      aria-pressed="true"
+      aria-label="Toggle live cursor presence"
+    >
+      <span class="hud__k">PRESENCE::</span><span class="hud__v" data-hud-presence-v>ON</span>
+    </button>
+    <span class="hud__chip" data-hud-listening-chip hidden>
+      <span class="hud__dot" aria-hidden="true"></span>
+      <span class="hud__k">LISTENING::</span><span class="hud__v hud__v--trunc" data-hud-listening></span>
+    </span>
+    <span class="hud__chip">
+      <span class="hud__k">{SITE.hud.bookingLabel.toUpperCase()}::</span><span class="hud__v">{SITE.hud.nextOpen}</span>
+    </span>
+  </div>
+
+  <div class="header__bar">
+    <div class="header__lead">
+      <a href="/" class="header__logo" aria-label="Carter Ogunsola — Home" data-magnetic>
+        <Logo word={logoWord} />
+      </a>
+      <span class="header__crumb text-nav" data-crumb hidden={!crumbName}>
+        <span class="header__crumb-sep" aria-hidden="true">/</span>
+        <span class="header__crumb-name" data-crumb-name>{crumbName ?? ''}</span>
+      </span>
+    </div>
+
+    <div class="header__center">
+      <nav class="navpill" aria-label="Main">
+        <span class="navpill__pill" data-nav-pill aria-hidden="true"></span>
+        <ul class="navpill__list">
+          {NAV_ITEMS.map((item) => (
+            <li>
+              <a href={item.href} class="navpill__link text-nav">
+                <span class="roll" data-roll>{item.label}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+
+    <div class="header__right">
+      <button
+        type="button"
+        class="cmdk text-mono-sm"
+        data-cmd-open
+        aria-label="Open command menu"
+      >
+        <span>⌘K</span>
+      </button>
+
+      <button
+        type="button"
+        class="notifbell"
+        data-notif-open
+        aria-label="Open notifications"
+        aria-expanded="false"
+        aria-controls="notif"
+      >
+        <svg class="notifbell__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M2.52992 14.394C2.31727 15.7471 3.268 16.6862 4.43205 17.1542C8.89481 18.9486 15.1052 18.9486 19.5679 17.1542C20.732 16.6862 21.6827 15.7471 21.4701 14.394C21.3394 13.5625 20.6932 12.8701 20.2144 12.194C19.5873 11.2975 19.525 10.3197 19.5249 9.27941C19.5249 5.2591 16.1559 2 12 2C7.84413 2 4.47513 5.2591 4.47513 9.27941C4.47503 10.3197 4.41272 11.2975 3.78561 12.194C3.30684 12.8701 2.66061 13.5625 2.52992 14.394Z"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+          <path
+            d="M9 21C9.79613 21.6219 10.8475 22 12 22C13.1525 22 14.2039 21.6219 15 21"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </svg>
+        <span class="notifbell__badge" data-notif-dot hidden aria-hidden="true">
+          <span class="notifbell__dot"></span>
+        </span>
+      </button>
+
+      <button
+        type="button"
+        class="navsearch"
+        data-cmd-open
+        aria-label="Open command menu"
+      >
+        <svg class="navsearch__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <use href="#ai:local:magnifying-glass"></use>
+        </svg>
+      </button>
+
+      <div class="themetoggle" role="group" aria-label="Theme" data-theme-toggle>
+        <button
+          type="button"
+          class="themetoggle__seg"
+          data-theme-set="light"
+          aria-label="Light theme"
+          aria-pressed="true"
+        >
+          <span class="themetoggle__bg" data-theme-bg aria-hidden="true"></span>
+          <svg class="themetoggle__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <use href="#ai:local:sun"></use>
+          </svg>
+        </button>
+        <button
+          type="button"
+          class="themetoggle__seg"
+          data-theme-set="dark"
+          aria-label="Dark theme"
+          aria-pressed="false"
+        >
+          <svg class="themetoggle__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <use href="#ai:local:moon"></use>
+          </svg>
+        </button>
+      </div>
+
+      <button
+        type="button"
+        class="navtrigger"
+        data-drawer-open
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="drawer"
+      >
+        <span class="navtrigger__bars" aria-hidden="true">
+          <span></span><span></span>
+        </span>
+      </button>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,281 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.scss';
+import SvgSymbols from '../components/SvgSymbols.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CommandMenu from '../components/CommandMenu.astro';
+import Notifications from '../components/Notifications.astro';
+import Drawer from '../components/Drawer.astro';
+import Veil from '../components/Veil.astro';
+import { SITE } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  crumbName?: string;
+  showFooter?: boolean;
+  noindex?: boolean;
+  mainClass?: string;
+  mainAttrs?: Record<string, any>;
+}
+
+const {
+  title,
+  description = SITE.description,
+  ogImage = SITE.ogImage,
+  crumbName,
+  showFooter = true,
+  noindex = false,
+  mainClass = '',
+  mainAttrs = {},
+} = Astro.props;
+
+const fullTitle = title
+  ? `${title}${SITE.titleSeparator}${SITE.name}`
+  : `${SITE.name}${SITE.titleSeparator}${SITE.role}`;
+
+const pathname = Astro.url.pathname;
+const canonicalUrl = new URL(pathname, SITE.url).toString();
+const ogImageUrl = ogImage.startsWith('http')
+  ? ogImage
+  : `${SITE.ogOrigin}${ogImage}`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE.url}/#website`,
+      url: SITE.url,
+      name: SITE.name,
+      description: SITE.description,
+      inLanguage: SITE.locale,
+      publisher: { '@id': `${SITE.url}/#person` },
+    },
+    {
+      '@type': 'Person',
+      '@id': `${SITE.url}/#person`,
+      name: SITE.name,
+      url: SITE.url,
+      image: `${SITE.ogOrigin}${SITE.ogImage}`,
+      jobTitle: SITE.role,
+      description: SITE.bio,
+      email: `mailto:${SITE.email}`,
+      worksFor: {
+        '@type': 'Organization',
+        name: SITE.employer.name,
+        url: SITE.employer.url,
+      },
+      founder: {
+        '@type': 'Organization',
+        name: SITE.studio.name,
+        url: SITE.studio.url,
+      },
+      sameAs: Object.values(SITE.socials),
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${canonicalUrl}#webpage`,
+      url: canonicalUrl,
+      name: fullTitle,
+      description,
+      isPartOf: { '@id': `${SITE.url}/#website` },
+      about: { '@id': `${SITE.url}/#person` },
+      inLanguage: SITE.locale,
+    },
+  ],
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={SITE.author} />
+    <meta
+      name="robots"
+      content={noindex
+        ? 'noindex, nofollow'
+        : 'index, follow, max-image-preview:large, max-snippet:-1'}
+    />
+    <meta name="theme-color" content="#d6d6d5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1e1e1e" media="(prefers-color-scheme: dark)" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" data-favicon />
+    <link rel="icon" href="/favicon.svg" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Carter Ogunsola — Writing"
+      href="/rss.xml"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Carter Ogunsola — Changelog"
+      href="/changelog.xml"
+    />
+    <link
+      rel="alternate"
+      type="application/feed+json"
+      title="Carter Ogunsola — Writing (JSON Feed)"
+      href="/feed.json"
+    />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content={SITE.ogLocale} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={fullTitle} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={SITE.twitterHandle} />
+    <meta name="twitter:creator" content={SITE.twitterHandle} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        var CUTOVER = 'theme-cutover';
+        try {
+          if (localStorage.getItem(CUTOVER) !== 'dark-default-v1') {
+            localStorage.removeItem('theme');
+            localStorage.setItem(CUTOVER, 'dark-default-v1');
+          }
+        } catch (e) {}
+        function resolve() {
+          try {
+            var stored = localStorage.getItem('theme');
+            if (stored === 'light' || stored === 'dark') return stored;
+            if (stored === 'system') {
+              return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+          } catch (e) {}
+          return 'dark';
+        }
+        function syncFavicon() {
+          var link = document.querySelector('link[data-favicon]');
+          if (!link) return;
+          var href = '/favicon-' + (root.dataset.theme === 'dark' ? 'dark' : 'light') + '.svg';
+          if (link.getAttribute('href') !== href) link.setAttribute('href', href);
+        }
+        window.__syncFavicon = syncFavicon;
+        function applyBare(target) {
+          var q = new URLSearchParams(location.search);
+          var bare = q.get('bare');
+          if (!bare) return;
+          target.setAttribute('data-bare', '');
+          if (bare === 'stage' || bare === 'clean') target.setAttribute('data-bare-nodocs', '');
+          if (bare === 'clean') target.setAttribute('data-bare-nocfg', '');
+        }
+        root.dataset.theme = resolve();
+        syncFavicon();
+        applyBare(root);
+        document.addEventListener('astro:before-swap', function (e) {
+          var next = e.newDocument.documentElement;
+          next.dataset.theme = root.dataset.theme || resolve();
+          if (root.hasAttribute('data-paper-gl')) next.setAttribute('data-paper-gl', '');
+          root.classList.forEach(function (c) {
+            if (c === 'lenis' || c.indexOf('lenis-') === 0) next.classList.add(c);
+          });
+          applyBare(next);
+        });
+        document.addEventListener('astro:after-swap', syncFavicon);
+      })();
+    </script>
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        if (root.hasAttribute('data-bare') || /^\/record(\/|$)/.test(location.pathname)) {
+          root.setAttribute('data-veil', 'off');
+          return;
+        }
+        var seen = false;
+        try {
+          seen = sessionStorage.getItem('veil:seen') === '1';
+          if (!seen) sessionStorage.setItem('veil:seen', '1');
+        } catch (e) {}
+        root.setAttribute('data-veil', seen ? 'fast' : 'boot');
+      })();
+    </script>
+    <noscript><style>html[data-veil] .veil{display:none!important}</style></noscript>
+    <ClientRouter />
+  </head>
+  <body>
+    <SvgSymbols />
+    <canvas
+      class="paper-gl"
+      data-paper
+      data-astro-transition-persist="paper"
+      aria-hidden="true"
+    ></canvas>
+    <div
+      class="veil-dim"
+      data-veil-dim
+      data-astro-transition-persist="veil-dim"
+      aria-hidden="true"
+    ></div>
+    <canvas
+      class="shelf-gl"
+      data-shelf
+      data-astro-transition-persist="shelf"
+      aria-hidden="true"
+    ></canvas>
+    <canvas
+      class="shelf-still"
+      data-shelf-still
+      data-astro-transition-persist="shelf-still"
+      aria-hidden="true"
+    ></canvas>
+    <canvas
+      class="flight-gl"
+      data-flight
+      data-astro-transition-persist="flight"
+      aria-hidden="true"
+    ></canvas>
+    <Header crumbName={crumbName} />
+    <main id="main" class={mainClass} {...mainAttrs}>
+      <slot />
+    </main>
+    {showFooter && <Footer />}
+    <div
+      class="overlay"
+      data-overlay
+      aria-hidden="true"
+      data-astro-transition-persist="astro-gyrtbwwo-6"
+    ></div>
+    <CommandMenu />
+    <Notifications />
+    <Drawer />
+    <ol
+      class="toast"
+      data-toaster
+      aria-live="polite"
+      aria-label="Activity"
+      data-astro-transition-persist="astro-gyrtbwwo-10"
+    ></ol>
+    <div
+      class="progress"
+      data-progress
+      aria-hidden="true"
+      data-astro-transition-persist="astro-gyrtbwwo-11"
+    ></div>
+    <Veil />
+    <script>
+      import '../lib/runtime';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+---
+import Chip from './Chip.astro';
+import LinkCircle from './LinkCircle.astro';
+
+interface Props {
+  label: string;
+  note?: string;
+  tags?: string[];
+  href?: string;
+  external?: boolean;
+  pillTags?: boolean;
+  class?: string;
+  [key: string]: any;
+}
+
+const {
+  label,
+  note,
+  tags = [],
+  href,
+  external = false,
+  pillTags = true,
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+const Tag = href ? 'a' : 'div';
+---
+
+<Tag
+  href={href}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener noreferrer' : undefined}
+  class:list={['row', href && 'row--link', className]}
+  data-hover={href ? '' : undefined}
+  {...rest}
+>
+  <span class="row__label text-body-sm">
+    {label}
+    {note && <span class="row__note">({note})</span>}
+  </span>
+  <span class="row__line" aria-hidden="true"></span>
+  <span class="row__tags">
+    {tags.map((tag) => (
+      <Chip pill={pillTags} class="row__tag">{tag}</Chip>
+    ))}
+  </span>
+  {href && <LinkCircle diagonal={external} class="row__link" />}
+</Tag>

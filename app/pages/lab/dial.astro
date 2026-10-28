@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FoundationShell from '../../components/FoundationShell.astro';
+---
+
+<BaseLayout
+  title="Dial"
+  crumbName="Dial"
+  ogImage="/og/lab/dial.jpg"
+  mainAttrs={{ 'data-lab-detail': '', 'data-name': 'Dial' }}
+>
+  <FoundationShell
+    heading="Dial — Breadcrumb Shell"
+    eyebrow="Phase 1 :: Lab Detail Crumb"
+    lead="Verifies [data-lab-detail][data-name='Dial'] unhiding the header breadcrumb (/ Dial) while keeping the LogoNav capsule on 'Motion'."
+    routePath="/lab/dial"
+    showAtoms={false}
+  />
+</BaseLayout>

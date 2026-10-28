@@ -1,0 +1,53 @@
+---
+interface CodeLine {
+  html: string;
+}
+
+interface Props {
+  title?: string;
+  language?: string;
+  code: string;
+  lines?: CodeLine[];
+  class?: string;
+}
+
+const {
+  title = '',
+  language = 'ts',
+  code,
+  lines,
+  class: className = '',
+} = Astro.props;
+
+const rawLines = lines
+  ? lines.map((l) => l.html)
+  : code.split('\n').map((line) =>
+      line
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+    );
+
+const copyData = code.replace(/\n/g, '\u007f');
+const hasTitle = Boolean(title);
+---
+
+<div class:list={['expressive-code', className]}>
+  <figure class:list={['frame', hasTitle && 'has-title']}>
+    <figcaption class="header">
+      {hasTitle && <span class="title">{title}</span>}
+    </figcaption>
+    <pre data-language={language} class="wrap"><code>{rawLines.map((lineHtml, idx) => (<div class="ec-line"><div class="gutter"><div class="ln">{idx + 1}</div></div><div class="code" set:html={lineHtml || '&nbsp;'} /></div>))}</code></pre>
+    <div class="copy">
+      <div aria-live="polite"></div>
+      <button
+        type="button"
+        title="Copy to clipboard"
+        data-copied="Copied!"
+        data-code={copyData}
+      >
+        <div></div>
+      </button>
+    </div>
+  </figure>
+</div>

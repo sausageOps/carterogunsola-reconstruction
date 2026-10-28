@@ -1,0 +1,146 @@
+---
+import Button from './ui/Button.astro';
+import Chip from './ui/Chip.astro';
+import Row from './ui/Row.astro';
+import SectionLabel from './ui/SectionLabel.astro';
+import CloseBox from './ui/CloseBox.astro';
+import InfoTip from './ui/InfoTip.astro';
+import ProgressiveBlur from './ui/ProgressiveBlur.astro';
+import RefRow from './ui/RefRow.astro';
+import Socials from './ui/Socials.astro';
+import Signature from './ui/Signature.astro';
+import ExpressiveCode from './ui/ExpressiveCode.astro';
+
+interface Props {
+  heading: string;
+  eyebrow: string;
+  lead: string;
+  routePath: string;
+  showAtoms?: boolean;
+}
+
+const {
+  heading,
+  eyebrow,
+  lead,
+  routePath,
+  showAtoms = false,
+} = Astro.props;
+
+const sampleCode = `import { ASSETS_ORIGIN, asset, img } from '~/lib/assets';
+
+export const heroPoster = img('work/strive-2026/poster.webp', 1280, 86);
+export const reelVideo = asset('work/strive-2026/reel.mp4');`;
+
+// Inline SVG data URI for halftone hover testing without downloading external images
+const testHalftoneDataUri =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='400' viewBox='0 0 640 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23f7f7f7'/%3E%3Cstop offset='50%25' stop-color='%23787878'/%3E%3Cstop offset='100%25' stop-color='%231e1e1e'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='640' height='400' fill='url(%23g)'/%3E%3Ccircle cx='320' cy='200' r='110' fill='%23d6d6d5'/%3E%3Ccircle cx='320' cy='200' r='52' fill='%231e1e1e'/%3E%3C/svg%3E";
+---
+
+<section class="u-container" style="padding-block: clamp(8.5rem, 15svh, 11rem) var(--s-96);">
+  <div class="u-measure" style="margin-inline: auto; display: flex; flex-direction: column; gap: var(--s-48);">
+    <header style="display: flex; flex-direction: column; gap: var(--s-16);" data-reveal>
+      <div style="display: flex; align-items: center; gap: var(--s-8); flex-wrap: wrap;">
+        <Chip pill>{eyebrow}</Chip>
+        <Chip>{routePath}</Chip>
+      </div>
+      <h1 class="text-display z-y" data-focus-target>{heading}</h1>
+      <p class="text-lead z-s" style="color: var(--ink-muted);">{lead}</p>
+      <div style="display: flex; align-items: center; gap: var(--s-12); flex-wrap: wrap; padding-top: var(--s-8);">
+        <Button href="/about" solid magnetic={0.15} label="Explore About" />
+        <Button href="/lab" solid={false} magnetic={0.15} label="Motion Lab" />
+        <Button href="/lab/dial" solid={false} label="Lab Crumb Test (/lab/dial)" />
+        <Button href="/changelog" solid={false} label="Changelog" />
+      </div>
+    </header>
+
+    <hr class="z-x" style="border: 0; border-top: 1px solid var(--divider); margin: 0;" />
+
+    <section style="display: flex; flex-direction: column; gap: var(--s-16);" data-reveal>
+      <SectionLabel size="lg">Route &amp; Transition Verification</SectionLabel>
+      <div data-row-list style="display: flex; flex-direction: column;">
+        <Row label="Home Foundation" note="Capsule: O" tags={['Route', 'Phase 1']} href="/" />
+        <Row label="About Route" note="Capsule: About" tags={['Route', 'Veil']} href="/about" />
+        <Row label="Motion Lab Index" note="Capsule: Motion" tags={['Route', 'Lab']} href="/lab" />
+        <Row label="Dial Study" note="Crumb: / Dial" tags={['Lab', 'Breadcrumb']} href="/lab/dial" />
+        <Row label="Writing Index" note="Capsule: Writing" tags={['Route', 'Veil']} href="/writing" />
+        <Row label="Studio" note="Capsule: Studio" tags={['Route', 'Veil']} href="/studio" />
+        <Row label="Contact" note="Capsule: Contact" tags={['Route', 'Veil']} href="/contact" />
+        <Row label="Changelog" note="Notifications sync" tags={['Ship Log', '14 items']} href="/changelog" />
+      </div>
+    </section>
+
+    {showAtoms && (
+      <>
+        <section style="display: flex; flex-direction: column; gap: var(--s-20);" class="z-o">
+          <SectionLabel size="lg">Shared UI Atoms &amp; Interactive Primitives</SectionLabel>
+          <div
+            style="display: flex; align-items: center; gap: var(--s-12); flex-wrap: wrap; padding: var(--s-20); border-radius: var(--r-lg); background-color: var(--card); background-image: var(--sheet-tex); border: 1px solid var(--line);"
+          >
+            <Button solid magnetic={0.18} label="Solid Magnetic" />
+            <Button solid={false} magnetic={0.18} label="Ghost Roll" />
+            <Chip>Mono Tag</Chip>
+            <Chip pill>Pill Tag</Chip>
+            <CloseBox size="sm" label="Small close button" />
+            <CloseBox variant="surface" label="Surface close button" />
+            <InfoTip title="INTERACTIVE STAGE">
+              <span class="text-caption" style="color: var(--ink-muted);">
+                Drag or hover to inspect stage controls
+              </span>
+            </InfoTip>
+            <RefRow
+              href="https://carterogunsola.com"
+              badge="LIVE"
+              label="carterogunsola.com reference"
+            />
+          </div>
+        </section>
+
+        <section style="display: flex; flex-direction: column; gap: var(--s-20);" class="z-o">
+          <SectionLabel size="lg" class="z-y">Expressive Code &amp; Copy Feedback</SectionLabel>
+          <ExpressiveCode
+            title="app/lib/assets.ts"
+            language="ts"
+            code={sampleCode}
+          />
+        </section>
+
+        <section style="display: flex; flex-direction: column; gap: var(--s-20);" class="z-o">
+          <SectionLabel size="lg" class="z-y">HalftoneHover Shader &amp; Progressive Blur</SectionLabel>
+          <div
+            style="position: relative; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--img-outline); aspect-ratio: 16 / 10;"
+          >
+            <img
+              src={testHalftoneDataUri}
+              alt="Halftone shader verification surface"
+              class="u-cover"
+              data-halftone
+              data-print-pitch="5"
+              width="640"
+              height="400"
+            />
+            <ProgressiveBlur />
+          </div>
+        </section>
+
+        <section style="display: flex; flex-direction: column; gap: var(--s-20);" class="z-o">
+          <SectionLabel size="lg" class="z-y">Typography Scale &amp; Signature</SectionLabel>
+          <div
+            style="display: flex; flex-direction: column; gap: var(--s-16); padding: var(--s-24); border-radius: var(--r-lg); background-color: var(--card); background-image: var(--sheet-tex);"
+          >
+            <p class="text-h2">Display &amp; Heading Hierarchy</p>
+            <p class="text-body" style="color: var(--ink-muted);">
+              Fluid typography tokens (<code>--fs-mega</code> through <code>--fs-hud</code>),
+              <code>Oracle</code> and <code>PP Neue Montreal Mono</code> stacks, and scroll-triggered
+              line reveals (<code>z-y</code>, <code>z-s</code>, <code>z-o</code>, <code>z-x</code>).
+            </p>
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--s-16); padding-top: var(--s-8);">
+              <Signature />
+              <Socials />
+            </div>
+          </div>
+        </section>
+      </>
+    )}
+  </div>
+</section>

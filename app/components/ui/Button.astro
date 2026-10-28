@@ -1,0 +1,43 @@
+---
+interface Props {
+  href?: string;
+  solid?: boolean;
+  magnetic?: number | string;
+  target?: string;
+  rel?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  label?: string;
+  [key: string]: any;
+}
+
+const {
+  href,
+  solid = true,
+  magnetic,
+  target,
+  rel,
+  type = 'button',
+  class: className = '',
+  label,
+  ...rest
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag
+  href={href}
+  type={!href ? type : undefined}
+  target={target}
+  rel={rel}
+  data-magnetic={magnetic !== undefined ? String(magnetic) : undefined}
+  class:list={['btn', solid && 'btn--solid', 'text-caption', className]}
+  {...rest}
+>
+  {label ? (
+    <span class="roll" data-roll>{label}</span>
+  ) : (
+    <slot />
+  )}
+</Tag>
