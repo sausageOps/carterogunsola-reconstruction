@@ -1,0 +1,45 @@
+---
+import LinkCircle from './ui/LinkCircle.astro';
+import { asset, img } from '../lib/assets';
+import { labHref, type LabItem } from '../data/lab';
+
+interface Props {
+  item: LabItem;
+  duplicate?: boolean;
+}
+const { item, duplicate = false } = Astro.props;
+const poster = img(item.poster, 960);
+---
+
+<a
+  href={labHref(item)}
+  class="lab__item"
+  data-lab-item
+  data-hover
+  data-preview={poster}
+  data-reel={asset(item.reel)}
+  aria-hidden={duplicate ? 'true' : undefined}
+  tabindex={duplicate ? '-1' : undefined}
+  data-astro-cid-jcwly6sb
+>
+  <span class="lab__row-face" data-astro-cid-jcwly6sb>
+    <span class="lab__name" data-astro-cid-jcwly6sb>{item.name}</span>
+    <span class="lab__meta" aria-hidden="true" data-astro-cid-jcwly6sb>
+      <span class="chip text-meta">{item.category}</span>
+      {item.isNew && <span class="chip text-meta chip--pill">New</span>}
+      <LinkCircle diagonal diagonalRoll={false} />
+    </span>
+  </span>
+  <span class="lab__card" aria-hidden="true" data-astro-cid-jcwly6sb>
+    <span class="lab__card-media u-media" data-astro-cid-jcwly6sb>
+      <img class="u-cover" src={poster} alt="" decoding="async" draggable="false" data-astro-cid-jcwly6sb />
+    </span>
+    <span class="lab__card-cap" data-astro-cid-jcwly6sb>
+      <span class="lab__card-name text-meta" data-astro-cid-jcwly6sb>{item.name}</span>
+      <span class="lab__card-tags" data-astro-cid-jcwly6sb>
+        <span class="chip text-meta">{item.category}</span>
+        {item.isNew && <span class="chip text-meta chip--pill">New</span>}
+      </span>
+    </span>
+  </span>
+</a>
