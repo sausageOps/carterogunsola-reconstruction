@@ -1,14 +1,194 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import FoundationShell from '../components/FoundationShell.astro';
+import Logo from '../components/Logo.astro';
+import Button from '../components/ui/Button.astro';
+import '../styles/contact.css';
+
+// The original renders the current date on the server. The Contact engine also
+// refreshes it on each client-side visit, since this reconstruction is static.
+const letterDate = new Intl.DateTimeFormat('en-GB', {
+  day: '2-digit',
+  month: 'short',
+  year: 'numeric',
+}).format(new Date()).toUpperCase();
 ---
 
-<BaseLayout title="Contact" ogImage="/og/section/contact.jpg">
-  <FoundationShell
-    heading="Contact — Route Shell"
-    eyebrow="Phase 1 :: Verification Route"
-    lead="Verifies ClientRouter navigation, Veil transition, and LogoNav capsule odometer rolling to 'Contact'."
-    routePath="/contact"
-    showAtoms={false}
-  />
+<BaseLayout
+  title="Contact"
+  description="New business, collabs, quick hellos :: hello@carterogunsola.com."
+  ogImage="/og/section/contact.jpg"
+  mainClass="letterpage"
+  showFooter={false}
+>
+  <h1 class="u-sr-only">Contact</h1>
+  <section class="desk" data-letter>
+    <canvas class="desk__canvas" data-letter-canvas aria-hidden="true"></canvas>
+
+    <form class="sheet" data-letter-sheet novalidate autocomplete="on" method="post" action="/api/contact">
+      <div class="sheet__in">
+        <header
+          class="sheet__head"
+          data-letter-head
+          data-who="Carter Ogunsola"
+          data-role="Creative Developer & Brand Engineer"
+          data-reach="hello@carterogunsola.com · Utah, USA"
+        >
+          <span class="sheet__mark" data-letter-mark><Logo word="O" /></span>
+          <div class="sheet__lh">
+            <p class="sheet__name z-y-1">Carter Ogunsola</p>
+            <p class="sheet__line z-y-2">Creative Developer &amp; Brand Engineer</p>
+            <p class="sheet__line z-y-3">
+              <a href="mailto:hello@carterogunsola.com">hello@carterogunsola.com</a> · Utah, USA
+            </p>
+          </div>
+          <i class="sheet__rule z-x-2" aria-hidden="true"></i>
+        </header>
+
+        <p class="sheet__date z-y-4" data-letter-date>{letterDate}</p>
+        <p class="sheet__salut z-y-5">Dear Carter,</p>
+
+        <fieldset class="sheet__re">
+          <legend class="sheet__label z-y-5">RE ::</legend>
+          <label class="sheet__kind z-y-6">
+            <input type="radio" name="kind" value="New business" checked data-letter-kind />
+            <span class="sheet__box" aria-hidden="true"></span><span>New business</span>
+          </label>
+          <label class="sheet__kind z-y-6">
+            <input type="radio" name="kind" value="A collaboration" data-letter-kind />
+            <span class="sheet__box" aria-hidden="true"></span><span>A collaboration</span>
+          </label>
+          <label class="sheet__kind z-y-7">
+            <input type="radio" name="kind" value="Just a hello" data-letter-kind />
+            <span class="sheet__box" aria-hidden="true"></span><span>Just a hello</span>
+          </label>
+        </fieldset>
+
+        <label class="sheet__field sheet__field--email">
+          <span class="sheet__label z-y-6">FROM ::</span>
+          <input
+            class="z-o-7"
+            type="email"
+            name="email"
+            placeholder="you@studio.com"
+            required
+            data-letter-email
+            aria-describedby="note-email"
+          />
+          <i class="sheet__rule z-x-7" aria-hidden="true"></i>
+        </label>
+        <p class="sheet__note" id="note-email" data-letter-note="email" role="alert" hidden></p>
+
+        <label class="sheet__field sheet__field--via">
+          <span class="sheet__label z-y-7">VIA ::</span>
+          <input
+            class="z-o-8"
+            type="text"
+            name="source"
+            maxlength="120"
+            placeholder="A friend, Awwwards, X, a search… (optional)"
+            autocomplete="off"
+            data-letter-source
+          />
+          <i class="sheet__rule z-x-8" aria-hidden="true"></i>
+        </label>
+
+        <label class="sheet__body" data-letter-rules>
+          <span class="sr-only">The letter</span>
+          <textarea
+            class="z-o-9"
+            name="body"
+            rows="6"
+            placeholder="What are we making?"
+            required
+            data-letter-body
+            aria-describedby="note-body"
+          ></textarea>
+        </label>
+        <p class="sheet__note" id="note-body" data-letter-note="body" role="alert" hidden></p>
+
+        <p class="sheet__close z-y-2-10">Sincerely,</p>
+        <div
+          class="sig"
+          data-letter-sig
+          tabindex="0"
+          role="button"
+          aria-label="Sign your name"
+          aria-haspopup="dialog"
+        >
+          <canvas class="sig__ink" data-letter-ink aria-hidden="true"></canvas>
+          <span class="sig__ghost z-y-2-11" aria-hidden="true">sign here</span>
+          <i class="sheet__rule z-x-2-11" aria-hidden="true"></i>
+        </div>
+        <div class="sheet__typed">
+          <span class="sheet__typed-in z-y-3-12">
+            <input
+              type="text"
+              name="name"
+              placeholder="Your name"
+              aria-label="Your name"
+              autocomplete="name"
+              data-letter-name
+              aria-describedby="note-sign"
+            />
+          </span>
+          <button type="button" class="sig__clear" data-letter-clear hidden>clear signature</button>
+        </div>
+        <p class="sheet__note" id="note-sign" data-letter-note="sign" role="alert" hidden></p>
+
+        <footer class="sheet__foot">
+          <p class="sheet__status z-y-3-13">
+            ONE REPLY, NO NEWSLETTER · <span data-letter-status aria-live="polite">NOT YET SIGNED</span>
+          </p>
+          <span class="sheet__send z-y-4-13">
+            <Button type="submit" class="text-tag" label="Send it" data-letter-send />
+          </span>
+          <button type="button" class="sheet__copy" data-letter-copy hidden>Keep a copy</button>
+        </footer>
+
+        <p class="sheet__note sheet__note--send" data-letter-note="send" hidden role="alert">
+          <span data-letter-why>The counter is closed right now.</span>
+          <a data-letter-mailto data-base="mailto:hello@carterogunsola.com" href="mailto:hello@carterogunsola.com">Send it by email instead</a>
+          <button type="button" class="sheet__retry" data-letter-retry>or try again</button>
+        </p>
+        <noscript>
+          <style>.letterpage [data-letter-send] { display: none; }</style>
+          <p class="sheet__note sheet__note--no-script">
+            The counter is closed right now. <a href="mailto:hello@carterogunsola.com">Send it by email instead</a>.
+          </p>
+        </noscript>
+        <div class="stamp" data-letter-stamp hidden aria-hidden="true"></div>
+      </div>
+    </form>
+
+    <dialog class="slip" data-letter-slip data-lenis-prevent aria-label="Sign your name">
+      <div class="slip__in">
+        <p class="slip__head">
+          <span>SIGN HERE</span>
+          <span class="slip__hint">WITH YOUR FINGER, MOUSE OR PEN</span>
+        </p>
+        <div class="slip__pad" data-letter-pad-box>
+          <canvas class="slip__canvas" data-letter-pad aria-label="Signature pad"></canvas>
+          <span class="slip__x" aria-hidden="true">✕</span>
+        </div>
+        <div class="slip__foot">
+          <button type="button" class="slip__clear" data-letter-slip-clear hidden>Clear</button>
+          <Button type="button" class="text-tag" label="Done" data-letter-slip-done />
+        </div>
+      </div>
+    </dialog>
+
+    <aside class="stub" data-letter-stub aria-label="Job ticket">
+      <p class="stub__head">CARTER OGUNSOLA:: PRESS</p>
+      <p class="stub__sub">INTAKE · COUNTER 01</p>
+      <dl class="stub__rows">
+        <div><dt>JOB</dt><dd data-stub="job">——</dd></div>
+        <div><dt>RECEIVED</dt><dd data-stub="received">——</dd></div>
+        <div><dt>REPLY BY</dt><dd data-stub="replyby">——</dd></div>
+        <div><dt>STATUS</dt><dd data-stub="status">BEING WRITTEN</dd></div>
+        <div><dt>FILE UNDER</dt><dd data-stub="file">NEW BUSINESS</dd></div>
+      </dl>
+      <span class="stub__bars" aria-hidden="true"></span>
+      <p class="stub__foot">KEEP THIS HALF</p>
+    </aside>
+  </section>
 </BaseLayout>
