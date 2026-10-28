@@ -1,14 +1,23 @@
 ---
 interface Props {
+  /** The glyph: up-right arrow instead of the right arrow. */
   diagonal?: boolean;
+  /**
+   * The hover roll direction (`--roll-out` / `--roll-in`). Defaults to `diagonal`.
+   * The original site's LinkCircle always pairs the up-right glyph with the flat
+   * (horizontal) roll — `/studio` and every other `.linkcircle` in the recovered
+   * pages render `class="arrow-roll"` with the diagonal path — so callers can ask
+   * for the glyph without the modifier. `refrow__ext` keeps the diagonal roll.
+   */
+  diagonalRoll?: boolean;
   class?: string;
 }
 
-const { diagonal = false, class: className = '' } = Astro.props;
+const { diagonal = false, diagonalRoll = diagonal, class: className = '' } = Astro.props;
 ---
 
 <span
-  class:list={['arrow-roll', diagonal && 'arrow-roll--diagonal', className]}
+  class:list={['arrow-roll', diagonalRoll && 'arrow-roll--diagonal', className]}
   aria-hidden="true"
 >
   <span class="arrow-roll__icon arrow-roll__current">

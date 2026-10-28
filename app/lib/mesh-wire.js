@@ -1,0 +1,4 @@
+// Recovered shared mesh-wire helper from src/mesh-wire.CQ-5TR8b.js (verbatim).
+// Swaps every mesh in a scene for the ink-tracked wireframe material when ?mesh is on.
+// Contact keeps its Phase 3 copy at app/lib/letter-mesh-wire.js (untouched).
+import{n as e,t}from"./mesh.ts";import{Y as n,h as r}from"../../src/three.module.DBbmgHoE.js";var i=new WeakSet,a=[],o=!1,s=()=>{o||(o=!0,t.onInk(e=>a.forEach(t=>t.color.set(e))));let i=new n({wireframe:!0,color:new r(e()),toneMapped:!1,transparent:!0,opacity:.85});return a.push(i),i};function c(e){t.on&&e.traverse(e=>{let t=e;!t.isMesh||i.has(t)||(i.add(t),t.material=s(),t.castShadow=!1,t.receiveShadow=!1)})}export{c as t};

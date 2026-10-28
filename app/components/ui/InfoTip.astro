@@ -4,6 +4,17 @@ interface Props {
   place?: 'top' | 'bottom';
   label?: string;
   class?: string;
+  /** Renders the trigger as an external link instead of a button (the /studio variant). */
+  href?: string;
+  target?: string;
+  rel?: string;
+  /** `id` for the tooltip, wired to the trigger's `aria-describedby`. */
+  tipId?: string;
+  /** The recovered /studio tooltip titles "balky.studio" in an uppercase `<p class="text-label">`. */
+  titleTag?: 'span' | 'p';
+  titleClass?: string;
+  /** Trailing arrow-up-right glyph, used when the tip names an external destination. */
+  externalIcon?: boolean;
 }
 
 const {
@@ -11,19 +22,63 @@ const {
   place = 'top',
   label = 'Stage controls',
   class: className = '',
+  href,
+  target = '_blank',
+  rel = 'noopener noreferrer',
+  tipId,
+  titleTag = 'span',
+  titleClass = 'text-mono-meta',
+  externalIcon = false,
 } = Astro.props;
 ---
 
 <div class:list={['infotip', className]} data-place={place}>
-  <button type="button" class="stage-ibtn infotip__btn" aria-label={label}>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <circle cx="12" cy="12" r="9.25" stroke="currentColor" stroke-width="1.5" />
-      <path d="M12 11.25v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-      <circle cx="12" cy="8" r="1" fill="currentColor" />
-    </svg>
-  </button>
-  <div class="infotip__tip" role="tooltip">
-    <span class="infotip__title text-mono-meta">{title}</span>
+  {href ? (
+    <a
+      class="stage-ibtn infotip__btn"
+      href={href}
+      target={target}
+      rel={rel}
+      aria-label={label}
+      aria-describedby={tipId}
+      data-hover
+    >
+      <svg width="1em" height="1em" aria-hidden="true" data-icon="circle-info">
+        <use href="#ai:local:circle-info"></use>
+      </svg>
+    </a>
+  ) : (
+    <button
+      type="button"
+      class="stage-ibtn infotip__btn"
+      aria-label={label}
+      aria-describedby={tipId}
+    >
+      <svg width="1em" height="1em" aria-hidden="true" data-icon="circle-info">
+        <use href="#ai:local:circle-info"></use>
+      </svg>
+    </button>
+  )}
+  <div class="infotip__tip" id={tipId} role="tooltip">
+    {titleTag === 'p' ? (
+      <p class:list={['infotip__title', titleClass]}>
+        {title}
+        {externalIcon && (
+          <svg width="1em" height="1em" aria-hidden="true" data-icon="arrow-up-right">
+            <use href="#ai:local:arrow-up-right"></use>
+          </svg>
+        )}
+      </p>
+    ) : (
+      <span class:list={['infotip__title', titleClass]}>
+        {title}
+        {externalIcon && (
+          <svg width="1em" height="1em" aria-hidden="true" data-icon="arrow-up-right">
+            <use href="#ai:local:arrow-up-right"></use>
+          </svg>
+        )}
+      </span>
+    )}
     <slot />
   </div>
 </div>

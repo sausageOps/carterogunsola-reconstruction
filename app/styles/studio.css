@@ -1,0 +1,37 @@
+/* Recovered from the inline <style> block of pages/studio.html (the /studio document).
+   Astro scope attributes (data-astro-cid-qndvf3hr / -lm67vrw3) are removed and every
+   rule is prefixed with `.studio` so the page keeps its own cascade position (the
+   original inlined these after Base.css) without touching any other route.
+   Declarations are verbatim. The `.infotip*` rules from the same block are already
+   global in app/styles/global.scss (identical declarations), so they are not repeated. */
+
+/* The stage's own `.stage-ibtn` variant — the original re-declares the atom inline on
+   this page: pointer-events restored over the canvas, 1rem icon, .25s/.16s transitions. */
+.studio .stage-ibtn{pointer-events:auto;block-size:2.5rem;inline-size:2.5rem;color:var(--ink-muted);cursor:pointer;transition:color .25s var(--ease-out-quad), transform .16s var(--ease-out-quad);background:0 0;border:0;place-items:center;padding:0;display:grid}
+.studio .stage-ibtn svg{block-size:1rem;inline-size:1rem}
+.studio .stage-ibtn:active{transform:scale(.96)}
+@media (hover:hover) and (pointer:fine){
+  .studio .stage-ibtn:hover{color:var(--ink)}
+}
+.studio .stage-ibtn:focus-visible{outline:2px solid var(--ink);outline-offset:-4px;border-radius:var(--r-sm);color:var(--ink)}
+
+/* The lanyard stage: full viewport, drag surface, hidden until the engine mounts. */
+.studio .lstage[hidden],.studio .studio__classic[hidden]{display:none}
+.studio .lstage{touch-action:none;overscroll-behavior:none;outline:none;height:100svh;position:relative}
+.studio .lstage:focus-visible{outline:2px solid var(--ink);outline-offset:-6px}
+.studio .lstage__canvas{width:100%;height:100%;display:block;position:absolute;inset:0}
+.studio .lstage__info{z-index:2;position:absolute;inset-block-end:var(--s-32);inset-inline-start:50%;translate:-50%}
+
+/* No-JS / reduced-motion fallback tile. */
+.studio .studio__classic{place-items:center;min-height:100svh;display:grid}
+.studio .studio__unit{align-items:center;gap:var(--s-16);flex-direction:column;display:flex}
+.studio .studio__link{align-items:center;gap:var(--s-24);color:var(--ink);flex-direction:column;text-decoration:none;display:flex}
+.studio .studio__link:focus-visible{outline:2px solid var(--ink);outline-offset:6px;border-radius:var(--r-lg)}
+.studio .studio__tile{aspect-ratio:1;background:var(--mono-900);border:1px solid var(--img-outline);width:clamp(9rem,20vw,11.25rem);transition:translate .4s var(--ease-out-expo), scale .2s var(--ease-out-quad), box-shadow .4s var(--ease-out-expo);border-radius:22.4%;place-items:center;display:grid}
+.studio .studio__flag{width:42%;display:block}
+.studio .studio__name{align-items:center;gap:var(--s-12);display:inline-flex}
+.studio .studio__meta{color:var(--ink-muted);text-transform:uppercase;text-align:center}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .studio .studio__link:hover .studio__tile{box-shadow:var(--shadow-card);translate:0 -4px}
+}
+.studio .studio__link:active .studio__tile{scale:.97}
