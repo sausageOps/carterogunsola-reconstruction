@@ -1,14 +1,44 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import FoundationShell from '../components/FoundationShell.astro';
+import LinkCircle from '../components/ui/LinkCircle.astro';
+import projects from '../../wheels-data.json';
+import '../styles/homepage.css';
 ---
-
-<BaseLayout>
-  <FoundationShell
-    heading="Foundation & Global Chrome"
-    eyebrow="Phase 1 :: System Shell"
-    lead="Shared design system tokens, light and dark paper grain, persistent HUD and navigation chrome, command menu, notifications popover, Lenis smooth scroll, and WebGL Veil transitions."
-    routePath="/"
-    showAtoms={true}
-  />
+<BaseLayout mainClass="hv2" showFooter={false}>
+  <h1 class="u-sr-only">Carter Ogunsola, Creative Developer &amp; Brand Engineer</h1>
+  <section class="hv2__stage" data-wheels data-lenis-prevent hidden tabindex="0" role="group" aria-roledescription="carousel" aria-label="Selected work — two linked wheels. Drag or scroll to turn, arrow keys browse, the center link opens the project.">
+    <div class="hv2__center" data-wheels-center>
+      <div class="hv2__line hv2__line--eyebrow" data-wheels-line="eyebrow">
+        <p class="hv2__eyebrow text-label hv2__drum" data-drum></p>
+        <p class="hv2__eyebrow text-label hv2__drum" data-drum aria-hidden="true"></p>
+      </div>
+      <div class="hv2__line hv2__line--title" data-wheels-line="title">
+        <p class="hv2__title hv2__drum" data-drum></p>
+        <p class="hv2__title hv2__drum" data-drum aria-hidden="true"></p>
+      </div>
+      <div class="hv2__line hv2__line--chips" data-wheels-line="chips">
+        {[0, 1].map((i) => <div class="hv2__chips hv2__drum" data-drum aria-hidden={i ? 'true' : undefined}>
+          <span class="chip text-meta" data-chip-collab></span><span class="chip text-meta chip--pill" data-chip-year></span>
+        </div>)}
+      </div>
+      <div class="hv2__line hv2__line--cta" data-wheels-line="cta">
+        {[0, 1].map((i) => <div class="hv2__ctarow hv2__drum" data-drum aria-hidden={i ? 'true' : undefined}>
+          <a href="/" data-cta target="_blank" rel="noopener" class="btn btn--solid text-tag"><span class="btn__label roll" data-roll>View project</span></a>
+        </div>)}
+      </div>
+    </div>
+    <p class="u-sr-only" data-wheels-announce aria-live="polite"></p>
+    <script type="application/json" data-wheels-data set:html={JSON.stringify(projects).replace(/</g, '\\u003c')} />
+  </section>
+  <div class="hv2__classic container" data-wheels-classic>
+    <h2 class="hv2__classic-head">Selected work</h2>
+    <ul class="hv2__list">
+      {projects.map((project) => <li>
+        <a href={project.href} data-hover target="_blank" rel="noopener noreferrer" class="row row--link">
+          <span class="row__label text-tag">{project.name}</span><span class="row__line" aria-hidden="true"></span>
+          <span class="row__tags"><span class="chip text-meta row__tag">{project.collab}</span><span class="chip text-meta chip--pill row__tag">{project.year}</span><LinkCircle diagonal class="row__link" /></span>
+        </a>
+      </li>)}
+    </ul>
+  </div>
 </BaseLayout>

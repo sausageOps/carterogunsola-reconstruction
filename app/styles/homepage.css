@@ -1,0 +1,150 @@
+/* Homepage-specific rules from recon/homepage/homepage.html; Astro scope attributes removed. */
+.hv2__stage[hidden],.hv2__classic[hidden] {
+                display: none
+            }
+
+            .hv2__stage {
+                --open: 0;
+                --open-dx: 25vw;
+                --open-dy: 0px;
+                touch-action: none;
+                overscroll-behavior: none;
+                cursor: grab;
+                -webkit-user-select: none;
+                user-select: none;
+                outline: none;
+                height: 100svh;
+                position: relative
+            }
+
+            .hv2__stage.is-grabbing {
+                cursor: grabbing
+            }
+
+            .hv2__stage:focus-visible {
+                outline: 2px solid var(--ink);
+                outline-offset: -6px
+            }
+
+            .hv2__center {
+                left: calc(50% + var(--open) * var(--open-dx));
+                top: calc(50% + var(--nip,0px) + var(--open) * var(--open-dy));
+                width: min(26rem, max(var(--nip-w,33vw), var(--open) * 100vw));
+                text-align: center;
+                z-index: 3;
+                pointer-events: none;
+                position: absolute;
+                translate: -50% -50%
+            }
+
+            .hv2__line {
+                margin-block:-2px;padding-block:2px;position: relative;
+                overflow: hidden
+            }
+
+            .hv2__line--title {
+                margin-block-start:var(--s-10)}
+
+            .hv2__line--chips {
+                margin-block-start: var(--s-14)
+            }
+
+            .hv2__line--cta {
+                margin-block-start:var(--s-24)}
+
+            .hv2__drum {
+                will-change: transform;
+                margin: 0;
+                position: absolute;
+                inset-block-start: 2px;
+                inset-inline: 0
+            }
+
+            .hv2__word {
+                white-space: nowrap
+            }
+
+            .hv2__ch {
+                line-height: inherit;
+                vertical-align: top;
+                margin-block:-.12em;padding-block:.12em;display: inline-block;
+                position: relative;
+                overflow: hidden
+            }
+
+            .hv2__ch>span {
+                transform: translateY(calc(var(--r,0) * (-100% - .24em)));
+                will-change: transform;
+                display: block
+            }
+
+            .hv2__ch>span+span {
+                position: absolute;
+                inset-block-start: calc(100% + .12em);
+                inset-inline-start: 0
+            }
+
+            .hv2__eyebrow {
+                color: var(--ink-muted);
+                text-transform: uppercase;
+                font-variant-numeric: tabular-nums;
+                font-size: clamp(.75rem,.5rem + .3vw,.8rem)
+            }
+
+            .hv2__title {
+                font-family: var(--font-sans);
+                font-size: var(--fs-h3);
+                font-weight: var(--fw-medium);
+                line-height: var(--lh-heading);
+                letter-spacing: var(--track-heading);
+                font-size: calc(var(--fit,1) * clamp(1.375rem, .9rem + 1.7vw, 2.4rem));
+                color: var(--ink);
+                text-wrap: balance
+            }
+
+            .hv2__chips {
+                justify-content: center;
+                display: flex
+            }
+
+            .hv2__ctarow {
+                pointer-events: auto
+            }
+
+            .hv2__ctarow .btn--solid {
+                --btn-fill: var(--fill);
+                --btn-on: var(--ink)
+            }
+
+            .hv2__ctarow .roll {
+                overflow-clip-margin: 2px;
+                overflow: clip
+            }
+
+            .hv2__stage.is-stacked {
+                --open-dx: 0px;
+                --open-dy: 18svh
+            }
+
+            .hv2__stage.is-stacked .hv2__center {
+                width: min(26rem,86vw)
+            }
+
+            .hv2__classic {
+                padding-block:clamp(9rem, 16svh, 12rem) var(--s-96)}
+
+            .hv2__classic-head {
+                font-family: var(--font-sans);
+                font-size: var(--fs-h2);
+                font-weight: var(--fw-medium);
+                line-height: var(--lh-heading);
+                letter-spacing: var(--track-heading);
+                color: var(--ink)
+            }
+
+            .hv2__list {
+                flex-direction: column;
+                margin-block-start:var(--s-32);padding: 0;
+                list-style: none;
+                display: flex
+            }
