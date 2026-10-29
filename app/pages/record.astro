@@ -1,0 +1,130 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { ORIGINAL_SITE_JSONLD } from '../data/original-jsonld';
+import '../styles/record.css';
+
+const siteRoutes = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/lab', label: 'Lab index' },
+  { href: '/writing', label: 'Writing' },
+  { href: '/contact', label: 'Contact' },
+];
+const labRoutes = [
+  { href: '/lab/live-cursors', label: 'Live Cursors' },
+  { href: '/lab/dial', label: 'Dial' },
+  { href: '/lab/polka-dots', label: 'Polka Dots' },
+  { href: '/lab/heart', label: 'Heart' },
+  { href: '/lab/threejs-test', label: 'ThreeJs Scene' },
+  { href: '/lab/dynamic-scrollbar', label: 'Dynamic Scrollbar' },
+  { href: '/lab/rotating-gallery', label: 'Rotating Gallery' },
+  { href: '/lab/paste-up', label: 'Paste-Up' },
+  { href: '/lab/vocal-orb', label: 'Vocal Orb' },
+];
+const presets = [
+  ['1920x1080', '16:9', '1920×1080'],
+  ['1440x900', '16:10', '1440×900'],
+  ['1440x1080', '4:3', '1440×1080'],
+  ['1280x720', '720p', '1280×720'],
+  ['1080x1080', '1:1', '1080×1080'],
+  ['1080x1350', '4:5', '1080×1350'],
+  ['1080x1920', '9:16', '1080×1920'],
+  ['1200x630', 'OG', '1200×630'],
+];
+---
+
+<BaseLayout
+  title="Record"
+  description="Creative developer, director, and entrepreneur crafting unique web experiences. A living lab of motion experiments, ideas and writing by Carter Ogunsola."
+  ogImage="/og/section/home.jpg"
+  canonical="https://carterogunsola.com/record"
+  noindex
+  jsonLd={ORIGINAL_SITE_JSONLD}
+  showFooter={false}
+  mainClass="rec"
+  mainAttrs={{ 'data-record-page': '' }}
+>
+  <div class="rec__stage" data-record-stage>
+    <div class="rec__frame" data-record-frame>
+      <iframe class="rec__iframe" data-record-iframe title="Recording preview" loading="eager"></iframe>
+    </div>
+  </div>
+  <div class="rec__bar" data-record-bar>
+    <div class="rec__row">
+      <div class="rec__group" role="group" aria-label="Source">
+        <select class="rec__select text-meta" data-record-route aria-label="Page to record">
+          <optgroup label="Site">
+            {siteRoutes.map((route) => <option value={route.href}>{route.label}</option>)}
+          </optgroup>
+          <optgroup label="Lab">
+            {labRoutes.map((route) => <option value={route.href}>{route.label}</option>)}
+          </optgroup>
+        </select>
+        <input
+          class="rec__url text-mono-meta"
+          data-record-url
+          type="text"
+          placeholder="or paste a URL…"
+          spellcheck="false"
+          autocomplete="off"
+        />
+      </div>
+      <span class="rec__div" aria-hidden="true"></span>
+      <div class="rec__group" role="group" aria-label="Size">
+        <div class="rec__preset">
+          <button
+            type="button"
+            class="rec__presetbtn text-label"
+            data-preset-menu
+            aria-haspopup="true"
+            aria-expanded="false"
+            title="Resolution presets"
+          >
+            <span data-preset-label>Custom</span>
+            <svg width="1em" height="1em" class="rec__caret" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="m20 9-6.586 6.586a2 2 0 0 1-2.828 0L4 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+          <div class="rec__menu" data-preset-list role="menu" hidden>
+            {presets.map(([value, ratio, dimensions]) => (
+              <button type="button" class="rec__menuitem text-label" data-preset={value} role="menuitemradio">
+                <span>{ratio}</span><span class="rec__menuitem-dim">{dimensions}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+        <div class="rec__dims text-mono-meta">
+          <input data-record-w type="number" min="80" step="1" aria-label="Width" />
+          <span aria-hidden="true">×</span>
+          <input data-record-h type="number" min="80" step="1" aria-label="Height" />
+        </div>
+        <button type="button" class="rec__toggle text-label" data-record-fit aria-pressed="true" title="Scale the frame to fit the window">
+          Fit
+        </button>
+      </div>
+      <span class="rec__div" aria-hidden="true"></span>
+      <div class="rec__group" role="group" aria-label="Frame chrome">
+        <button type="button" class="rec__toggle text-label" data-record-bare aria-pressed="false" title="Strip the site nav inside the frame — your own pages; labs go edge-to-edge">
+          Bare
+        </button>
+        <span class="rec__sub" data-record-subtoggles hidden>
+          <button type="button" class="rec__toggle rec__toggle--sm text-label" data-record-docs aria-pressed="true" title="Keep the lab Docs panel toggle">
+            Docs
+          </button>
+          <button type="button" class="rec__toggle rec__toggle--sm text-label" data-record-cfg aria-pressed="true" title="Keep the lab configurator gear">
+            Cfg
+          </button>
+        </span>
+      </div>
+      <span class="rec__div" aria-hidden="true"></span>
+      <button type="button" class="rec__toggle text-label" data-record-hide title="Hide this bar (H · Esc)">Hide UI</button>
+      <span class="rec__readout text-mono-meta" data-record-readout aria-live="polite"></span>
+    </div>
+    <p class="rec__hint text-meta">
+      Own pages always embed; some sites block framing (X-Frame-Options).<kbd>H</kbd>/<kbd>Esc</kbd> hides this bar — then grab the frame with ⌘⇧5 or Screen Studio.
+    </p>
+  </div>
+  <script>
+    import '../lib/record';
+  </script>
+</BaseLayout>
