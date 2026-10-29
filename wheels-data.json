@@ -1,263 +1,263 @@
 [
- {
-  "name": "Clay",
-  "collab": "w/clay",
-  "year": "2026",
-  "href": "https://www.clay.com/",
-  "hand": [
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/clay/subject.jpg",
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/clay/hero.jpg"
-  ],
-  "depth": [
-   "https://assets.carterogunsola.com/projects/clay/subject.depth.png"
-  ],
-  "mono": "CL",
-  "logo": "/media/plates/clay.png",
-  "video": "https://assets.carterogunsola.com/projects/clay/reel.mp4"
- },
- {
-  "name": "Helion",
-  "collab": "w/off+brand",
-  "year": "2026",
-  "href": "https://www.helionenergy.com/",
-  "hand": [
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/helion/subject.jpg",
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/helion/hero.jpg"
-  ],
-  "depth": [
-   "https://assets.carterogunsola.com/projects/helion/subject.depth.png"
-  ],
-  "mono": "HE",
-  "logo": "/media/plates/helion.svg",
-  "video": "https://assets.carterogunsola.com/projects/helion/reel.mp4"
- },
- {
-  "name": "Scott Snyder",
-  "collab": "w/willie",
-  "year": "2025",
-  "href": "https://scottsnyder.webflow.io/",
-  "hand": [
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/scott-snyder/subject.jpg",
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/scott-snyder/hero.jpg"
-  ],
-  "depth": [
-   "https://assets.carterogunsola.com/projects/scott-snyder/subject.depth.png"
-  ],
-  "mono": "SS",
-  "logo": "/media/plates/scott-snyder.svg",
-  "video": "https://assets.carterogunsola.com/projects/scott-snyder/reel.mp4"
- },
- {
-  "name": "Heva 2025",
-  "collab": "w/balky studio",
-  "year": "2025",
-  "href": "https://heva-health-og.webflow.io/",
-  "hand": [
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/heva/subject.jpg",
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/heva/hero.jpg"
-  ],
-  "depth": [
-   "https://assets.carterogunsola.com/projects/heva/subject.depth.png"
-  ],
-  "mono": "H2",
-  "logo": "/media/plates/heva.svg"
- },
- {
-  "name": "ABCAU",
-  "collab": "w/balky studio",
-  "year": "2026",
-  "href": "https://www.abcchs.com.au/",
-  "hand": [
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/abcau/subject.jpg",
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/abcau/hero.jpg"
-  ],
-  "depth": [
-   "https://assets.carterogunsola.com/projects/abcau/subject.depth.png"
-  ],
-  "mono": "AB",
-  "logo": "/media/plates/abcau.svg"
- },
- {
-  "name": "PNY",
-  "collab": "w/j.berry",
-  "year": "2025",
-  "href": "https://www.papernewyork.com/",
-  "hand": [
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/pny/subject.jpg",
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/pny/hero.jpg"
-  ],
-  "depth": [
-   "https://assets.carterogunsola.com/projects/pny/subject.depth.png"
-  ],
-  "mono": "PN",
-  "logo": "/media/plates/pny.png"
- },
- {
-  "name": "Hamilton AI",
-  "collab": "w/balky studio",
-  "year": "2025",
-  "href": "https://www.hamilton.ai/",
-  "hand": [
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/hamilton-ai/subject.jpg",
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/hamilton-ai/hero.jpg"
-  ],
-  "depth": [
-   "https://assets.carterogunsola.com/projects/hamilton-ai/subject.depth.png"
-  ],
-  "mono": "HA",
-  "logo": "/media/plates/hamilton-ai.svg"
- },
- {
-  "name": "Vesyl",
-  "collab": "w/bondir",
-  "year": "2023",
-  "href": "https://vesyl-balky.webflow.io/",
-  "hand": [
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/vesyl/subject.jpg",
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/vesyl/hero.jpg"
-  ],
-  "depth": [
-   "https://assets.carterogunsola.com/projects/vesyl/subject.depth.png"
-  ],
-  "mono": "VE",
-  "logo": "/media/plates/vesyl.svg"
- },
- {
-  "name": "Vana 2024",
-  "collab": "w/balky studio",
-  "year": "2024",
-  "href": "https://balky-vana.webflow.io/",
-  "hand": [
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/vana-2024/subject.jpg",
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/vana-2024/hero.jpg"
-  ],
-  "depth": [
-   "https://assets.carterogunsola.com/projects/vana-2024/subject.depth.png"
-  ],
-  "mono": "V2",
-  "logo": "/media/plates/vana-2024.svg"
- },
- {
-  "name": "Vana X Team",
-  "collab": "w/balky studio",
-  "year": "2024",
-  "href": "https://balky-vana-x-team.webflow.io/",
-  "hand": [
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/vana-x-team/subject.jpg",
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/vana-x-team/hero.jpg"
-  ],
-  "depth": [
-   "https://assets.carterogunsola.com/projects/vana-x-team/subject.depth.png"
-  ],
-  "mono": "VX",
-  "logo": "/media/plates/vana-x-team.svg"
- },
- {
-  "name": "Vana Q4",
-  "collab": "w/balky studio",
-  "year": "2024",
-  "href": "https://balky-vana-q4.webflow.io/",
-  "hand": [
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/vana-q4/subject.jpg",
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/vana-q4/hero.jpg"
-  ],
-  "depth": [
-   "https://assets.carterogunsola.com/projects/vana-q4/subject.depth.png"
-  ],
-  "mono": "VQ",
-  "logo": "/media/plates/vana-q4.svg"
- },
- {
-  "name": "TSM",
-  "collab": "w/balky studio",
-  "year": "2024",
-  "href": "https://www.topspheremedia.com/",
-  "hand": [
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/tsm/subject.jpg",
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/tsm/hero.jpg"
-  ],
-  "depth": [
-   "https://assets.carterogunsola.com/projects/tsm/subject.depth.png"
-  ],
-  "mono": "TS",
-  "logo": "/media/plates/tsm.svg"
- },
- {
-  "name": "OriginalForm",
-  "collab": "w/original form",
-  "year": "2025",
-  "href": "https://www.originalform.com/",
-  "hand": [
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/originalform/subject.jpg",
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/originalform/hero.jpg"
-  ],
-  "depth": [
-   "https://assets.carterogunsola.com/projects/originalform/subject.depth.png"
-  ],
-  "mono": "OR",
-  "logo": "/media/plates/originalform.svg"
- },
- {
-  "name": "Firelight",
-  "collab": "w/outermind",
-  "year": "2026",
-  "href": "https://www.firelightutah.com/",
-  "hand": [
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/firelight/subject.jpg",
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/firelight/hero.jpg"
-  ],
-  "depth": [
-   "https://assets.carterogunsola.com/projects/firelight/subject.depth.png"
-  ],
-  "mono": "FI",
-  "logo": "/media/plates/firelight.svg"
- },
- {
-  "name": "Eden Tech",
-  "collab": "w/balky studio",
-  "year": "2026",
-  "href": "https://www.edentechinc.com/",
-  "hand": [
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/eden-tech/subject.jpg",
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/eden-tech/hero.jpg"
-  ],
-  "depth": [
-   "https://assets.carterogunsola.com/projects/eden-tech/subject.depth.png"
-  ],
-  "mono": "ET",
-  "logo": "/media/plates/eden-tech.png",
-  "video": "https://assets.carterogunsola.com/projects/eden-tech/reel.mp4"
- },
- {
-  "name": "Strive Rx",
-  "collab": "w/strive",
-  "year": "2023\u20132026",
-  "href": "https://www.strivepharmacy.com/",
-  "hand": [
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/strive/subject.jpg",
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/strive/hero.jpg"
-  ],
-  "depth": [
-   "https://assets.carterogunsola.com/projects/strive/subject.depth.png"
-  ],
-  "mono": "SR",
-  "logo": "/media/plates/strive.svg",
-  "video": "https://assets.carterogunsola.com/projects/strive/reel.mp4"
- },
- {
-  "name": "1820",
-  "collab": "w/balky studio",
-  "year": "2025",
-  "href": "https://www.1820productions.com/",
-  "hand": [
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/1820/subject.jpg",
-   "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/1820/hero.jpg"
-  ],
-  "depth": [
-   "https://assets.carterogunsola.com/projects/1820/subject.depth.png"
-  ],
-  "mono": "18",
-  "logo": "/media/plates/1820.svg",
-  "video": "https://assets.carterogunsola.com/projects/1820/reel.mp4"
- }
+  {
+    "name": "Clay",
+    "collab": "w/clay",
+    "year": "2026",
+    "href": "https://www.clay.com/",
+    "hand": [
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/clay/subject.jpg",
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/clay/hero.jpg"
+    ],
+    "depth": [
+      "https://assets.carterogunsola.com/projects/clay/subject.depth.png"
+    ],
+    "mono": "CL",
+    "logo": "/media/plates/clay.png",
+    "video": "https://assets.carterogunsola.com/projects/clay/reel.mp4"
+  },
+  {
+    "name": "Helion",
+    "collab": "w/off+brand",
+    "year": "2026",
+    "href": "https://www.helionenergy.com/",
+    "hand": [
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/helion/subject.jpg",
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/helion/hero.jpg"
+    ],
+    "depth": [
+      "https://assets.carterogunsola.com/projects/helion/subject.depth.png"
+    ],
+    "mono": "HE",
+    "logo": "/media/plates/helion.png",
+    "video": "https://assets.carterogunsola.com/projects/helion/reel.mp4"
+  },
+  {
+    "name": "Scott Snyder",
+    "collab": "w/willie",
+    "year": "2025",
+    "href": "https://scottsnyder.webflow.io/",
+    "hand": [
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/scott-snyder/subject.jpg",
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/scott-snyder/hero.jpg"
+    ],
+    "depth": [
+      "https://assets.carterogunsola.com/projects/scott-snyder/subject.depth.png"
+    ],
+    "mono": "SS",
+    "logo": "/media/plates/scott-snyder.png",
+    "video": "https://assets.carterogunsola.com/projects/scott-snyder/reel.mp4"
+  },
+  {
+    "name": "Heva 2025",
+    "collab": "w/balky studio",
+    "year": "2025",
+    "href": "https://heva-health-og.webflow.io/",
+    "hand": [
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/heva/subject.jpg",
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/heva/hero.jpg"
+    ],
+    "depth": [
+      "https://assets.carterogunsola.com/projects/heva/subject.depth.png"
+    ],
+    "mono": "H2",
+    "logo": "/media/plates/heva.png"
+  },
+  {
+    "name": "ABCAU",
+    "collab": "w/balky studio",
+    "year": "2026",
+    "href": "https://www.abcchs.com.au/",
+    "hand": [
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/abcau/subject.jpg",
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/abcau/hero.jpg"
+    ],
+    "depth": [
+      "https://assets.carterogunsola.com/projects/abcau/subject.depth.png"
+    ],
+    "mono": "AB",
+    "logo": "/media/plates/abcau.png"
+  },
+  {
+    "name": "PNY",
+    "collab": "w/j.berry",
+    "year": "2025",
+    "href": "https://www.papernewyork.com/",
+    "hand": [
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/pny/subject.jpg",
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/pny/hero.jpg"
+    ],
+    "depth": [
+      "https://assets.carterogunsola.com/projects/pny/subject.depth.png"
+    ],
+    "mono": "PN",
+    "logo": "/media/plates/pny.png"
+  },
+  {
+    "name": "Hamilton AI",
+    "collab": "w/balky studio",
+    "year": "2025",
+    "href": "https://www.hamilton.ai/",
+    "hand": [
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/hamilton-ai/subject.jpg",
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/hamilton-ai/hero.jpg"
+    ],
+    "depth": [
+      "https://assets.carterogunsola.com/projects/hamilton-ai/subject.depth.png"
+    ],
+    "mono": "HA",
+    "logo": "/media/plates/hamilton-ai.png"
+  },
+  {
+    "name": "Vesyl",
+    "collab": "w/bondir",
+    "year": "2023",
+    "href": "https://vesyl-balky.webflow.io/",
+    "hand": [
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/vesyl/subject.jpg",
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/vesyl/hero.jpg"
+    ],
+    "depth": [
+      "https://assets.carterogunsola.com/projects/vesyl/subject.depth.png"
+    ],
+    "mono": "VE",
+    "logo": "/media/plates/vesyl.png"
+  },
+  {
+    "name": "Vana 2024",
+    "collab": "w/balky studio",
+    "year": "2024",
+    "href": "https://balky-vana.webflow.io/",
+    "hand": [
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/vana-2024/subject.jpg",
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/vana-2024/hero.jpg"
+    ],
+    "depth": [
+      "https://assets.carterogunsola.com/projects/vana-2024/subject.depth.png"
+    ],
+    "mono": "V2",
+    "logo": "/media/plates/vana-2024.png"
+  },
+  {
+    "name": "Vana X Team",
+    "collab": "w/balky studio",
+    "year": "2024",
+    "href": "https://balky-vana-x-team.webflow.io/",
+    "hand": [
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/vana-x-team/subject.jpg",
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/vana-x-team/hero.jpg"
+    ],
+    "depth": [
+      "https://assets.carterogunsola.com/projects/vana-x-team/subject.depth.png"
+    ],
+    "mono": "VX",
+    "logo": "/media/plates/vana-x-team.png"
+  },
+  {
+    "name": "Vana Q4",
+    "collab": "w/balky studio",
+    "year": "2024",
+    "href": "https://balky-vana-q4.webflow.io/",
+    "hand": [
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/vana-q4/subject.jpg",
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/vana-q4/hero.jpg"
+    ],
+    "depth": [
+      "https://assets.carterogunsola.com/projects/vana-q4/subject.depth.png"
+    ],
+    "mono": "VQ",
+    "logo": "/media/plates/vana-q4.png"
+  },
+  {
+    "name": "TSM",
+    "collab": "w/balky studio",
+    "year": "2024",
+    "href": "https://www.topspheremedia.com/",
+    "hand": [
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/tsm/subject.jpg",
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/tsm/hero.jpg"
+    ],
+    "depth": [
+      "https://assets.carterogunsola.com/projects/tsm/subject.depth.png"
+    ],
+    "mono": "TS",
+    "logo": "/media/plates/tsm.png"
+  },
+  {
+    "name": "OriginalForm",
+    "collab": "w/original form",
+    "year": "2025",
+    "href": "https://www.originalform.com/",
+    "hand": [
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/originalform/subject.jpg",
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/originalform/hero.jpg"
+    ],
+    "depth": [
+      "https://assets.carterogunsola.com/projects/originalform/subject.depth.png"
+    ],
+    "mono": "OR",
+    "logo": "/media/plates/originalform.png"
+  },
+  {
+    "name": "Firelight",
+    "collab": "w/outermind",
+    "year": "2026",
+    "href": "https://www.firelightutah.com/",
+    "hand": [
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/firelight/subject.jpg",
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/firelight/hero.jpg"
+    ],
+    "depth": [
+      "https://assets.carterogunsola.com/projects/firelight/subject.depth.png"
+    ],
+    "mono": "FI",
+    "logo": "/media/plates/firelight.png"
+  },
+  {
+    "name": "Eden Tech",
+    "collab": "w/balky studio",
+    "year": "2026",
+    "href": "https://www.edentechinc.com/",
+    "hand": [
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/eden-tech/subject.jpg",
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/eden-tech/hero.jpg"
+    ],
+    "depth": [
+      "https://assets.carterogunsola.com/projects/eden-tech/subject.depth.png"
+    ],
+    "mono": "ET",
+    "logo": "/media/plates/eden-tech.png",
+    "video": "https://assets.carterogunsola.com/projects/eden-tech/reel.mp4"
+  },
+  {
+    "name": "Strive Rx",
+    "collab": "w/strive",
+    "year": "2023\u20132026",
+    "href": "https://www.strivepharmacy.com/",
+    "hand": [
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/strive/subject.jpg",
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/strive/hero.jpg"
+    ],
+    "depth": [
+      "https://assets.carterogunsola.com/projects/strive/subject.depth.png"
+    ],
+    "mono": "SR",
+    "logo": "/media/plates/strive.png",
+    "video": "https://assets.carterogunsola.com/projects/strive/reel.mp4"
+  },
+  {
+    "name": "1820",
+    "collab": "w/balky studio",
+    "year": "2025",
+    "href": "https://www.1820productions.com/",
+    "hand": [
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/1820/subject.jpg",
+      "https://assets.carterogunsola.com/cdn-cgi/image/width=1280,quality=86,format=auto/projects/1820/hero.jpg"
+    ],
+    "depth": [
+      "https://assets.carterogunsola.com/projects/1820/subject.depth.png"
+    ],
+    "mono": "18",
+    "logo": "/media/plates/1820.png",
+    "video": "https://assets.carterogunsola.com/projects/1820/reel.mp4"
+  }
 ]

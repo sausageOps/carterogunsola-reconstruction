@@ -1,5 +1,5 @@
 ---
-import ArrowRoll from './ui/ArrowRoll.astro';
+import LinkCircle from './ui/LinkCircle.astro';
 import { CHANGELOG_ITEMS } from '../data/site';
 ---
 
@@ -8,64 +8,61 @@ import { CHANGELOG_ITEMS } from '../data/site';
   id="notif"
   data-notif
   aria-hidden="true"
-  role="dialog"
-  aria-modal="true"
-  aria-label="Notifications"
   data-astro-transition-persist="astro-gyrtbwwo-8"
 >
-  <div class="notif__panel">
+  <div class="notif__panel" role="dialog" aria-modal="true" aria-label="What's new">
     <div class="notif__head">
-      <span class="notif__title text-mono-sm">Notifications</span>
-      <span class="notif__count text-hud" data-notif-count hidden>0</span>
-      <button type="button" class="notif__clear text-mono-sm" data-notif-clear hidden>
+      <p class="notif__title text-label">What's new</p>
+      <span class="notif__count text-meta" data-notif-count hidden></span>
+      <button type="button" class="notif__clear text-meta" data-notif-clear hidden>
         Mark all read
       </button>
     </div>
     <div class="notif__body">
-      <div class="notif__fade notif__fade--top" aria-hidden="true"></div>
-      <ul class="notif__list" data-notif-list data-lenis-prevent>
+      <div class="notif__fade" aria-hidden="true"></div>
+      <div class="notif__list" data-notif-list data-lenis-prevent>
         {CHANGELOG_ITEMS.map((item) => (
-          <li>
-            {item.href ? (
-              <a
-                href={item.href}
-                class="notif__item notif__item--link"
-                data-date={item.date}
-                data-hover
-              >
-                <span class="notif__dot" aria-hidden="true"></span>
-                <span class="notif__main">
-                  <span class="notif__label text-body-sm">{item.title}</span>
-                  <span class="notif__summary text-caption">{item.summary}</span>
-                </span>
-                <span class="notif__meta">
-                  <span class="notif__time text-mono-sm" data-time={item.date}></span>
+          item.href ? (
+            <a
+              href={item.href}
+              class="notif__item notif__item--link"
+              data-date={item.date}
+              data-hover
+            >
+              <div class="notif__main">
+                <div class="notif__meta">
                   <span class="chip text-mono-tag notif__tag">{item.tag}</span>
-                </span>
-                <ArrowRoll diagonal />
-              </a>
-            ) : (
-              <div class="notif__item" data-date={item.date}>
-                <span class="notif__dot" aria-hidden="true"></span>
-                <span class="notif__main">
-                  <span class="notif__label text-body-sm">{item.title}</span>
-                  <span class="notif__summary text-caption">{item.summary}</span>
-                </span>
-                <span class="notif__meta">
-                  <span class="notif__time text-mono-sm" data-time={item.date}></span>
-                  <span class="chip text-mono-tag notif__tag">{item.tag}</span>
-                </span>
+                  <span class="notif__time text-meta" data-time={item.date}></span>
+                </div>
+                <p class="notif__label text-tag">{item.title}</p>
+                <p class="notif__summary">{item.summary}</p>
               </div>
-            )}
-          </li>
+              <span class="notif__dot" aria-hidden="true"></span>
+              <LinkCircle diagonal class="notif__link" />
+            </a>
+          ) : (
+            <div class="notif__item" data-date={item.date}>
+              <div class="notif__main">
+                <div class="notif__meta">
+                  <span class="chip text-mono-tag notif__tag">{item.tag}</span>
+                  <span class="notif__time text-meta" data-time={item.date}></span>
+                </div>
+                <p class="notif__label text-tag">{item.title}</p>
+                <p class="notif__summary">{item.summary}</p>
+              </div>
+              <span class="notif__dot" aria-hidden="true"></span>
+            </div>
+          )
         ))}
-      </ul>
+      </div>
       <div class="notif__fade notif__fade--bottom" aria-hidden="true"></div>
     </div>
     <div class="notif__footer">
-      <a href="/changelog" class="notif__all text-mono-sm" data-hover>
-        <span>View all</span>
-        <ArrowRoll />
+      <a href="/changelog" class="notif__all text-meta" data-hover>
+        View all
+        <svg class="notif__all-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <use href="#ai:local:arrow-right"></use>
+        </svg>
       </a>
     </div>
   </div>

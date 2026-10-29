@@ -12,40 +12,38 @@ const logoWord = getLogoWordForPath(pathname);
 ---
 
 <header class="header" data-header data-astro-transition-persist="astro-gyrtbwwo-5">
-  <div class="hud text-hud" role="status" aria-label="Site status">
+  <div class="hud text-hud" aria-hidden="true">
     <span class="hud__chip">
       <span class="hud__k">UT::</span><span class="hud__v" data-hud-time>--:--</span>
     </span>
     <span class="hud__chip">
-      <span class="hud__v" data-hud-fps>60</span><span class="hud__k">FPS</span>
+      <span class="hud__k">FPS::</span><span class="hud__v" data-hud-fps>--</span>
     </span>
     <span class="hud__chip" data-hud-online-chip hidden>
-      <span class="hud__dot" aria-hidden="true"></span>
-      <number-flow class="hud__v" data-hud-online>0</number-flow>
-      <span class="hud__k">ONLINE</span>
-    </span>
-    <span class="hud__chip" data-hud-owner-chip hidden>
-      <span class="hud__dot" aria-hidden="true"></span>
-      <span class="hud__k">CARTER::</span><span class="hud__v">HERE</span>
+      <span class="hud__k">ONLINE::</span>
+      <number-flow class="hud__v" data-hud-online>--</number-flow>
     </span>
     <span class="hud__chip" data-hud-lcp-chip hidden>
       <span class="hud__k">LCP::</span><span class="hud__v" data-hud-lcp>--</span>
+    </span>
+    <span class="hud__chip" data-hud-owner-chip hidden>
+      <span class="hud__k">CARTER::</span><span class="hud__v">HERE</span>
     </span>
     <button
       type="button"
       class="hud__chip"
       data-hud-presence
+      tabindex="-1"
       aria-pressed="true"
-      aria-label="Toggle live cursor presence"
+      aria-label="Toggle live presence"
     >
       <span class="hud__k">PRESENCE::</span><span class="hud__v" data-hud-presence-v>ON</span>
     </button>
     <span class="hud__chip" data-hud-listening-chip hidden>
-      <span class="hud__dot" aria-hidden="true"></span>
       <span class="hud__k">LISTENING::</span><span class="hud__v hud__v--trunc" data-hud-listening></span>
     </span>
     <span class="hud__chip">
-      <span class="hud__k">{SITE.hud.bookingLabel.toUpperCase()}::</span><span class="hud__v">{SITE.hud.nextOpen}</span>
+      <span class="hud__k">{SITE.hud.bookingLabel}::</span><span class="hud__v">{SITE.hud.nextOpen}</span>
     </span>
   </div>
 
@@ -55,61 +53,53 @@ const logoWord = getLogoWordForPath(pathname);
         <Logo word={logoWord} />
       </a>
       <span class="header__crumb text-nav" data-crumb hidden={!crumbName}>
-        <span class="header__crumb-sep" aria-hidden="true">/</span>
+        <span class="header__crumb-sep" aria-hidden="true">::</span>
         <span class="header__crumb-name" data-crumb-name>{crumbName ?? ''}</span>
       </span>
     </div>
 
     <div class="header__center">
-      <nav class="navpill" aria-label="Main">
+      <nav class="navpill" aria-label="Primary">
         <span class="navpill__pill" data-nav-pill aria-hidden="true"></span>
         <ul class="navpill__list">
           {NAV_ITEMS.map((item) => (
             <li>
-              <a href={item.href} class="navpill__link text-nav">
+              <a href={item.href} class="navpill__link text-nav" aria-label={item.label}>
                 <span class="roll" data-roll>{item.label}</span>
               </a>
             </li>
           ))}
         </ul>
       </nav>
+      <button
+        type="button"
+        class="cmdk"
+        data-cmd-open
+        data-magnetic="0.15"
+        aria-label="Open command menu"
+        aria-keyshortcuts="Meta+K"
+      >
+        <span class="cmdk__label roll text-nav" data-roll aria-hidden="true">⌘K</span>
+      </button>
     </div>
 
     <div class="header__right">
       <button
         type="button"
-        class="cmdk text-mono-sm"
-        data-cmd-open
-        aria-label="Open command menu"
-      >
-        <span>⌘K</span>
-      </button>
-
-      <button
-        type="button"
         class="notifbell"
         data-notif-open
-        aria-label="Open notifications"
+        aria-label="What's new"
+        aria-haspopup="dialog"
         aria-expanded="false"
         aria-controls="notif"
       >
-        <svg class="notifbell__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path
-            d="M2.52992 14.394C2.31727 15.7471 3.268 16.6862 4.43205 17.1542C8.89481 18.9486 15.1052 18.9486 19.5679 17.1542C20.732 16.6862 21.6827 15.7471 21.4701 14.394C21.3394 13.5625 20.6932 12.8701 20.2144 12.194C19.5873 11.2975 19.525 10.3197 19.5249 9.27941C19.5249 5.2591 16.1559 2 12 2C7.84413 2 4.47513 5.2591 4.47513 9.27941C4.47503 10.3197 4.41272 11.2975 3.78561 12.194C3.30684 12.8701 2.66061 13.5625 2.52992 14.394Z"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></path>
-          <path
-            d="M9 21C9.79613 21.6219 10.8475 22 12 22C13.1525 22 14.2039 21.6219 15 21"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></path>
-        </svg>
-        <span class="notifbell__badge" data-notif-dot hidden aria-hidden="true">
+        <span class="notifbell__icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+            <path d="M4.47254 9.40225C4.94336 5.60292 8.17163 2.75 12 2.75C15.8284 2.75 19.0567 5.60291 19.5275 9.40224L20.2217 15.004C20.3695 16.1971 19.439 17.25 18.2369 17.25H5.76317C4.56102 17.25 3.63051 16.1971 3.77835 15.004L4.47254 9.40225Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 17.25C16 19.4591 14.2091 21.25 12 21.25C9.79086 21.25 8 19.4591 8 17.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="notifbell__badge" data-notif-dot data-open="false" hidden aria-hidden="true">
           <span class="notifbell__dot"></span>
         </span>
       </button>
@@ -118,7 +108,8 @@ const logoWord = getLogoWordForPath(pathname);
         type="button"
         class="navsearch"
         data-cmd-open
-        aria-label="Open command menu"
+        aria-label="Search"
+        aria-keyshortcuts="Meta+K"
       >
         <svg class="navsearch__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <use href="#ai:local:magnifying-glass"></use>
@@ -155,7 +146,7 @@ const logoWord = getLogoWordForPath(pathname);
         type="button"
         class="navtrigger"
         data-drawer-open
-        aria-label="Open menu"
+        aria-label="Menu"
         aria-expanded="false"
         aria-controls="drawer"
       >
