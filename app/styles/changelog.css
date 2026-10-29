@@ -1,0 +1,72 @@
+.log {
+  padding-block: clamp(9rem, 16svh, 12rem) var(--s-96);
+}
+
+.log__col {
+  width: min(100%, var(--measure));
+  justify-self: center;
+}
+
+.log__intro {
+  gap: var(--s-24);
+  color: var(--ink);
+  flex-direction: column;
+  display: flex;
+}
+
+.log__intro p {
+  text-wrap: pretty;
+}
+
+.log__feed {
+  color: var(--ink);
+  text-underline-offset: .2em;
+  transition: opacity .25s var(--ease-out-quad);
+  text-decoration: underline 1px;
+}
+
+.log__feed:hover {
+  opacity: .6;
+}
+
+.log__year {
+  gap: var(--s-14);
+  flex-direction: column;
+  margin-block-start: var(--s-64);
+  display: flex;
+}
+
+.log__card {
+  gap: var(--s-4);
+  padding: var(--s-24) var(--s-12);
+  border-radius: var(--r-lg);
+  background-color: var(--card);
+  background-image: var(--sheet-tex);
+  flex-direction: column;
+  display: flex;
+  overflow: hidden;
+}
+
+.log__card [data-log-row] {
+  position: relative;
+}
+
+.log__card [data-log-row]:before {
+  content: "";
+  width: var(--s-4);
+  height: var(--s-4);
+  border-radius: var(--r-full);
+  background: var(--spot);
+  opacity: 0;
+  transition: opacity .3s var(--ease-out-quad), scale .3s var(--ease-out-quad);
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: calc((var(--s-4) + var(--s-12)) / -2);
+  translate: 0 -50%;
+  scale: .5;
+}
+
+.log__card [data-log-row][data-unread]:before {
+  opacity: 1;
+  scale: 1;
+}

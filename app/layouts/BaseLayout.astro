@@ -22,6 +22,8 @@ interface Props {
   crumbName?: string;
   showFooter?: boolean;
   noindex?: boolean;
+  /** `null` omits the robots meta when the captured source has none. */
+  robots?: string | null;
   mainClass?: string;
   mainAttrs?: Record<string, any>;
 }
@@ -36,6 +38,7 @@ const {
   crumbName,
   showFooter = true,
   noindex = false,
+  robots: robotsOverride,
   mainClass = '',
   mainAttrs = {},
 } = Astro.props;
@@ -43,6 +46,11 @@ const {
 const fullTitle = title
   ? `${title}${SITE.titleSeparator}${SITE.name}`
   : `${SITE.name}${SITE.titleSeparator}${SITE.role}`;
+const robotsContent = robotsOverride === undefined
+  ? noindex
+    ? 'noindex, nofollow'
+    : 'index, follow, max-image-preview:large, max-snippet:-1'
+  : robotsOverride;
 
 const pathname = Astro.url.pathname;
 const canonicalUrl = canonical ?? new URL(pathname, SITE.url).toString();
@@ -105,38 +113,32 @@ const jsonLd = jsonLdOverride ?? {
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <meta name="author" content={SITE.author} />
-    <meta
-      name="robots"
-      content={noindex
-        ? 'noindex, nofollow'
-        : 'index, follow, max-image-preview:large, max-snippet:-1'}
-    />
+    {robotsContent && <meta name="robots" content={robotsContent} />}
     <meta name="theme-color" content="#d6d6d5" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#1e1e1e" media="(prefers-color-scheme: dark)" />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" data-favicon />
-    <link rel="icon" href="/favicon.svg" sizes="32x32" />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link
       rel="alternate"
       type="application/rss+xml"
-      title="Carter Ogunsola — Writing"
+      title="Carter Ogunsola :: Writing"
       href="/rss.xml"
     />
     <link
       rel="alternate"
       type="application/rss+xml"
-      title="Carter Ogunsola — Changelog"
+      title="Carter Ogunsola :: Ship log"
       href="/changelog.xml"
     />
     <link
       rel="alternate"
       type="application/feed+json"
-      title="Carter Ogunsola — Writing (JSON Feed)"
+      title="Carter Ogunsola :: Ship log"
       href="/feed.json"
     />
-    <link rel="sitemap" href="/sitemap-index.xml" />
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:locale" content={SITE.ogLocale} />

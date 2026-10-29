@@ -1,12 +1,23 @@
 {
-  "name": "Carter Ogunsola — Creative Developer & Brand Engineer",
-  "short_name": "Carter Ogunsola",
-  "description": "Creative developer, director, and entrepreneur crafting unique web experiences.",
+  "name": "Carter Ogunsola",
+  "short_name": "Carter",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1e1e1e",
-  "theme_color": "#1e1e1e",
+  "background_color": "#d6d6d5",
+  "theme_color": "#d6d6d5",
   "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
     {
       "src": "/favicon.svg",
       "sizes": "any",
