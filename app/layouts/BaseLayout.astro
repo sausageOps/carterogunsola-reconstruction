@@ -118,7 +118,7 @@ const jsonLd = jsonLdOverride ?? {
     <meta name="theme-color" content="#1e1e1e" media="(prefers-color-scheme: dark)" />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" data-favicon />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link
@@ -159,11 +159,22 @@ const jsonLd = jsonLdOverride ?? {
     <script is:inline>
       (function () {
         var root = document.documentElement;
-        var CUTOVER = 'theme-cutover';
+        // One-shot theme-cutover migration (2026-08-27, the dark-default switch):
+        // visitors from the follow-OS era keep what they were seeing. Evidence of a
+        // past visit = any first-party key already stored; those browsers get
+        // "system" stamped (their old behavior, made explicit). The marker makes
+        // this run EXACTLY once per browser. Storage-less past visitors are
+        // indistinguishable from new ones and get the dark default.
         try {
-          if (localStorage.getItem(CUTOVER) !== 'dark-default-v1') {
-            localStorage.removeItem('theme');
-            localStorage.setItem(CUTOVER, 'dark-default-v1');
+          if (!localStorage.getItem('theme') && !localStorage.getItem('theme-cutover')) {
+            localStorage.setItem('theme-cutover', '1');
+            var legacy = ['notif-seen', 'lab-mode', 'presence', 'owner-key', 'assets_key'];
+            if (
+              legacy.some(function (k) {
+                return localStorage.getItem(k) !== null;
+              })
+            )
+              localStorage.setItem('theme', 'system');
           }
         } catch (e) {}
         function resolve() {
@@ -176,20 +187,36 @@ const jsonLd = jsonLdOverride ?? {
           } catch (e) {}
           return 'dark';
         }
+        // Point the svg favicon at the variant that matches the SITE theme.
+        // Explicit "light"/"dark" → fixed favicon-<theme>.svg (tracks the site, not
+        // the OS). Explicit "system" → the adaptive favicon.svg (its own
+        // prefers-color-scheme media query). No stored choice → the fixed dark
+        // favicon (the house default).
         function syncFavicon() {
-          var link = document.querySelector('link[data-favicon]');
+          var link = document.querySelector('link[rel="icon"][type="image/svg+xml"]');
           if (!link) return;
-          var href = '/favicon-' + (root.dataset.theme === 'dark' ? 'dark' : 'light') + '.svg';
+          var t = null;
+          try {
+            t = localStorage.getItem('theme');
+          } catch (e) {}
+          var href =
+            t === 'light' || t === 'dark'
+              ? '/favicon-' + t + '.svg'
+              : t === 'system'
+                ? '/favicon.svg'
+                : '/favicon-dark.svg';
           if (link.getAttribute('href') !== href) link.setAttribute('href', href);
         }
         window.__syncFavicon = syncFavicon;
+        // "Bare" mode — when a page is framed by /record with ?bare=1, strip the
+        // site chrome; docs=0 / cfg=0 additionally hide the lab scaffold's Docs
+        // toggle / Tune gear. Applied pre-paint to avoid a chrome flash.
         function applyBare(target) {
           var q = new URLSearchParams(location.search);
-          var bare = q.get('bare');
-          if (!bare) return;
-          target.setAttribute('data-bare', '');
-          if (bare === 'stage' || bare === 'clean') target.setAttribute('data-bare-nodocs', '');
-          if (bare === 'clean') target.setAttribute('data-bare-nocfg', '');
+          var bare = q.has('bare');
+          target.toggleAttribute('data-bare', bare);
+          target.toggleAttribute('data-bare-nodocs', bare && q.get('docs') === '0');
+          target.toggleAttribute('data-bare-nocfg', bare && q.get('cfg') === '0');
         }
         root.dataset.theme = resolve();
         syncFavicon();
@@ -213,12 +240,13 @@ const jsonLd = jsonLdOverride ?? {
           root.setAttribute('data-veil', 'off');
           return;
         }
-        var seen = false;
         try {
-          seen = sessionStorage.getItem('veil:seen') === '1';
+          var seen = sessionStorage.getItem('veil:seen');
+          root.setAttribute('data-veil', seen ? 'fast' : 'boot');
           if (!seen) sessionStorage.setItem('veil:seen', '1');
-        } catch (e) {}
-        root.setAttribute('data-veil', seen ? 'fast' : 'boot');
+        } catch (e) {
+          root.setAttribute('data-veil', 'fast');
+        }
       })();
     </script>
     <noscript><style>html[data-veil] .veil{display:none!important}</style></noscript>
@@ -291,5 +319,13 @@ const jsonLd = jsonLdOverride ?? {
     <script>
       import '../lib/runtime';
     </script>
+    <!-- Cloudflare Pages Analytics -->
+    <script
+      is:inline
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon={'{"token": "b25d28546f67432e92c9cf1c5910ab94"}'}
+    ></script>
+    <!-- Cloudflare Pages Analytics -->
   </body>
 </html>

@@ -105,3 +105,28 @@ Lifecycle: every module boots on `astro:page-load` (and `boot`/`runtime` phases)
 - Global: ⌘K/Ctrl+K cmd; Esc closes overlays (cmd/notif/drawer/dialogs/slip/record bar); ↑↓/↵ in cmd; H in record; arrow keys in wheels/folders stages; `data-lenis-prevent` regions remain natively scrollable.
 - Focus: visible styles implied by design system; skip patterns via `u-sr-only` headings (every page has sr-only h1); `aria-pressed` on toggles; `aria-live` on announcer/toaster/status/captions; `role=dialog aria-modal` on cmd/notif/drawer/slip/about dialogs; `aria-roledescription=carousel` on wheels/folders; `aria-keyshortcuts="Meta+K"`.
 - Touch: drawer for nav; hover-only effects gated behind `(hover:hover) and (pointer:fine)`; prefetch on `touchstart`.
+
+---
+
+## Phase 10 verification status — 2026-10-29
+
+How each interaction area above was (or could not be) exercised in the Phase-10 QA passes, against the production build (`npm run build`, 19 pages) in headless Chromium. Full results: `PHASE_STATUS.md` → *Phase 10*.
+
+| Area | Status | Evidence |
+|---|---|---|
+| Theme system, favicons (incl. `system` → `/favicon.svg`), one-shot cutover (legacy/fresh/explicit) | **Browser-verified** | Stage C: toggle/persist/aria + three cutover cases; original inline-head-script diff |
+| Command menu (⌘K/Ctrl+K, `/`, fuzzy filter, Enter, Esc, actions incl. presence) | **Browser-verified** | Stage C |
+| Notifications (14 items, badge, mark-all-read persistence) | **Browser-verified** | Stage C |
+| Presence toggle + cursor-layer show/hide + persistence | **Browser-verified** | Stage C |
+| Realtime count / owner / cursors / LISTENING / vitals chip | **Mock-verified (labelled)** | Local worker speaking the observed protocol; production worker unreachable — degradation path (chip hidden, no errors) browser-verified |
+| Two-browser cursor exchange, `pointer:fine` broadcast gating | **Unverified in sandbox** | Needs a second client + fine pointer; source-contract only (Phase-1 constraint: documented, not simulated) |
+| Header scroll hide/reveal, scroll progress | **Browser-verified** | Stage C (writing post) |
+| Bare/Docs/Cfg subtoggles (`bare=1&docs=0&cfg=0`) | **Browser-verified** | Stage C — after restoring the original `q.has('bare')` semantics |
+| Query eggs (`?tune=type`, `?font`/`?mono`, `?mesh`, `?debug=toast`, `?perf`, `?flicker`, `?owner`) | **Browser-verified** | Stage C |
+| Console music-egg three states (`nosignal` / `live` via `?radio=mock` / `?radio=fail`) | **Browser-verified (mock branch)** | Focused probe; live `/api/radio` is an unavailable backend (documented) |
+| DevGrid 4 modes, Marks/Tilt, PrintFlicker, TypeTune, FontTrial, MeshMode | **Browser-verified** | Stage C (+ Phase 8 for Marks/Tilt mounts) |
+| Astro view transitions + singleton cleanup across 9 hops | **Browser-verified** | Stage C |
+| Global chrome, HUD, reduced-motion paths, 404, keyboard Tab/Enter | **Browser-verified** | Stage B (48 probes) + Stage D (63/63: 18 routes × desktop/tablet/mobile, 404 ×3, keyboard, reduced-motion spots) |
+| Feeds, sitemaps, robots, manifest, links | **Static-verified** | Stage A (18/18 routes, 15/15 resources, 36/37 links — only documented `/api/contact`) |
+| Cloudflare Pages Analytics beacon | **Markup-verified (host unreachable)** | Exact original tag + token present on pages; beacon host blocked in sandbox — never fetched, not substituted |
+| Studio lanyard / writing shelf / deck / paper-WebGL rendering | **Source-contract only** | No hardware GPU in sandbox; original no-GL fallbacks exercised (veil paper) |
