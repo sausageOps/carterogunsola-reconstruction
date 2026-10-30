@@ -4,6 +4,37 @@
 import indexHtml from '../../pages/lab.html?raw';
 import dialHtml from '../../pages/lab_dial.html?raw';
 import vocalOrbHtml from '../../pages/lab_vocal-orb.html?raw';
+// Restored documents for the seven experiments with no page capture. Built by
+// recon/lab/tools/build-restored.mjs from the Jina-recovered markdown
+// (prose verbatim) and numbered code fences, rendered through the
+// golden-calibrated Expressive Code reconstruction (byte-identical on all
+// seven captured dial/vocal-orb blocks; every restored fence round-trips
+// byte-exactly back to its recovered stream). Provenance notes: hard-newline
+// positions in restored prose are reconstructed (greedy ≤81 wrap — rendered
+// text is identical to any other wrap); heart's Notes EC embed language is
+// "js" (the original data-language is unrecoverable without a capture; the
+// other six Notes have no EC embeds).
+import heartNotes from './lab-restored/heart.notes.html?raw';
+import heartCode from './lab-restored/heart.code.html?raw';
+import heartJsonLd from './lab-restored/heart.jsonld.json';
+import liveCursorsNotes from './lab-restored/live-cursors.notes.html?raw';
+import liveCursorsCode from './lab-restored/live-cursors.code.html?raw';
+import liveCursorsJsonLd from './lab-restored/live-cursors.jsonld.json';
+import pasteUpNotes from './lab-restored/paste-up.notes.html?raw';
+import pasteUpCode from './lab-restored/paste-up.code.html?raw';
+import pasteUpJsonLd from './lab-restored/paste-up.jsonld.json';
+import dynamicScrollbarNotes from './lab-restored/dynamic-scrollbar.notes.html?raw';
+import dynamicScrollbarCode from './lab-restored/dynamic-scrollbar.code.html?raw';
+import dynamicScrollbarJsonLd from './lab-restored/dynamic-scrollbar.jsonld.json';
+import rotatingGalleryNotes from './lab-restored/rotating-gallery.notes.html?raw';
+import rotatingGalleryCode from './lab-restored/rotating-gallery.code.html?raw';
+import rotatingGalleryJsonLd from './lab-restored/rotating-gallery.jsonld.json';
+import polkaDotsNotes from './lab-restored/polka-dots.notes.html?raw';
+import polkaDotsCode from './lab-restored/polka-dots.code.html?raw';
+import polkaDotsJsonLd from './lab-restored/polka-dots.jsonld.json';
+import threejsTestNotes from './lab-restored/threejs-test.notes.html?raw';
+import threejsTestCode from './lab-restored/threejs-test.code.html?raw';
+import threejsTestJsonLd from './lab-restored/threejs-test.jsonld.json';
 
 function jsonLd(html: string): Record<string, unknown> {
   const match = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
@@ -111,15 +142,29 @@ export const LAB_INDEX_JSON_LD = jsonLd(indexHtml);
 
 const sources: Record<string, string> = { dial: dialHtml, 'vocal-orb': vocalOrbHtml };
 
+// Restored documents (see provenance notes at the imports above).
+const restored: Record<string, { notes: string; code: string; jsonLd: Record<string, unknown> }> = {
+  heart: { notes: heartNotes, code: heartCode, jsonLd: heartJsonLd as Record<string, unknown> },
+  'live-cursors': { notes: liveCursorsNotes, code: liveCursorsCode, jsonLd: liveCursorsJsonLd as Record<string, unknown> },
+  'paste-up': { notes: pasteUpNotes, code: pasteUpCode, jsonLd: pasteUpJsonLd as Record<string, unknown> },
+  'dynamic-scrollbar': { notes: dynamicScrollbarNotes, code: dynamicScrollbarCode, jsonLd: dynamicScrollbarJsonLd as Record<string, unknown> },
+  'rotating-gallery': { notes: rotatingGalleryNotes, code: rotatingGalleryCode, jsonLd: rotatingGalleryJsonLd as Record<string, unknown> },
+  'polka-dots': { notes: polkaDotsNotes, code: polkaDotsCode, jsonLd: polkaDotsJsonLd as Record<string, unknown> },
+  'threejs-test': { notes: threejsTestNotes, code: threejsTestCode, jsonLd: threejsTestJsonLd as Record<string, unknown> },
+};
+
 export function labDocumentEvidence(slug: string): {
   notes: string;
   code: string;
   jsonLd: Record<string, unknown>;
 } | null {
   const source = sources[slug];
-  return source ? {
-    notes: paneContents(source, 'notes'),
-    code: paneContents(source, 'code'),
-    jsonLd: jsonLd(source),
-  } : null;
+  if (source) {
+    return {
+      notes: paneContents(source, 'notes'),
+      code: paneContents(source, 'code'),
+      jsonLd: jsonLd(source),
+    };
+  }
+  return restored[slug] ?? null;
 }

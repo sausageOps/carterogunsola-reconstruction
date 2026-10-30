@@ -1,0 +1,45 @@
+<p class="labd__summary text-lead" data-astro-cid-f3pbbn5j>A tuner dial you spin: a full ring of channels hubbed off-screen left, one active where it crosses the axis. Drag, scroll, or arrow-key it; each detent snaps with an elastic settle and a click pitched to how fast you spun.</p><section class="labd__refs" data-astro-cid-f3pbbn5j><p class="labd__refs-label text-label" data-astro-cid-f3pbbn5j>Dependencies</p><div class="labd__refs-rule" aria-hidden="true" data-astro-cid-f3pbbn5j></div><div class="labd__refs-list" data-astro-cid-f3pbbn5j><a data-hover="true" href="https://gsap.com/" target="_blank" rel="noopener noreferrer" data-astro-cid-mgnwo4tu="true" class="refrow refrow--link"><span class="refrow__badge" data-astro-cid-mgnwo4tu><span class="refrow__wordmark text-label" data-astro-cid-mgnwo4tu>GSAP</span></span><span class="refrow__label text-tag" data-astro-cid-mgnwo4tu>Core :: ticker, tweens, elastic ease</span><span class="refrow__ext" aria-hidden="true" data-astro-cid-mgnwo4tu><span class="arrow-roll arrow-roll--diagonal" aria-hidden="true" data-astro-cid-klkmuj5r><span class="arrow-roll__icon arrow-roll__current" data-astro-cid-klkmuj5r><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span><span class="arrow-roll__icon arrow-roll__next" data-astro-cid-klkmuj5r><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span></span></span></a></div></section><div class="labd__article" data-astro-cid-f3pbbn5j><h2 id="a-radio-you-cant-listen-to">A radio you can’t listen to</h2>
+<p>Old FM tuners had a weighted wheel. You’d spin past the stations and it would
+settle into one with a soft click. This is that, minus the radio: a ring of
+channels you spin with the knob, a drag, the scroll wheel, or the arrow keys.
+Whichever one crosses the centerline is live.</p>
+<h2 id="its-a-full-circle-you-only-see-the-edge">It’s a full circle, you only see the edge</h2>
+<p>The dial looks like an arc, but it’s a complete ring of 26 channels turning
+around a hub that sits off the left of the stage. You only ever see its right
+cap. The rest of it (the left of the ring, the top and bottom curling away) gets
+painted back over with the page’s own background by one conic-gradient centered
+on that hub. So there’s no clever culling to keep offscreen items hidden: the
+ring is always all there, and the dial you see is just the slice the cover
+leaves uncovered.</p>
+<p>The tick ruler is the same move: a full ring of marks, a long one on every
+channel, spun by a single transform and clipped by the same cover. A major tick
+lands on the axis exactly when a channel goes live.</p>
+<h2 id="the-feel-is-the-whole-point">The feel is the whole point</h2>
+<p>Anyone can rotate a ring. The reason this one feels like hardware is a handful of
+numbers, carried over from the original build and left exactly where they were
+tuned:</p>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.2v5bd.css"/><script type="module" src="/_astro/ec.0vx5m.js"></script><figure class="frame"><figcaption class="header"></figcaption><pre data-language="ts" class="wrap" style="--ecMaxLine:68ch"><code><div class="ec-line" style="--ecIndent:2ch"><div class="code"><span style="--0:#2F5885;--1:#A6CBEE">const</span><span style="--0:#1E1E1E;--1:#F7F7F7"> DAMP_DRAG </span><span style="--0:#2F5885;--1:#A6CBEE">=</span><span style="--0:#1E1E1E;--1:#F7F7F7"> </span><span style="--0:#7A4A1C;--1:#E6C79C">15</span><span style="--0:#1E1E1E;--1:#F7F7F7">;   </span><span style="--0:#1E1E1EB0;--1:#F7F7F7A6">// follow while dragging — laggy, has weight</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="code"><span style="--0:#2F5885;--1:#A6CBEE">const</span><span style="--0:#1E1E1E;--1:#F7F7F7"> DAMP_IDLE </span><span style="--0:#2F5885;--1:#A6CBEE">=</span><span style="--0:#1E1E1E;--1:#F7F7F7"> </span><span style="--0:#7A4A1C;--1:#E6C79C">25</span><span style="--0:#1E1E1E;--1:#F7F7F7">;   </span><span style="--0:#1E1E1EB0;--1:#F7F7F7A6">// follow at rest — settles quicker</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="code"><span style="--0:#2F5885;--1:#A6CBEE">const</span><span style="--0:#1E1E1E;--1:#F7F7F7"> SNAP_EASE </span><span style="--0:#2F5885;--1:#A6CBEE">=</span><span style="--0:#1E1E1E;--1:#F7F7F7"> </span><span style="--0:#43601F;--1:#C3D6AD">&quot;elastic.out(2, 0.6)&quot;</span><span style="--0:#1E1E1E;--1:#F7F7F7">;   </span><span style="--0:#1E1E1EB0;--1:#F7F7F7A6">// the detent</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="code"><span style="--0:#2F5885;--1:#A6CBEE">const</span><span style="--0:#1E1E1E;--1:#F7F7F7"> SNAP_DUR  </span><span style="--0:#2F5885;--1:#A6CBEE">=</span><span style="--0:#1E1E1E;--1:#F7F7F7"> </span><span style="--0:#7A4A1C;--1:#E6C79C">0.8</span><span style="--0:#1E1E1E;--1:#F7F7F7">;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="const DAMP_DRAG = 15;   // follow while dragging — laggy, has weightconst DAMP_IDLE = 25;   // follow at rest — settles quickerconst SNAP_EASE = &quot;elastic.out(2, 0.6)&quot;;   // the detentconst SNAP_DUR  = 0.8;"><div></div></button></div></figure></div>
+<p>Your finger sets a target; the dial <em>damps</em> toward it a beat behind, so it has
+mass. Let go and it settles onto the nearest channel with a short elastic
+overshoot. That’s the detent. Every time a channel crosses the line it clicks,
+pitched by how fast you’re spinning (playback rate <code>0.8 → 1.6</code> over
+<code>velocity / 600</code>), so a slow nudge and a hard flick don’t sound alike. Drag the
+knob and its grip line see-saws against the motion, then springs back level.
+None of these are load-bearing; all of them are why it reads as an object.</p>
+<h2 id="make-it-yours">Make it yours</h2>
+<ul>
+<li><strong><code>SLICE</code></strong> — <code>360 / channel-count</code>. Fewer channels, wider spacing; the ring
+stays a ring.</li>
+<li><strong><code>--dial-accent</code></strong> — the knob’s fill. It’s <code>--ink</code> by default, since the site
+is monochrome; set it to any color to bring the knob back to life.</li>
+<li><strong>The tuning block</strong> — <code>DAMP_*</code>, <code>SNAP_*</code>, the sound rates. Change these and
+nothing else to make the dial heavier, snappier, or silent.</li>
+</ul>
+<p>Reduced-motion callers get the same dial with the physics off: it jumps to each
+channel, no coast, no click.</p>
+<h2 id="would-you-ship-this">Would you ship this?</h2>
+<p>Probably not as your nav. But it’s a fair reminder that “pick one of N” doesn’t
+have to be a dropdown, and that most of what makes an interaction feel expensive
+lives in four or five constants you can tune by hand.</p></div>

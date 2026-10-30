@@ -1,0 +1,52 @@
+<p class="labd__summary text-lead">Everyone else on the page, in real time. You broadcast your pointer as a 0-to-1 position, a Cloudflare Durable Object fans it out, and each peer eases toward its latest spot, on the same server that counts who's online in the header.</p><section class="labd__refs"><p class="labd__refs-label text-label">Dependencies</p><div class="labd__refs-rule" aria-hidden="true"></div><div class="labd__refs-list"><a data-hover="true" href="https://www.partykit.io/" target="_blank" rel="noopener noreferrer" class="refrow refrow--link"><span class="refrow__badge"><span class="refrow__wordmark text-label">PartyKit</span></span><span class="refrow__label text-tag">PartyServer :: Durable Object rooms + presence</span><span class="refrow__ext" aria-hidden="true"><span class="arrow-roll arrow-roll--diagonal" aria-hidden="true"><span class="arrow-roll__icon arrow-roll__current"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span><span class="arrow-roll__icon arrow-roll__next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span></span></span></a><a data-hover="true" href="https://github.com/cloudflare/partykit" target="_blank" rel="noopener noreferrer" class="refrow refrow--link"><span class="refrow__badge"><svg width="1em" height="1em" class="refrow__icon" aria-hidden="true" data-icon="globe"><symbol id="lab-doc:globe" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="square" stroke-width="1.5"><path d="M21.25 12a9.25 9.25 0 1 1-18.5 0 9.25 9.25 0 0 1 18.5 0Z"/><path d="M12 21c-2.21 0-4-4.03-4-9s1.79-9 4-9 4 4.03 4 9-1.79 9-4 9Zm9-9H3"/></g></symbol><use href="#lab-doc:globe"></use></svg></span><span class="refrow__label text-tag">partysocket :: reconnecting WebSocket client</span><span class="refrow__ext" aria-hidden="true"><span class="arrow-roll arrow-roll--diagonal" aria-hidden="true"><span class="arrow-roll__icon arrow-roll__current"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span><span class="arrow-roll__icon arrow-roll__next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span></span></span></a><a data-hover="true" href="https://gsap.com/" target="_blank" rel="noopener noreferrer" class="refrow refrow--link"><span class="refrow__badge"><span class="refrow__wordmark text-label">GSAP</span></span><span class="refrow__label text-tag">Core :: one ticker for the interpolation loop</span><span class="refrow__ext" aria-hidden="true"><span class="arrow-roll arrow-roll--diagonal" aria-hidden="true"><span class="arrow-roll__icon arrow-roll__current"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span><span class="arrow-roll__icon arrow-roll__next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span></span></span></a></div></section><div class="labd__article"><h2 id="someone-else-is-here">Someone else is here</h2>
+<p>Most of the web is single-player. You move your cursor, nothing moves back. Open
+this page in a second tab, or send it to a friend, and their pointer slides
+across your screen in real time, tinted and named, easing wherever they go.</p>
+<h2 id="one-object-in-the-middle">One object in the middle</h2>
+<p>Every visitor holds one WebSocket to a room called <code>live-cursors</code>, served by a
+single Cloudflare Durable Object (the same one that counts who’s online up in the
+header). You send your pointer; the object fans it out to everyone else. Nobody
+talks to anyone directly, which is what makes it trustworthy: the server stamps
+each message with the sender’s real connection id and clamps the coordinates
+before forwarding, so a peer can’t claim to be someone else or fling a cursor off
+the stage. Names and colors are derived from that id on the client and written
+with <code>textContent</code>, so a hostile payload has nowhere to land.</p>
+<p>Positions travel as a pair of 0-to-1 fractions of the stage, not pixels. A peer
+at <code>0.5, 0.5</code> sits dead center of your stage whatever your window size. There’s
+no shared artwork to line up against, so relative is the honest mapping: your
+top-right is their top-right.</p>
+<h2 id="the-feel-is-in-the-easing">The feel is in the easing</h2>
+<p>Raw network positions land in bursts, and drawn straight they make a cursor
+teleport. So each peer carries two positions, a <em>target</em> (the last thing that
+arrived) and a <em>rendered</em> one, and every frame the rendered position moves a
+fraction of the way toward the target. That fraction is time-based (<code>1 − e^(−λ·dt)</code>),
+so the glide feels the same at 30fps and 120fps instead of turning twitchy on a
+fast display.</p>
+<p>You broadcast at most once every <code>50ms</code> (~20 a second, under the server’s rate
+cap), and even holding still your position re-sends every <code>4s</code> so you never
+flicker out on anyone else’s screen. Smoothing sits at <code>λ18</code>. Go <code>12s</code> with no
+word from a peer and their cursor is pulled, which is the thing that catches a
+shut laptop lid that never sends a clean goodbye.</p>
+<h2 id="the-moving-parts">The moving parts</h2>
+<ul>
+<li><strong>The room</strong> — one Durable Object per room name. <code>live-cursors</code> is this stage,
+<code>global</code> is the header count. Same server, different rooms.</li>
+<li><strong>Normalized coordinates</strong> — pointer stored as <code>x/width, y/height</code>, so it maps
+across any window size.</li>
+<li><strong>Server-stamped id</strong> — the relay attaches the real sender id; the client trusts
+nothing else on the message.</li>
+<li><strong>Stale sweep</strong> — drop a peer after <code>12s</code> of silence, for the disconnect that was
+never clean. Clean departures arrive instantly as a <code>leave</code> from the server.</li>
+<li><strong>Keepalive</strong> — your position re-sends every <code>4s</code> even at rest, so
+idle-but-present peers keep their cursor instead of blinking out.</li>
+</ul>
+<p>The cursor art is Central Icons’ collaboration pointer, flipped left or right by
+the peer’s travel direction. Reduced-motion callers get the same cursors with the
+easing off: they snap to each position instead of gliding.</p>
+<p>Built on PartyKit, by Sunil Pai, now part of Cloudflare.</p></div>

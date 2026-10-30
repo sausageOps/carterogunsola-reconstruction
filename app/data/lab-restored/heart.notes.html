@@ -1,0 +1,47 @@
+<p class="labd__summary text-lead">Taubin's implicit heart surface, solved into a point cloud and spun on canvas. Grab it and it coasts on its own momentum, the outer points trailing elastically, tone carried by a monochrome halftone.</p><section class="labd__refs"><p class="labd__refs-label text-label">Dependencies</p><div class="labd__refs-rule" aria-hidden="true"></div><div class="labd__refs-list"><a data-hover="true" href="https://gsap.com/" target="_blank" rel="noopener noreferrer" class="refrow refrow--link"><span class="refrow__badge"><span class="refrow__wordmark text-label">GSAP</span></span><span class="refrow__label text-tag">Core :: ticker</span><span class="refrow__ext" aria-hidden="true"><span class="arrow-roll arrow-roll--diagonal" aria-hidden="true"><span class="arrow-roll__icon arrow-roll__current"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span><span class="arrow-roll__icon arrow-roll__next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span></span></span></a></div></section><div class="labd__article"><h2 id="a-textbook-figure-with-a-pulse">A textbook figure with a pulse</h2>
+<p>There’s a famous equation that draws a heart in 3D: Taubin’s surface, the one
+calculus tools trot out to show off implicit graphing. As a wireframe it’s
+correct and completely cold: a diagram of a heart with no heart in it. This is
+the same equation. Grab it and it spins, coasts, and trails after your hand. The
+interaction is the pulse.</p>
+<h2 id="solving-a-shape-instead-of-drawing-it">Solving a shape instead of drawing it</h2>
+<p>You can’t just plot an implicit surface <code>F(x,y,z) = 0</code>; there’s no list of points
+to draw. So we find them. The equation only ever uses <code>y²</code>, so for each <code>(x, z)</code>
+cell of a grid we treat it as “how thick is the heart here?” and solve for <code>y</code>:
+step outward until <code>F</code> flips sign, then bisect ~22 times onto the crossing. Take
+the root, mirror it to <code>±y</code>, and that column contributes two points. Do that
+across a 100×120 grid and the equation becomes a ~12k-point cloud, computed once,
+on load. Each point also gets a normal straight from the analytic gradient <code>∇F</code>,
+which is what lets it catch light and hide its back.</p>
+<p>After that every frame is cheap: rotate the baked points, project them through a
+perspective camera (focal <code>1500</code>) onto the canvas, draw a dot.</p>
+<h2 id="the-feel-is-in-the-trailing">The feel is in the trailing</h2>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="js" class="wrap" style="--ecMaxLine:75ch"><code><div class="ec-line" style="--ecIndent:2ch"><div class="code"><span style="--0:#1E1E1E;--1:#F7F7F7">w </span><span style="--0:#2F5885;--1:#A6CBEE">+=</span><span style="--0:#1E1E1E;--1:#F7F7F7"> dx </span><span style="--0:#2F5885;--1:#A6CBEE">*</span><span style="--0:#1E1E1E;--1:#F7F7F7"> </span><span style="--0:#7A4A1C;--1:#E6C79C">0.05</span><span style="--0:#1E1E1E;--1:#F7F7F7">;            </span><span style="--0:#1E1E1EB0;--1:#F7F7F7A6">// your drag becomes angular velocity</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="code"><span style="--0:#1E1E1E;--1:#F7F7F7">w </span><span style="--0:#2F5885;--1:#A6CBEE">*=</span><span style="--0:#1E1E1E;--1:#F7F7F7"> Math.</span><span style="--0:#5E5016;--1:#E9DFAB">exp</span><span style="--0:#1E1E1E;--1:#F7F7F7">(</span><span style="--0:#2F5885;--1:#A6CBEE">-</span><span style="--0:#1E1E1E;--1:#F7F7F7">dt </span><span style="--0:#2F5885;--1:#A6CBEE">/</span><span style="--0:#1E1E1E;--1:#F7F7F7"> </span><span style="--0:#7A4A1C;--1:#E6C79C">2</span><span style="--0:#1E1E1E;--1:#F7F7F7">);    </span><span style="--0:#1E1E1EB0;--1:#F7F7F7A6">// which bleeds off — it coasts, half-life ~1.4s</span></div></div><div class="ec-line" style="--ecIndent:2ch"><div class="code"><span style="--0:#1E1E1E;--1:#F7F7F7">yaw </span><span style="--0:#2F5885;--1:#A6CBEE">+=</span><span style="--0:#1E1E1E;--1:#F7F7F7"> w </span><span style="--0:#2F5885;--1:#A6CBEE">*</span><span style="--0:#1E1E1E;--1:#F7F7F7"> dt;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="w += dx * 0.05;            // your drag becomes angular velocityw *= Math.exp(-dt / 2);    // which bleeds off — it coasts, half-life ~1.4syaw += w * dt;"><div></div></button></div></figure></div>
+<p>A flick sets the whole thing spinning and it keeps going on momentum, slowing on
+its own. The nice part happens <em>around</em> that. The points don’t rotate rigidly.
+Each radial ring lags toward the current spin at a rate that falls off with
+distance from the axis (<code>1/(0.72 − 0.38·r)</code>), so the outer shell smears
+elastically behind the core. The cloud breathes as it turns instead of moving
+like one solid thing.</p>
+<p>Tone is a <strong>halftone</strong>: a back-face cull drops every point facing away, and a
+Lambert term against a fixed light sorts the rest into three opacity tiers. Dot
+<em>size</em> only ever tracks depth, never brightness, so the shading reads through
+density and opacity the way a printed halftone does. All monochrome, drawn in
+<code>--ink</code> on the stage’s own surface; flip the site theme and it re-inks.</p>
+<h2 id="make-it-yours">Make it yours</h2>
+<ul>
+<li><strong><code>SPIN_GAIN</code> / <code>FRICTION_TAU</code></strong> — how hard a drag throws it, and how long it
+coasts. Lower τ and it stops sooner.</li>
+<li><strong><code>NX</code> / <code>NZ</code></strong> — grid resolution, the point count. Denser is lusher and heavier;
+~12k is the sweet spot for canvas 2D at 60fps.</li>
+<li><strong>The Lambert thresholds</strong> (<code>0.26</code> / <code>0.62</code>) — where the three tone tiers split.
+Widen the middle band for a flatter read.</li>
+<li><strong><code>FOCAL</code></strong> — smaller exaggerates the perspective; the heart bulges toward you.</li>
+</ul>
+<h2 id="no-interaction-no-heart">No interaction, no heart</h2>
+<p>It’s just math until someone touches it. That’s the whole experiment. The
+equation was always a heart; it only <em>feels</em> like one once it answers you.</p></div><section class="labd__refs"><p class="labd__refs-label text-label">Credits</p><div class="labd__refs-rule" aria-hidden="true"></div><div class="labd__refs-list"><a data-hover="true" href="https://tol.is/heart" target="_blank" rel="noopener noreferrer" class="refrow refrow--link"><span class="refrow__badge"><svg width="1em" height="1em" class="refrow__icon" aria-hidden="true" data-icon="globe"><symbol id="lab-doc:globe" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="square" stroke-width="1.5"><path d="M21.25 12a9.25 9.25 0 1 1-18.5 0 9.25 9.25 0 0 1 18.5 0Z"/><path d="M12 21c-2.21 0-4-4.03-4-9s1.79-9 4-9 4 4.03 4 9-1.79 9-4 9Zm9-9H3"/></g></symbol><use href="#lab-doc:globe"></use></svg></span><span class="refrow__label text-tag">Tolis C :: tol.is/heart</span><span class="refrow__ext" aria-hidden="true"><span class="arrow-roll arrow-roll--diagonal" aria-hidden="true"><span class="arrow-roll__icon arrow-roll__current"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span><span class="arrow-roll__icon arrow-roll__next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span></span></span></a></div></section>

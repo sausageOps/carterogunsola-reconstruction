@@ -1,0 +1,54 @@
+<p class="labd__summary text-lead">A slim gray bar that inks to black and blooms into a live analog clock as you scroll, then taps open into a working native-audio mini player. A faithful rebuild of Xavier Jac's three-state Webflow scrollbar, on its own Lenis-style smooth scroll.</p><section class="labd__refs"><p class="labd__refs-label text-label">Dependencies</p><div class="labd__refs-rule" aria-hidden="true"></div><div class="labd__refs-list"><a data-hover="true" href="https://gsap.com/" target="_blank" rel="noopener noreferrer" class="refrow refrow--link"><span class="refrow__badge"><span class="refrow__wordmark text-label">GSAP</span></span><span class="refrow__label text-tag">Core :: ticker + tweens</span><span class="refrow__ext" aria-hidden="true"><span class="arrow-roll arrow-roll--diagonal" aria-hidden="true"><span class="arrow-roll__icon arrow-roll__current"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span><span class="arrow-roll__icon arrow-roll__next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span></span></span></a></div></section><div class="labd__article"><h2 id="a-scrollbar-with-somewhere-to-be">A scrollbar with somewhere to be</h2>
+<p>The scrollbar is the one piece of UI everyone ignores. This one earns a look.
+Scroll and the slim gray rail on the right inks to black and blooms into a little
+panel with a live analog clock; stop, and it settles back to a bar. Reach a
+section about music and a note surfaces on it. Tap that, and the whole capsule
+opens into a working mini player. You can also just grab the bar and scrub, the
+way a scrollbar should let you.</p>
+<p>It’s a rebuild of a Webflow piece by Xavier Jac, ported to run as one
+self-contained module: the exact colors and dimensions, but native audio instead
+of Howler and its own scroll instead of the page’s.</p>
+<h2 id="one-capsule-three-sizes">One capsule, three sizes</h2>
+<p>Default is the 5×64 bar. Bloomed is a 50×188 clock. Tapped is a 264×397 player.
+One capsule does all three: it resizes, the panels blur-crossfade inside it, and
+the background inks gray→black as it grows.</p>
+<p>The part worth stealing is what <em>doesn’t</em> animate together. Size and position are
+two separate jobs. The ticker owns the vertical position every frame (it centers
+the capsule on your place in the scroll, then clamps it to the rail), while an
+interruptible tween owns the width and height. The first draft let one GSAP Flip
+own both, and it fought itself: the bar froze mid-morph then snapped ~160px to
+catch up, and a bloom near the bottom slid out from under the cursor and
+flickered. Centering on the cursor point is what fixes the flicker: the capsule
+is always taller than the bar, so a bloom still covers wherever you were hovering
+and can’t slide away from you.</p>
+<h2 id="the-feel">The feel</h2>
+<p>Blooming runs <code>0.65s</code>, collapsing <code>0.6s</code>, both <code>power3.inOut</code>; the background
+inks over <code>0.8s</code>. The clock only shows while you’re actually moving: a <code>150ms</code>
+pause settles it back to the bar, short enough to feel immediate but long enough
+that a stutter mid-scroll doesn’t flap it on and off. The scroll is self-owned (<code>λ9</code>),
+Lenis-style momentum without the dependency, which also hands the bar the exact
+velocity it reacts to instead of guessing.</p>
+<h2 id="the-player-is-real">The player is real</h2>
+<p>Native HTML5 <code>Audio</code>: play, pause, seek by dragging the timeline, skip tracks,
+with the wave bars animating only while sound is playing and freezing the instant
+you pause. Going native instead of Howler means it survives being copied out of
+here with nothing to install. It also knows its place. Scroll away, or drift out
+of the music section, and it drops back to the clock while the track keeps
+playing. One bug here is easy to hit. The play and pause glyphs are stacked in
+the same spot, so the hidden one needs <code>pointer-events: none</code>, or it eats the
+click and play only fires when you happen to catch the edge.</p>
+<h2 id="make-it-yours">Make it yours</h2>
+<ul>
+<li><strong><code>MORPH_IN</code> / <code>MORPH_OUT</code></strong> — the bloom and collapse durations (<code>0.65</code> / <code>0.6</code>).
+The two knobs for how the capsule transforms.</li>
+<li><strong>The state sizes</strong> (<code>THUMB_*</code>, <code>MIN_*</code>, <code>MUSIC_*</code>) — the bar, clock, and player
+dimensions. Change them and the morph re-targets on its own.</li>
+<li><strong><code>--sb-accent</code></strong> — the single spot of color, on the clock hands, the note, and
+the wave. <code>#ff4d00</code> here; everything else is the original’s grayscale.</li>
+<li><strong><code>REST_DELAY</code></strong> — the stillness before the clock collapses (<code>150ms</code>). Drop it
+for a snappier bar, raise it if quick scrolls make it flicker.</li>
+</ul></div><section class="labd__refs"><p class="labd__refs-label text-label">Credits</p><div class="labd__refs-rule" aria-hidden="true"></div><div class="labd__refs-list"><a data-hover="true" href="https://x.com/KMkota0" target="_blank" rel="noopener noreferrer" class="refrow refrow--link"><span class="refrow__badge"><svg width="1em" height="1em" class="refrow__icon" aria-hidden="true" data-icon="user-zap"><symbol id="lab-doc:user-zap" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="M15 21a6 6 0 0 0-12 0M19 9l-2.6 3.6H20L17.4 16"/><circle cx="9" cy="8" r="4"/></g></symbol><use href="#lab-doc:user-zap"></use></svg></span><span class="refrow__label text-tag">Xavier Jac :: original scrollbar</span><span class="refrow__ext" aria-hidden="true"><span class="arrow-roll arrow-roll--diagonal" aria-hidden="true"><span class="arrow-roll__icon arrow-roll__current"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span><span class="arrow-roll__icon arrow-roll__next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span></span></span></a></div></section>

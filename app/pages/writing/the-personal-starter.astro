@@ -88,7 +88,14 @@ const foldersJson = JSON.stringify(FOLDERS).replace(/</g, '\\u003c');
       data-flight-wait="true"
     >
       <svg width="1em" height="1em" aria-hidden="true" data-icon="close"
-        ><use href="#ai:local:close"></use
+        ><symbol id="ai:local:close" viewBox="0 0 24 24"
+          ><path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.5"
+            d="m6.25 6.25 11.5 11.5m0-11.5-11.5 11.5"
+        /></symbol><use href="#ai:local:close"></use
       ></svg>
     </CloseBox>
   </div>

@@ -1,0 +1,120 @@
+<p class="labd__summary text-lead">A vanilla Three.js scene, pared to the basis: a renderer on a canvas, a camera, orbit controls, a render loop. On the stage, a loaded glTF model or a superformula that morphs between four shapes, each drawn as surface, mesh or vertices, in one of four finishes baked from a lit sphere.</p><section class="labd__refs"><p class="labd__refs-label text-label">Dependencies</p><div class="labd__refs-rule" aria-hidden="true"></div><div class="labd__refs-list"><a data-hover="true" href="https://threejs.org/" target="_blank" rel="noopener noreferrer" class="refrow refrow--link"><span class="refrow__badge"><span class="refrow__wordmark text-label">three.js</span></span><span class="refrow__label text-tag">r0.185 :: renderer, GLTFLoader, OrbitControls</span><span class="refrow__ext" aria-hidden="true"><span class="arrow-roll arrow-roll--diagonal" aria-hidden="true"><span class="arrow-roll__icon arrow-roll__current"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span><span class="arrow-roll__icon arrow-roll__next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span></span></span></a></div></section><div class="labd__article"><h2 id="a-model-in-a-room-you-can-turn">A model in a room you can turn</h2>
+<p>Drag anywhere and the model swings around; let go and it keeps drifting on its
+own. It’s floating in a plain monochrome studio with no visible lights, just a
+model catching a soft key from the upper left. Nothing here is doing much, and
+that’s the point. This is the smallest honest Three.js scene, the one you’d start
+any project from, with a little interaction bolted on so it isn’t a still life.</p>
+<h2 id="the-parts-every-scene-needs">The parts every scene needs</h2>
+<p>Strip a Three.js scene to its frame and it’s always the same short list, and this
+experiment is just those parts wired together:</p>
+<ul>
+<li>a <strong>renderer</strong> that owns a <code>&lt;canvas&gt;</code> (here transparent, so the stage shows
+through), pixel ratio capped at 2 so retina screens don’t render 4× the pixels;</li>
+<li>a <strong>scene</strong> to hold things and a <strong>camera</strong> to look through;</li>
+<li>a <strong>light</strong>, or in our case a matcap standing in for one (more below);</li>
+<li>a <strong>loader</strong> that pulls a <code>.glb</code> off a CDN and drops it in;</li>
+<li><strong>controls</strong> so you can orbit;</li>
+<li>a <strong>loop</strong> that reads the controls and re-renders each frame.</li>
+</ul>
+<p>The load does one extra courtesy: it measures the model’s bounding box, scales
+the longest side to a fixed size, and recenters it on the origin, so any model
+you point it at arrives framed instead of tiny or off in a corner.</p>
+<h2 id="the-same-geometry-three-ways">The same geometry, three ways</h2>
+<p>The Shaded / Wire / Points switch draws one geometry three different ways, which
+is the quickest way to see what a loaded model actually is:</p>
+<ul>
+<li><strong>Shaded</strong> is the surface, lit by the matcap.</li>
+<li><strong>Wire</strong> is a <code>MeshBasicMaterial</code> with <code>wireframe: true</code>, so you see the
+triangles the surface is built from.</li>
+<li><strong>Points</strong> is a <code>THREE.Points</code> cloud sampled evenly across that surface (via
+<code>MeshSurfaceSampler</code>), so it stays dense even on the big flat faces where the raw
+vertices are miles apart.</li>
+</ul>
+<h2 id="one-equation-four-shapes">One equation, four shapes</h2>
+<p>The subject switch is where this stops being a loader demo. Lantern is the model.
+The other four are the same eleven lines of math with different numbers in them:
+Gielis’s superformula, a superellipse swept around another superellipse. Feed it
+<code>m=4, n=2</code> and you get a sphere. Push <code>n1</code> under 1 and the lobes pinch into a
+star. Split the two rings apart and you get a vessel.</p>
+<p>Each shape is sampled on a 120 by 72 grid, which is 8,833 vertices, coarse enough
+that Wire reads as a mesh instead of a gray wash, fine enough that Shaded has no
+facets. The radius goes to infinity wherever a lobe pinches to nothing, so it is
+clamped at 6 before it can blow the bounding box apart, and every subject is
+normalized to the same size on the way out. A morph between two shapes of
+different scale reads as a zoom, not a change of shape.</p>
+<p>One hack worth naming: where the lobe count is not a multiple of four the radius
+at <code>-PI</code> and <code>+PI</code> genuinely differ, which leaves a crack down one side. The last
+column of the grid is copied from the first to close it. That trades a hair of
+asymmetry for a watertight surface, and nobody has ever spotted the asymmetry.</p>
+<h2 id="the-morph-and-the-swap-it-cant-do">The morph, and the swap it can’t do</h2>
+<p>Because every shape rides the <em>same</em> grid, with the same vertex count and the
+same winding, a switch is a lerp: hold the shape you left in one buffer, the
+shape you asked for in another, and walk the position attribute between them over
+0.9s on an expo.out curve. The mesh, the wireframe and the point cloud share that
+one buffer, so all three morph at once, whichever is on screen.</p>
+<p>Normals are recomputed every frame of the morph. That’s the expensive part, and
+it is unavoidable: the surface really is new each frame, and a matcap reads
+normals. At this vertex count it costs about a millisecond, which is fine for the
+second it lasts. The bounding sphere gets recomputed with them, or the frustum
+cull clips a shape that just grew.</p>
+<p>The model is the exception. A lantern has nothing in common with an equation,
+vertex for vertex, so there is no honest morph between them. Instead the outgoing
+subject scales down to a point over 0.35s and the incoming one blooms out of it.</p>
+<h2 id="four-finishes-baked-at-boot">Four finishes, baked at boot</h2>
+<p>A matcap is a photograph of a lit sphere, sampled by view-space normal. One 256px
+image carries a whole light rig, and the price is that the light never moves with
+the camera. So rather than download one, take the photograph: at boot a unit
+sphere sits in a unit ortho frustum under <code>RoomEnvironment</code> and two lights, gets
+rendered once into a 256px target, and that target is the matcap. It behaves
+exactly like a downloaded one.</p>
+<p>Two things come free. Roughness and metalness become dials instead of pixels, so
+Polish can re-bake the finish in a frame. And the finishes are ours. The big
+public matcap libraries on GitHub carry no license file at all.</p>
+<ul>
+<li><strong>Studio</strong> is the default: roughness 0.52, no metal, the key up and to the left.</li>
+<li><strong>Chrome</strong> is roughness 0.06 at full metal, so the room does the work.</li>
+<li><strong>Wax</strong> is roughness 0.95 with sheen, which kills every highlight.</li>
+<li><strong>Ink</strong> paints the sphere near-black at roughness 0.22, so the body goes dark and
+the edge stays bright. On the spiked shapes it is the best of the four.</li>
+</ul>
+<p>The bake writes into a render target whose texture is tagged sRGB. Miss that and
+the matcap comes back linear, which reads as a flat, muddy gray, and it takes a
+while to work out why.</p>
+<h2 id="monochrome-on-purpose">Monochrome on purpose</h2>
+<p>The model ships with full PBR materials, and we throw them away. Every mesh gets
+its material replaced with a <code>MeshMatcapMaterial</code> reading a small grayscale
+sphere drawn on a 2D canvas, so the whole thing renders in soft monochrome with
+no light rig at all and stays on brand no matter what the source textures were.
+It’s also the cheapest possible shading. Want the real thing back? Delete the
+override and give the meshes a <code>MeshStandardMaterial</code> under an environment map,
+and the model’s own materials return.</p>
+<h2 id="make-it-yours">Make it yours</h2>
+<ul>
+<li><strong><code>MODEL</code></strong> — the glTF URL. Any single-file <code>.glb</code> on a CORS-friendly host drops
+straight in; the fit-to-box handles the rest.</li>
+<li><strong>Accent</strong> — defaults to <code>--ink</code>. The wireframe and the point cloud take it as
+their ink, and the shaded pass multiplies its matcap by it, so one swatch
+recolors all three modes.</li>
+<li><strong><code>FINISHES</code></strong> — a row per finish: a label plus the sphere’s material. Add a row
+and it joins the switch; there is no texture to ship.</li>
+<li><strong>Polish</strong> — shifts the loaded finish, rougher below 0 and smoother and more
+metallic above it. Each nudge re-bakes the sphere, which costs one frame.</li>
+<li><strong><code>SUBJECTS</code></strong> — one row per subject: a label, and the eight superformula numbers
+(or <code>null</code> for the loaded model). Add a row and it appears in the switch.</li>
+<li><strong><code>SEG_U</code> / <code>SEG_V</code></strong> — the sampling grid, 120 by 72. Raising it smooths Shaded
+and turns Wire into a wash; every subject shares it, which is what makes the
+morph possible.</li>
+<li><strong>Lobes</strong> — adds to the loaded subject’s own lobe count, live in the config
+panel, neutral at 0. It holds across a switch, so a shape you dial in survives
+the next subject.</li>
+<li><strong>Sharp</strong> — scales the two exponents that decide how hard each lobe pinches.
+Under 1 the lobes bite; over 1 they swell back toward a ball.</li>
+</ul>
+<p>Reduced-motion callers get the scene without the drift: no auto-rotate, no idle
+loop, just a frame rendered on load and again whenever you orbit it yourself.</p></div><section class="labd__refs"><p class="labd__refs-label text-label">Credits</p><div class="labd__refs-rule" aria-hidden="true"></div><div class="labd__refs-list"><a data-hover="true" href="https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/Lantern" target="_blank" rel="noopener noreferrer" class="refrow refrow--link"><span class="refrow__badge"><svg width="1em" height="1em" class="refrow__icon" aria-hidden="true" data-icon="globe"><symbol id="lab-doc:globe" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="square" stroke-width="1.5"><path d="M21.25 12a9.25 9.25 0 1 1-18.5 0 9.25 9.25 0 0 1 18.5 0Z"/><path d="M12 21c-2.21 0-4-4.03-4-9s1.79-9 4-9 4 4.03 4 9-1.79 9-4 9Zm9-9H3"/></g></symbol><use href="#lab-doc:globe"></use></svg></span><span class="refrow__label text-tag">Lantern :: CC0 (Khronos glTF samples)</span><span class="refrow__ext" aria-hidden="true"><span class="arrow-roll arrow-roll--diagonal" aria-hidden="true"><span class="arrow-roll__icon arrow-roll__current"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span><span class="arrow-roll__icon arrow-roll__next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span></span></span></a><a data-hover="true" href="https://en.wikipedia.org/wiki/Superformula" target="_blank" rel="noopener noreferrer" class="refrow refrow--link"><span class="refrow__badge"><svg width="1em" height="1em" viewBox="0 0 24 24" class="refrow__icon" aria-hidden="true" data-icon="globe"><use href="#lab-doc:globe"></use></svg></span><span class="refrow__label text-tag">Johan Gielis :: the superformula (1997)</span><span class="refrow__ext" aria-hidden="true"><span class="arrow-roll arrow-roll--diagonal" aria-hidden="true"><span class="arrow-roll__icon arrow-roll__current"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span><span class="arrow-roll__icon arrow-roll__next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span></span></span></a></div></section>

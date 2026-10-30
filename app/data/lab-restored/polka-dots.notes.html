@@ -1,0 +1,46 @@
+<p class="labd__summary text-lead">A grid of dots run as one spring integration on a single ticker. The cursor repels and blooms them, a click sends a ripple through the field, and a slow wave keeps it breathing at rest.</p><section class="labd__refs"><p class="labd__refs-label text-label">Dependencies</p><div class="labd__refs-rule" aria-hidden="true"></div><div class="labd__refs-list"><a data-hover="true" href="https://gsap.com/" target="_blank" rel="noopener noreferrer" class="refrow refrow--link"><span class="refrow__badge"><span class="refrow__wordmark text-label">GSAP</span></span><span class="refrow__label text-tag">Core :: ticker, elastic ease</span><span class="refrow__ext" aria-hidden="true"><span class="arrow-roll arrow-roll--diagonal" aria-hidden="true"><span class="arrow-roll__icon arrow-roll__current"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span><span class="arrow-roll__icon arrow-roll__next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span></span></span></a></div></section><div class="labd__article"><h2 id="a-field-that-flinches">A field that flinches</h2>
+<p>A grid of dots sitting still at a low gray. Move the cursor through them and they
+scatter out of its way, harder if you swipe fast, swelling and darkening to full
+ink as it passes. Click, and a ring pushes out through the whole field like a
+drop hitting water. Leave it alone and it doesn’t go dead: a slow wave keeps it
+breathing.</p>
+<h2 id="one-loop-not-ten-thousand-tweens">One loop, not ten thousand tweens</h2>
+<p>The version this comes from (an old Webflow study) gave every dot its own GSAP
+tween and rebuilt them every frame. That falls over a few hundred dots in. Here
+the whole field is one integration on a single <code>gsap.ticker</code>: each dot is a small
+damped spring anchored to its home cell, and one pass advances all of them and
+paints them to a canvas. No per-dot tweens, no DOM. It’ll carry thousands of dots
+without noticing.</p>
+<p>Each dot only ever does three things: get pulled back home (<code>SPRING 0.055</code>), get
+shoved by whatever’s near it, and shed a little speed to friction (<code>0.82</code>) so it
+settles instead of ringing forever.</p>
+<h2 id="repel-bloom-ripple">Repel, bloom, ripple</h2>
+<p>The cursor does two jobs at once. It repels: every dot within <code>REPEL_R</code> (116px)
+gets pushed along the line away from the pointer, and the faster you’re moving
+the harder the shove, so a slow pass nudges a dot aside and a fast swipe flicks
+it. And it blooms: that same nearness swells the dot’s radius (up to about ×3)
+and lifts it from the resting <code>0.2</code> alpha toward full ink, so a fat bright
+cluster follows your hand across a quiet field.</p>
+<p>A click drops a ripple: a ring that expands at <code>620px/s</code>, shoving dots outward as
+its edge crosses them and fading as it travels. The idle wave is quieter still:
+two sines nudge each dot’s <em>home</em> cell, so even untouched the grid drifts a
+couple of pixels and never looks frozen.</p>
+<p>It’s all one ink color, read from <code>--ink</code> and re-read when you flip the site
+theme, so on a dark page the dots invert with everything else.</p>
+<h2 id="make-it-yours">Make it yours</h2>
+<ul>
+<li><strong><code>REPEL_R</code> / <code>PUSH</code></strong> — how far the cursor’s wake reaches, and how hard it
+shoves.</li>
+<li><strong><code>BLOOM</code></strong> — how much dots swell and brighten near the pointer. Set it to <code>0</code>
+for pure displacement, no glow.</li>
+<li><strong><code>SPRING</code> / <code>FRICTION</code></strong> — the recovery. A stiffer spring snaps home faster;
+less friction lets them overshoot and wobble.</li>
+</ul>
+<h2 id="nothing-here-knows-its-a-dot">Nothing here knows it’s a dot</h2>
+<p>Each one only tracks a home, a velocity, and whatever pushed it this frame. The
+crowd behavior (the wake that trails the cursor, the expanding ring, the
+breathing at rest) all falls out of running that one tiny rule across the whole
+grid at once. (Reduced-motion callers get the field with the physics off: still,
+even, no wave.)</p></div>
