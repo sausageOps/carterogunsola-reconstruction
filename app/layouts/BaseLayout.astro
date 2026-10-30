@@ -9,6 +9,7 @@ import Notifications from '../components/Notifications.astro';
 import Drawer from '../components/Drawer.astro';
 import Veil from '../components/Veil.astro';
 import { SITE } from '../data/site';
+import { ORIGINAL_SITE_JSONLD } from '../data/original-jsonld';
 
 interface Props {
   title?: string;
@@ -22,7 +23,7 @@ interface Props {
   crumbName?: string;
   showFooter?: boolean;
   noindex?: boolean;
-  /** `null` omits the robots meta when the captured source has none. */
+  /** `null` (default) omits the robots meta — the captured originals only carry it on /record. */
   robots?: string | null;
   mainClass?: string;
   mainAttrs?: Record<string, any>;
@@ -38,7 +39,7 @@ const {
   crumbName,
   showFooter = true,
   noindex = false,
-  robots: robotsOverride,
+  robots: robotsOverride = null,
   mainClass = '',
   mainAttrs = {},
 } = Astro.props;
@@ -46,63 +47,19 @@ const {
 const fullTitle = title
   ? `${title}${SITE.titleSeparator}${SITE.name}`
   : `${SITE.name}${SITE.titleSeparator}${SITE.role}`;
-const robotsContent = robotsOverride === undefined
-  ? noindex
-    ? 'noindex, nofollow'
-    : 'index, follow, max-image-preview:large, max-snippet:-1'
-  : robotsOverride;
+const robotsContent = noindex ? 'noindex, nofollow' : robotsOverride;
 
 const pathname = Astro.url.pathname;
-const canonicalUrl = canonical ?? new URL(pathname, SITE.url).toString();
+// The originals carry extension-less canonical/og:url values without a trailing slash
+// (`https://carterogunsola.com/about`); only the root keeps its `/`.
+const trimSlash = (url: string) => (url === `${SITE.url}/` ? url : url.replace(/\/+$/, ''));
+const canonicalUrl = trimSlash(canonical ?? new URL(pathname, SITE.url).toString());
 const ogImageUrl = ogImage.startsWith('http')
   ? ogImage
   : `${SITE.ogOrigin}${ogImage}`;
 
-const jsonLd = jsonLdOverride ?? {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'WebSite',
-      '@id': `${SITE.url}/#website`,
-      url: SITE.url,
-      name: SITE.name,
-      description: SITE.description,
-      inLanguage: SITE.locale,
-      publisher: { '@id': `${SITE.url}/#person` },
-    },
-    {
-      '@type': 'Person',
-      '@id': `${SITE.url}/#person`,
-      name: SITE.name,
-      url: SITE.url,
-      image: `${SITE.ogOrigin}${SITE.ogImage}`,
-      jobTitle: SITE.role,
-      description: SITE.bio,
-      email: `mailto:${SITE.email}`,
-      worksFor: {
-        '@type': 'Organization',
-        name: SITE.employer.name,
-        url: SITE.employer.url,
-      },
-      founder: {
-        '@type': 'Organization',
-        name: SITE.studio.name,
-        url: SITE.studio.url,
-      },
-      sameAs: Object.values(SITE.socials),
-    },
-    {
-      '@type': 'WebPage',
-      '@id': `${canonicalUrl}#webpage`,
-      url: canonicalUrl,
-      name: fullTitle,
-      description,
-      isPartOf: { '@id': `${SITE.url}/#website` },
-      about: { '@id': `${SITE.url}/#person` },
-      inLanguage: SITE.locale,
-    },
-  ],
-};
+const jsonLd = jsonLdOverride ?? ORIGINAL_SITE_JSONLD;
+
 ---
 
 <!DOCTYPE html>
@@ -125,19 +82,19 @@ const jsonLd = jsonLdOverride ?? {
       rel="alternate"
       type="application/rss+xml"
       title="Carter Ogunsola :: Writing"
-      href="/rss.xml"
+      href={`${SITE.url}/rss.xml`}
     />
     <link
       rel="alternate"
       type="application/rss+xml"
       title="Carter Ogunsola :: Ship log"
-      href="/changelog.xml"
+      href={`${SITE.url}/changelog.xml`}
     />
     <link
       rel="alternate"
       type="application/feed+json"
       title="Carter Ogunsola :: Ship log"
-      href="/feed.json"
+      href={`${SITE.url}/feed.json`}
     />
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={SITE.name} />
@@ -305,8 +262,9 @@ const jsonLd = jsonLdOverride ?? {
     <ol
       class="toast"
       data-toaster
+      data-lenis-prevent
       aria-live="polite"
-      aria-label="Activity"
+      aria-relevant="additions"
       data-astro-transition-persist="astro-gyrtbwwo-10"
     ></ol>
     <div

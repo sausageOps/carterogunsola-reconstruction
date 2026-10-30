@@ -45,5 +45,5 @@ const Tag = href ? 'a' : 'div';
       <Chip pill={pillTags} class="row__tag">{tag}</Chip>
     ))}
   </span>
-  {href && <LinkCircle diagonal={external} class="row__link" />}
+  {href && <LinkCircle diagonal diagonalRoll={false} class="row__link" />}
 </Tag>

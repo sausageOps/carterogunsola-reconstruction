@@ -12,26 +12,26 @@ const logoWord = getLogoWordForPath(pathname);
 ---
 
 <header class="header" data-header data-astro-transition-persist="astro-gyrtbwwo-5">
-  <div class="hud text-hud" aria-hidden="true">
-    <span class="hud__chip">
+  <div class="hud" aria-hidden="true">
+    <span class="hud__chip text-hud">
       <span class="hud__k">UT::</span><span class="hud__v" data-hud-time>--:--</span>
     </span>
-    <span class="hud__chip">
+    <span class="hud__chip text-hud">
       <span class="hud__k">FPS::</span><span class="hud__v" data-hud-fps>--</span>
     </span>
-    <span class="hud__chip" data-hud-online-chip hidden>
+    <span class="hud__chip text-hud" data-hud-online-chip hidden>
       <span class="hud__k">ONLINE::</span>
       <number-flow class="hud__v" data-hud-online>--</number-flow>
     </span>
-    <span class="hud__chip" data-hud-lcp-chip hidden>
+    <span class="hud__chip text-hud" data-hud-lcp-chip hidden>
       <span class="hud__k">LCP::</span><span class="hud__v" data-hud-lcp>--</span>
     </span>
-    <span class="hud__chip" data-hud-owner-chip hidden>
+    <span class="hud__chip text-hud" data-hud-owner-chip hidden>
       <span class="hud__k">CARTER::</span><span class="hud__v">HERE</span>
     </span>
     <button
       type="button"
-      class="hud__chip"
+      class="hud__chip text-hud"
       data-hud-presence
       tabindex="-1"
       aria-pressed="true"
@@ -39,22 +39,22 @@ const logoWord = getLogoWordForPath(pathname);
     >
       <span class="hud__k">PRESENCE::</span><span class="hud__v" data-hud-presence-v>ON</span>
     </button>
-    <span class="hud__chip" data-hud-listening-chip hidden>
+    <span class="hud__chip text-hud" data-hud-listening-chip hidden>
       <span class="hud__k">LISTENING::</span><span class="hud__v hud__v--trunc" data-hud-listening></span>
     </span>
-    <span class="hud__chip">
+    <span class="hud__chip text-hud">
       <span class="hud__k">{SITE.hud.bookingLabel}::</span><span class="hud__v">{SITE.hud.nextOpen}</span>
     </span>
   </div>
 
   <div class="header__bar">
     <div class="header__lead">
-      <a href="/" class="header__logo" aria-label="Carter Ogunsola — Home" data-magnetic>
+      <a href="/" class="header__logo" aria-label="Carter Ogunsola — home">
         <Logo word={logoWord} />
       </a>
-      <span class="header__crumb text-nav" data-crumb hidden={!crumbName}>
+      <span class="header__crumb" data-crumb hidden={!crumbName}>
         <span class="header__crumb-sep" aria-hidden="true">::</span>
-        <span class="header__crumb-name" data-crumb-name>{crumbName ?? ''}</span>
+        <span class="header__crumb-name text-nav" data-crumb-name></span>
       </span>
     </div>
 
@@ -65,7 +65,7 @@ const logoWord = getLogoWordForPath(pathname);
           {NAV_ITEMS.map((item) => (
             <li>
               <a href={item.href} class="navpill__link text-nav" aria-label={item.label}>
-                <span class="roll" data-roll>{item.label}</span>
+                <span class="roll" data-roll aria-hidden="true">{item.label}</span>
               </a>
             </li>
           ))}
@@ -88,7 +88,7 @@ const logoWord = getLogoWordForPath(pathname);
         type="button"
         class="notifbell"
         data-notif-open
-        aria-label="What's new"
+        aria-label="What’s new"
         aria-haspopup="dialog"
         aria-expanded="false"
         aria-controls="notif"
@@ -150,9 +150,7 @@ const logoWord = getLogoWordForPath(pathname);
         aria-expanded="false"
         aria-controls="drawer"
       >
-        <span class="navtrigger__bars" aria-hidden="true">
-          <span></span><span></span>
-        </span>
+        <span class="navtrigger__bars" aria-hidden="true"></span>
       </button>
     </div>
   </div>

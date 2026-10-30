@@ -6,6 +6,7 @@ import RefRow from '../../components/ui/RefRow.astro';
 import Signature from '../../components/ui/Signature.astro';
 import { CREDITS, FOLDERS, POST, TOC } from '../../data/writing';
 import { CODE_BLOCKS } from '../../data/writing-code';
+import { WRITING_POST_JSONLD } from '../../data/original-jsonld';
 import '../../styles/writing-post.css';
 
 // Original /writing/the-personal-starter: `main.wpost.container[data-writing-post]` with the
@@ -21,6 +22,7 @@ const foldersJson = JSON.stringify(FOLDERS).replace(/</g, '\\u003c');
   description={POST.description}
   ogImage={POST.ogImage}
   ogType="article"
+  jsonLd={WRITING_POST_JSONLD}
   showFooter={false}
   mainClass="wpost container"
   mainAttrs={{ 'data-writing-post': '', 'data-folders-slug': POST.slug }}
@@ -140,6 +142,7 @@ const foldersJson = JSON.stringify(FOLDERS).replace(/</g, '\\u003c');
                 lines={CODE_BLOCKS[0].lines}
                 code={CODE_BLOCKS[0].code}
                 gutter={false}
+                assets
               />
       <h2 id="keeping-projects-in-sync">Keeping projects in sync</h2>
       <p>This is also why I don’t try to keep projects in sync with the starter. It’s tempting, fix it once and every site gets the fix, but the moment a project starts it’s supposed to drift, that’s the whole point of it being mine to change. Most of the product starters say the same thing in their own way, the Epic Stack pretty much tells you <a href="https://github.com/epicweb-dev/epic-stack/blob/main/docs/managing-updates.md">the code is yours and there’s no update path</a>.</p>

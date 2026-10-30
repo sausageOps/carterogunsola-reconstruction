@@ -1,6 +1,15 @@
 ---
 import LinkCircle from './ui/LinkCircle.astro';
 import { CHANGELOG_ITEMS } from '../data/site';
+
+/** Original server-rendered label: short month + day, no leading zero (e.g. `Oct 2`). */
+const timeLabel = (date: string) =>
+  new Date(`${date}T00:00:00Z`).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    timeZone: 'UTC',
+  });
+const isExternal = (href?: string) => Boolean(href && href.startsWith('http'));
 ---
 
 <div
@@ -10,9 +19,9 @@ import { CHANGELOG_ITEMS } from '../data/site';
   aria-hidden="true"
   data-astro-transition-persist="astro-gyrtbwwo-8"
 >
-  <div class="notif__panel" role="dialog" aria-modal="true" aria-label="What's new">
+  <div class="notif__panel" role="dialog" aria-modal="true" aria-label="What’s new">
     <div class="notif__head">
-      <p class="notif__title text-label">What's new</p>
+      <p class="notif__title text-label">What’s new</p>
       <span class="notif__count text-meta" data-notif-count hidden></span>
       <button type="button" class="notif__clear text-meta" data-notif-clear hidden>
         Mark all read
@@ -25,27 +34,29 @@ import { CHANGELOG_ITEMS } from '../data/site';
           item.href ? (
             <a
               href={item.href}
+              target={isExternal(item.href) ? '_blank' : undefined}
+              rel={isExternal(item.href) ? 'noopener noreferrer' : undefined}
               class="notif__item notif__item--link"
               data-date={item.date}
               data-hover
             >
               <div class="notif__main">
                 <div class="notif__meta">
-                  <span class="chip text-mono-tag notif__tag">{item.tag}</span>
-                  <span class="notif__time text-meta" data-time={item.date}></span>
+                  <span class="chip chip--pill text-meta">{item.tag}</span>
+                  <span class="notif__time text-meta" data-time={item.date}>{timeLabel(item.date)}</span>
                 </div>
                 <p class="notif__label text-tag">{item.title}</p>
                 <p class="notif__summary">{item.summary}</p>
               </div>
               <span class="notif__dot" aria-hidden="true"></span>
-              <LinkCircle diagonal class="notif__link" />
+              <LinkCircle diagonal diagonalRoll={false} class="notif__link" />
             </a>
           ) : (
             <div class="notif__item" data-date={item.date}>
               <div class="notif__main">
                 <div class="notif__meta">
-                  <span class="chip text-mono-tag notif__tag">{item.tag}</span>
-                  <span class="notif__time text-meta" data-time={item.date}></span>
+                  <span class="chip chip--pill text-meta">{item.tag}</span>
+                  <span class="notif__time text-meta" data-time={item.date}>{timeLabel(item.date)}</span>
                 </div>
                 <p class="notif__label text-tag">{item.title}</p>
                 <p class="notif__summary">{item.summary}</p>
