@@ -13,3 +13,8 @@
 }
 .letterpage .sheet__note--no-script { margin-block-start: var(--s-16); }
 .letterpage .sheet__note--no-script a { color: inherit; text-decoration: underline; text-underline-offset: .2em; }
+/* Tablet receipt fit: letter.js sets the receipt paper height to 1.04x its width, but the receipt content
+   uses fixed padding and margins, so the barcode and footer overflowed the paper from 760px to about 1270px.
+   Spacing interpolates from compact values (sheet width 560px) to the original desktop values (sheet width 720px+). */
+@property --rs{syntax:"<length>";inherits:true;initial-value:560px}
+@container desk (width>=760px){.letterpage .stub{--rs:clamp(560px,56cqw,720px);padding:calc(var(--rs)*.0875 - 37px) 22px calc(var(--rs)*.075 - 32px)}.letterpage .stub__sub{padding-block-end:calc(var(--rs)*.03125 - 12.5px)}.letterpage .stub__rows{margin-block-start:calc(var(--rs)*.0375 - 15px)}.letterpage .stub__rows>div{padding-block:calc(var(--rs)*.01875 - 8.5px)}.letterpage .stub__bars{margin-block-start:calc(var(--rs)*.04375 - 15.5px)}.letterpage .stub__foot{margin-block-start:calc(var(--rs)*.025 - 10px)}}

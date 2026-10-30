@@ -1,6 +1,7 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.scss';
+import '../styles/scroll-rail.css';
 import SvgSymbols from '../components/SvgSymbols.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -267,15 +268,14 @@ const jsonLd = jsonLdOverride ?? ORIGINAL_SITE_JSONLD;
       aria-relevant="additions"
       data-astro-transition-persist="astro-gyrtbwwo-10"
     ></ol>
-    <div
-      class="progress"
-      data-progress
-      aria-hidden="true"
-      data-astro-transition-persist="astro-gyrtbwwo-11"
-    ></div>
+    <nav class="scroll-rail" data-scroll-rail aria-label="Page sections">
+      <p class="scroll-rail__count" data-scroll-rail-count aria-hidden="true">(0)</p>
+      <div class="scroll-rail__track" data-scroll-rail-track></div>
+    </nav>
     <Veil />
     <script>
       import '../lib/runtime';
+      import '../lib/scroll-rail';
     </script>
     <!-- Cloudflare Pages Analytics -->
     <script
