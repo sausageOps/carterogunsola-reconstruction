@@ -8,9 +8,11 @@ import Logo from './Logo.astro';
   data-astro-transition-persist="veil"
   aria-hidden="true"
 >
-  <canvas class="veil__paper" data-veil-paper></canvas>
+  <canvas class="veil__paper" data-veil-paper aria-hidden="true"></canvas>
   <div class="veil__boot" data-veil-boot>
-    <Logo isVeilWord word="O" class="veil__word" />
+    <span class="veil__word" data-veil-word>
+      <Logo />
+    </span>
     <div class="veil__travel" data-veil-travel>
       <span class="veil__count" data-veil-count>0</span>
     </div>

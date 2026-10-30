@@ -37,3 +37,62 @@ export const ORIGINAL_SITE_JSONLD = {
     },
   ],
 } as const;
+
+/** `/writing/the-personal-starter` — Person + WebSite + BlogPosting + BreadcrumbList (saved original head). */
+export const WRITING_POST_JSONLD = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    ...ORIGINAL_SITE_JSONLD['@graph'],
+    {
+      '@type': 'BlogPosting',
+      '@id': 'https://carterogunsola.com/writing/the-personal-starter#article',
+      headline: 'The personal starter',
+      description:
+        'A personal starter has an audience of one, so what goes in is whatever keeps showing up in the sites I build, and whatever my next project deletes never belonged there. I keep the engines in small packages and let every project own and drift from the rest, because the smaller a starter stays, the longer it lasts.',
+      abstract:
+        'A personal starter has an audience of one, so what goes in is whatever keeps showing up in the sites I build, and whatever my next project deletes never belonged there. I keep the engines in small packages and let every project own and drift from the rest, because the smaller a starter stays, the longer it lasts.',
+      datePublished: '2026-09-16T00:00:00.000Z',
+      dateModified: '2026-09-16T00:00:00.000Z',
+      image: 'https://carterogunsola.com/og/writing/the-personal-starter.jpg',
+      articleSection: 'web',
+      wordCount: 1066,
+      author: {
+        '@type': 'Person',
+        '@id': 'https://carterogunsola.com/#person',
+        name: 'Carter Ogunsola',
+        url: 'https://carterogunsola.com',
+      },
+      publisher: {
+        '@type': 'Person',
+        '@id': 'https://carterogunsola.com/#person',
+        name: 'Carter Ogunsola',
+        url: 'https://carterogunsola.com',
+      },
+      mainEntityOfPage: 'https://carterogunsola.com/writing/the-personal-starter',
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://carterogunsola.com/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Writing',
+          item: 'https://carterogunsola.com/writing/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: 'The personal starter',
+          item: 'https://carterogunsola.com/writing/the-personal-starter',
+        },
+      ],
+    },
+  ],
+} as const;

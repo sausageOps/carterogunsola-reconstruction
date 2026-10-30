@@ -3,7 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionLabel from '../components/ui/SectionLabel.astro';
 import LinkCircle from '../components/ui/LinkCircle.astro';
 import { CHANGELOG_ENTRIES } from '../data/changelog';
-import { ORIGINAL_SITE_JSONLD } from '../data/original-jsonld';
 import '../styles/changelog.css';
 
 const dateLabel = (date: string) =>
@@ -14,43 +13,41 @@ const dateLabel = (date: string) =>
   });
 ---
 
-<BaseLayout title="Changelog" description="A running log of what’s new. New experiments, projects, roles and recognition, as they ship." ogImage="/og/section/home.jpg" canonical="https://carterogunsola.com/changelog" jsonLd={ORIGINAL_SITE_JSONLD} robots={null}>
-  <section class="log container">
-    <div class="log__col">
-      <div class="log__intro" data-reveal>
-        <SectionLabel as="h1" size="lg" class="z-y">Changelog</SectionLabel>
-        <p class="text-lead z-s">
-          A running log of what’s new around here: experiments, projects, roles, and recognition, as they ship. Follow along in your reader via
-          <a class="log__feed" href="/changelog.xml">the feed</a> (or <a class="log__feed" href="/feed.json">JSON</a>).
-        </p>
+<BaseLayout title="Changelog" description="A running log of what’s new. New experiments, projects, roles and recognition, as they ship." ogImage="/og/section/home.jpg" canonical="https://carterogunsola.com/changelog" mainClass="log container">
+  <div class="log__col">
+    <header class="log__intro">
+      <SectionLabel as="h1" size="lg" mark>Changelog</SectionLabel>
+      <p class="text-lead">
+        A running log of what’s new around here: experiments, projects, roles, and recognition, as they ship. Follow along in your reader via
+        <a class="log__feed" href="/changelog.xml">the feed</a> (or <a class="log__feed" href="/feed.json">JSON</a>).
+      </p>
+    </header>
+    <section class="log__year" aria-label="2026 updates">
+      <SectionLabel as="h2" size="lg" mark>2026</SectionLabel>
+      <div class="log__card">
+        {CHANGELOG_ENTRIES.map((item) => {
+          const external = item.href.startsWith('http');
+          return (
+            <a
+              href={item.href}
+              target={external ? '_blank' : undefined}
+              rel={external ? 'noopener noreferrer' : undefined}
+              class="row row--link"
+              data-hover
+              data-log-row
+              data-date={item.date}
+            >
+              <span class="row__label text-tag">{item.title}</span>
+              <span class="row__line" aria-hidden="true"></span>
+              <span class="row__tags">
+                <span class="chip text-meta row__tag">{dateLabel(item.date)}</span>
+                <span class="chip text-meta chip--pill row__tag">{item.category}</span>
+                <LinkCircle diagonal diagonalRoll={false} class="row__link" />
+              </span>
+            </a>
+          );
+        })}
       </div>
-      <div class="log__year" data-reveal>
-        <SectionLabel as="h2" size="sm" class="z-y">2026</SectionLabel>
-        <div class="log__card" data-row-list>
-          {CHANGELOG_ENTRIES.map((item) => {
-            const external = item.href.startsWith('http');
-            return (
-              <a
-                href={item.href}
-                target={external ? '_blank' : undefined}
-                rel={external ? 'noopener noreferrer' : undefined}
-                class="row row--link"
-                data-hover
-                data-log-row
-                data-date={item.date}
-              >
-                <span class="row__label text-tag">{item.title}</span>
-                <span class="row__line" aria-hidden="true"></span>
-                <span class="row__tags">
-                  <span class="chip text-meta row__tag">{dateLabel(item.date)}</span>
-                  <span class="chip text-meta chip--pill row__tag">{item.category}</span>
-                </span>
-                <LinkCircle diagonal={external} class="row__link" />
-              </a>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </BaseLayout>

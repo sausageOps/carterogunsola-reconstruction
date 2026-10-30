@@ -13,6 +13,14 @@ interface Props {
   code?: string;
 }
 const { item, previous, next, position, total, notes = '', code = '' } = Astro.props;
+// The original Lab documents load the Expressive Code stylesheet from inside the
+// first code block of each pane. The runtime half is already ported in
+// `app/lib/expressive-code.ts`, so only the stylesheet link is restored.
+const EC_STYLES = '<link rel="stylesheet" href="/_astro/ec.2v5bd.css">';
+const withEcStyles = (html: string) =>
+  html.includes('<div class="expressive-code">')
+    ? html.replace('<div class="expressive-code">', `<div class="expressive-code">${EC_STYLES}`)
+    : html;
 const number = String(position).padStart(2, '0');
 const count = String(total).padStart(2, '0');
 const digits = Array.from({ length: 10 }, (_, digit) => digit);
@@ -59,8 +67,8 @@ const digits = Array.from({ length: 10 }, (_, digit) => digit);
     </div>
     <div class="labd__docs-clip" data-astro-cid-f3pbbn5j>
       <div class="labd__docs-body" data-docs-scroll data-lenis-prevent data-astro-cid-f3pbbn5j>
-        <div class="labd__pane" id="lab-docs-notes" data-docs-pane="notes" data-astro-cid-f3pbbn5j set:html={notes}></div>
-        <div class="labd__pane" id="lab-docs-code" data-docs-pane="code" hidden data-astro-cid-f3pbbn5j set:html={code}></div>
+        <div class="labd__pane" id="lab-docs-notes" data-docs-pane="notes" data-astro-cid-f3pbbn5j set:html={withEcStyles(notes)}></div>
+        <div class="labd__pane" id="lab-docs-code" data-docs-pane="code" hidden data-astro-cid-f3pbbn5j set:html={withEcStyles(code)}></div>
       </div>
     </div>
     <div class="labd__bar" data-docs-scrollbar aria-hidden="true" data-astro-cid-f3pbbn5j>

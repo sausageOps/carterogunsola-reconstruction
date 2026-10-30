@@ -22,7 +22,7 @@ const {
   type = 'button',
   class: className = '',
   label,
-  textClass = 'text-caption',
+  textClass = '',
   ...rest
 } = Astro.props;
 
@@ -39,7 +39,7 @@ const Tag = href ? 'a' : 'button';
   {...rest}
 >
   {label ? (
-    <span class="roll" data-roll>{label}</span>
+    <span class="btn__label roll" data-roll>{label}</span>
   ) : (
     <slot />
   )}

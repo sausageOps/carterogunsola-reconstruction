@@ -4,7 +4,11 @@ import LinkCircle from '../components/ui/LinkCircle.astro';
 import projects from '../../wheels-data.json';
 import '../styles/homepage.css';
 ---
-<BaseLayout mainClass="hv2" showFooter={false}>
+<BaseLayout
+  mainClass="hv2"
+  showFooter={false}
+  description="I’m a creative developer, director and entrepreneur, crafting web experiences with a taste for pure digital originality. Born in Lagos, based in Utah."
+>
   <h1 class="u-sr-only">Carter Ogunsola, Creative Developer &amp; Brand Engineer</h1>
   <section class="hv2__stage" data-wheels data-lenis-prevent hidden tabindex="0" role="group" aria-roledescription="carousel" aria-label="Selected work — two linked wheels. Drag or scroll to turn, arrow keys browse, the center link opens the project.">
     <div class="hv2__center" data-wheels-center>
@@ -36,7 +40,7 @@ import '../styles/homepage.css';
       {projects.map((project) => <li>
         <a href={project.href} data-hover target="_blank" rel="noopener noreferrer" class="row row--link">
           <span class="row__label text-tag">{project.name}</span><span class="row__line" aria-hidden="true"></span>
-          <span class="row__tags"><span class="chip text-meta row__tag">{project.collab}</span><span class="chip text-meta chip--pill row__tag">{project.year}</span><LinkCircle diagonal class="row__link" /></span>
+          <span class="row__tags"><span class="chip text-meta row__tag">{project.collab}</span><span class="chip text-meta chip--pill row__tag">{project.year}</span><LinkCircle diagonal diagonalRoll={false} class="row__link" /></span>
         </a>
       </li>)}
     </ul>
