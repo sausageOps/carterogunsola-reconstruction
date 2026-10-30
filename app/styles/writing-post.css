@@ -4,7 +4,11 @@
    only the generated Astro scope attributes are removed and selectors are prefixed with
    the route root (`.wpost`) so the recovered cascade stays scoped to this page. The one
    `html` rule (--toast-lift under 79.99rem) is kept as-is: it lifts the shared toaster
-   above the fixed mobile table of contents, exactly as the original does. */
+   above the fixed mobile table of contents, exactly as the original does. The dark-sheet
+   override keeps its original shape too: `[data-theme=dark]` is set on <html>, so it must
+   stay an ANCESTOR of `.wpost` (`[data-theme=dark] .wpost .wpost__col`). Prefixing that
+   selector with `.wpost ` makes it unmatchable and leaves the dark-theme panel on the
+   light-theme --wsheet value (pale grey instead of charcoal). */
 
 .wpost .toc{width:14.6875rem;padding:var(--s-8);border-radius:var(--r-md);background:var(--code-bg);color:var(--code-ink)}
 .wpost .toc__head{justify-content:space-between;align-items:center;gap:var(--s-8);display:flex}
@@ -38,7 +42,7 @@
 .wpost{padding-block:clamp(9rem, 16svh, 12rem) var(--s-96);--wpaper:min(100%, calc(var(--measure) + 9rem));z-index:2;position:relative}
 .wpost .wpost__article>:is(p,.wpost ul,.wpost ol,.wpost pre,.wpost figure,.wpost blockquote,.wpost table,.wpost div,.wpost aside){content-visibility:auto;contain-intrinsic-block-size:auto 4lh}
 .wpost .wpost__col{width:var(--wpaper);--wsheet:color-mix(in srgb, #fff 55%, var(--paper));background-color:var(--wsheet);background-image:var(--sheet-tex);-webkit-font-smoothing:antialiased;border-radius:3px;justify-self:center;padding:4.2% 5.7% 6.5%;position:relative;box-shadow:0 2px 28px #0000000d}
-.wpost [data-theme=dark] .wpost__col{--wsheet:color-mix(in srgb, #fff 11%, var(--paper));box-shadow:0 2px 28px #0000004d}
+[data-theme=dark] .wpost .wpost__col{--wsheet:color-mix(in srgb, #fff 11%, var(--paper));box-shadow:0 2px 28px #0000004d}
 .wpost .wpost__close{z-index:3;pointer-events:none;height:100%;position:absolute;inset-block-start:clamp(9rem,16svh,12rem);inset-inline-start:calc(50% + var(--wpaper) / 2 + 1.25rem)}
 .wpost .wpost__close>*{pointer-events:auto;position:sticky;inset-block-start:7rem}
 .wpost .wpost__masthead{justify-content:space-between;gap:var(--s-16);color:var(--ink-muted);border-block-end:1px solid var(--line);margin-block-end:var(--s-24);padding-block-end:var(--s-12);display:flex}

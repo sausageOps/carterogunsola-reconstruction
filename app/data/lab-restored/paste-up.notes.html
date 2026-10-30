@@ -1,0 +1,57 @@
+<p class="labd__summary text-lead">One set of prints, three layout boards. The DOM lays out invisible boxes; WebGL planes sit on them, each claimed by an ID. Switch boards and the prints fly to their new homes. The transition is never written, only implied. Landberg's mirrored-DOM mechanism, on the paste-up table.</p><section class="labd__refs"><p class="labd__refs-label text-label">Dependencies</p><div class="labd__refs-rule" aria-hidden="true"></div><div class="labd__refs-list"><a data-hover="true" href="https://gsap.com/" target="_blank" rel="noopener noreferrer" class="refrow refrow--link"><span class="refrow__badge"><span class="refrow__wordmark text-label">GSAP</span></span><span class="refrow__label text-tag">Core :: ticker</span><span class="refrow__ext" aria-hidden="true"><span class="arrow-roll arrow-roll--diagonal" aria-hidden="true"><span class="arrow-roll__icon arrow-roll__current"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span><span class="arrow-roll__icon arrow-roll__next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span></span></span></a></div></section><div class="labd__article"><h2 id="prints-on-the-board">Prints on the board</h2>
+<p>Before layout software, a page was assembled by hand: photostats waxed onto a
+board, moved between layouts until the spread worked. The prints didn’t change
+when the layout did. They just went somewhere else.</p>
+<p>That’s the whole engine here. Three boards (an index grid, a spread, a strip) are
+real DOM, laid out by the browser: invisible boxes with a pencil-line border and
+a mono tag. One WebGL canvas sits on top and draws each print as a plane, exactly
+on its box. Click a print, switch a board, and every plane notices its home moved
+and <em>slides there</em>. There is no grid-to-spread animation anywhere in the code.
+There’s no spread-to-strip one either.</p>
+<h2 id="a-print-belongs-to-its-id">A print belongs to its ID</h2>
+<p>Each box says <code>data-print="p3"</code>, meaning “I want that plane.” The engine keeps
+one claim per ID, measures the claiming box, and damps the plane’s rect toward it
+at 0.085 per frame, the house follow factor. Every transition on the stage (six
+of them, if you count the in-place plate swap) is that one rule firing. Making a
+clicked print the plate is an attribute write: the spread’s hero slot takes the
+new ID, the rail takes the rest, and the planes trade places.</p>
+<p>This is Jesper Landberg’s portfolio mechanism at lab scale. On his site the DOM
+never holds media at all: empty boxes with an aspect-ratio carry <code>data-id</code> slugs,
+one persistent canvas renders everything, and a project page claims the same slug
+the home card had. Browsers are good at putting rectangles in the right place.
+The GL’s job is only what a rectangle can’t do, which here is the flight, and the
+way the sheet <em>bows</em> while it moves: center leading, edges trailing, flat again
+the moment it parks.</p>
+<h2 id="the-two-knobs">The two knobs</h2>
+<p>His writeup names two failure modes, so the panel makes both real.</p>
+<p><strong>Fetch</strong> is fake navigation latency. At 0 the boards overlap-swap and flight
+starts immediately. Dial it up and the old board is torn down first, the way real
+navigation does it: the planes hold still through the dwell, then fly late. That
+sit-then-go is exactly what waiting for the destination costs you.</p>
+<p><strong>Memory</strong> is the rect cache. A claim on a dead board answers <code>0×0</code> from
+<code>getBoundingClientRect</code>, and with memory on, the engine refuses to believe a
+zero-width home and keeps the rect the plane last sat on. Turn it off and watch
+the appear-instead-of-fly bug: mid-dwell the planes collapse into the corner,
+then pop into place.</p>
+<p>One admitted cheat: the three boards coexist in the stage and “navigation” is a
+display toggle, so the dead-DOM window has to be simulated. On the real site
+you’d capture rects at <code>astro:before-swap</code>, while the old page can still be
+measured.</p>
+<h2 id="the-moving-parts">The moving parts</h2>
+<ul>
+<li><strong><code>data-print</code></strong> — the claim. The entire API between markup and engine; a new
+layout is a new arrangement of these, not new code.</li>
+<li><strong><code>measure()</code></strong> — asks each claim for its rect, relative to the stage, only on
+swap and resize. Rects are cached between; nothing thrashes per frame.</li>
+<li><strong>Bow</strong> — vertex displacement <code>(1 − sin(π·uv)) · vel</code>, velocity smoothed 0.8/0.2
+and clamped at 48px/frame so a cross-board leap doesn’t fold the sheet.</li>
+<li><strong>Draw order</strong> — planes sort by speed each frame; a flying print passes over the
+parked ones.</li>
+<li><strong>No treatment</strong> — planes draw the photo as-is; the flight is the whole effect.</li>
+</ul>
+<p>No WebGL2 and the boxes get plain images; swaps become cuts. The page still
+works, which was his first point.</p></div><section class="labd__refs"><p class="labd__refs-label text-label">Credits</p><div class="labd__refs-rule" aria-hidden="true"></div><div class="labd__refs-list"><a data-hover="true" href="https://jesperlandberg.com/" target="_blank" rel="noopener noreferrer" class="refrow refrow--link"><span class="refrow__badge"><svg width="1em" height="1em" class="refrow__icon" aria-hidden="true" data-icon="user-zap"><symbol id="lab-doc:user-zap" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="M15 21a6 6 0 0 0-12 0M19 9l-2.6 3.6H20L17.4 16"/><circle cx="9" cy="8" r="4"/></g></symbol><use href="#lab-doc:user-zap"></use></svg></span><span class="refrow__label text-tag">Jesper Landberg :: the mirrored-DOM plane mechanism, from his portfolio breakdown</span><span class="refrow__ext" aria-hidden="true"><span class="arrow-roll arrow-roll--diagonal" aria-hidden="true"><span class="arrow-roll__icon arrow-roll__current"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span><span class="arrow-roll__icon arrow-roll__next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M18.25 15.25V5.75M18.25 5.75H8.75M18.25 5.75L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span></span></span></a></div></section>
